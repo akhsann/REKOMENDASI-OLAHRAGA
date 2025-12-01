@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Heart, Clock, Flame, TrendingUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { categoryMap, intensityMap, benefitsMap, equipmentMap, muscleMap } from '@/utils/translationMaps';
 
 interface ExerciseCardProps {
   exercise: Exercise;
@@ -29,15 +30,7 @@ const intensityColors: Record<Exercise['intensity'], string> = {
   high: 'text-red-600',
 };
 
-export function ExerciseCard({
-  exercise,
-  score,
-  reasons,
-  isFavorite = false,
-  onFavorite,
-  onStart,
-  onSkip,
-}: ExerciseCardProps) {
+export function ExerciseCard({ exercise, score, reasons, isFavorite = false, onFavorite, onStart, onSkip }: ExerciseCardProps) {
   return (
     <Card className="p-5 hover-lift border-border bg-card animate-fade-in-up overflow-hidden group relative">
       <div className="absolute inset-0 shimmer-bg animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -46,59 +39,42 @@ export function ExerciseCard({
         <div className="flex justify-between items-start">
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
-              <h3 className="text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
-                {exercise.name}
-              </h3>
+              <h3 className="text-lg font-semibold text-foreground transition-colors group-hover:text-primary">{exercise.name}</h3>
               {score !== undefined && (
                 <Badge variant="secondary" className="text-xs animate-scale-in">
-                  {score}% match
+                  {score}% kecocokan
                 </Badge>
               )}
             </div>
             <p className="text-sm text-muted-foreground line-clamp-2">{exercise.description}</p>
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onFavorite}
-            className="shrink-0 hover-scale"
-          >
-            <Heart
-              className={cn(
-                'h-5 w-5 transition-all duration-300',
-                isFavorite ? 'fill-accent text-accent scale-110' : 'text-muted-foreground'
-              )}
-            />
+          <Button variant="ghost" size="icon" onClick={onFavorite} className="shrink-0 hover-scale">
+            <Heart className={cn('h-5 w-5 transition-all duration-300', isFavorite ? 'fill-accent text-accent scale-110' : 'text-muted-foreground')} />
           </Button>
         </div>
 
         {/* Badges */}
         <div className="flex flex-wrap gap-2">
-          <Badge className={categoryColors[exercise.category]}>
-            {exercise.category}
-          </Badge>
+          <Badge className={categoryColors[exercise.category]}>{categoryMap[exercise.category]}</Badge>
           <Badge variant="outline" className="gap-1">
             <Clock className="h-3 w-3" />
-            {exercise.duration} min
+            {exercise.duration} menit
           </Badge>
           <Badge variant="outline" className={cn('gap-1', intensityColors[exercise.intensity])}>
             <TrendingUp className="h-3 w-3" />
-            {exercise.intensity}
+            {intensityMap[exercise.intensity]}
           </Badge>
           <Badge variant="outline" className="gap-1">
             <Flame className="h-3 w-3 text-accent" />
-            {exercise.caloriesBurn} cal
+            {exercise.caloriesBurn} kal
           </Badge>
         </div>
 
         {/* Target Muscles */}
         <div className="flex flex-wrap gap-1">
           {exercise.targetMuscles.map((muscle) => (
-            <span
-              key={muscle}
-              className="text-xs px-2 py-1 rounded-full bg-secondary text-secondary-foreground"
-            >
-              {muscle}
+            <span key={muscle} className="text-xs px-2 py-1 rounded-full bg-secondary text-secondary-foreground">
+              {muscleMap[muscle] ?? muscle}
             </span>
           ))}
         </div>
@@ -109,7 +85,7 @@ export function ExerciseCard({
             {reasons.map((reason, idx) => (
               <div key={idx} className="flex items-center gap-1">
                 <span className="text-primary">✓</span>
-                {reason}
+                {benefitsMap[reason] ?? reason}
               </div>
             ))}
           </div>
@@ -119,16 +95,13 @@ export function ExerciseCard({
         {(onStart || onSkip) && (
           <div className="flex gap-2 pt-2">
             {onStart && (
-              <Button
-                onClick={onStart}
-                className="flex-1 bg-gradient-to-r from-primary to-primary-glow hover:opacity-90 hover:scale-105 transition-all duration-300 shadow-glow"
-              >
-                Start Workout
+              <Button onClick={onStart} className="flex-1 bg-gradient-to-r from-primary to-primary-glow hover:opacity-90 hover:scale-105 transition-all duration-300 shadow-glow">
+                Mulai Latihan
               </Button>
             )}
             {onSkip && (
               <Button onClick={onSkip} variant="outline" className="flex-1 hover:scale-105 transition-all duration-300">
-                Skip
+                Lewati
               </Button>
             )}
           </div>

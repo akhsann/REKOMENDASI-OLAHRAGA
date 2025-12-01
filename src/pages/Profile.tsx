@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserProfile, FitnessLevel, Gender, FitnessGoal } from '@/types/exercise';
+import { UserProfile, FitnessLevel, Gender, FitnessGoal, HealthCondition } from '@/types/exercise';
 import { saveUserProfile, getUserProfile } from '@/utils/storage';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -14,24 +14,32 @@ import { useToast } from '@/hooks/use-toast';
 import { User, Save } from 'lucide-react';
 
 const fitnessLevels: { value: FitnessLevel; label: string }[] = [
-  { value: 'beginner', label: 'Beginner' },
-  { value: 'intermediate', label: 'Intermediate' },
-  { value: 'advanced', label: 'Advanced' },
+  { value: 'pemula', label: 'Pemula' },
+  { value: 'menengah', label: 'Menengah' },
+  { value: 'lanjutan', label: 'Lanjutan' },
 ];
 
 const genders: { value: Gender; label: string }[] = [
-  { value: 'male', label: 'Male' },
-  { value: 'female', label: 'Female' },
-  { value: 'other', label: 'Other' },
-  { value: 'prefer-not-to-say', label: 'Prefer not to say' },
+  { value: 'pria', label: 'Pria' },
+  { value: 'wanita', label: 'Wanita' },
+  // { value: 'lainnya', label: 'Lainnya' },
+  // { value: 'lebih-baik-tidak-dikatakan', label: 'Lebih Baik Tidak Dikatakan' },
 ];
 
 const fitnessGoals: { value: FitnessGoal; label: string }[] = [
-  { value: 'weight-loss', label: 'Weight Loss' },
-  { value: 'muscle-gain', label: 'Muscle Gain' },
-  { value: 'endurance', label: 'Build Endurance' },
-  { value: 'flexibility', label: 'Improve Flexibility' },
-  { value: 'general-fitness', label: 'General Fitness' },
+  { value: 'penurunan-berat-badan', label: 'Penurunan Berat Badan' },
+  { value: 'penambahan-otot', label: 'Penambahan Otot' },
+  { value: 'ketahanan', label: 'Membangun Ketahanan' },
+  { value: 'fleksibilitas', label: 'Meningkatkan Fleksibilitas' },
+  { value: 'kebugaran-umum', label: 'Kebugaran Umum' },
+];
+
+const healthConditions: { value: HealthCondition; label: string }[] = [
+  { value: 'hipertensi', label: 'Hipertensi' },
+  { value: 'asma', label: 'Asma' },
+  { value: 'diabetes', label: 'Diabetes' },
+  { value: 'obesitas', label: 'Obesitas' },
+  { value: 'tidak-ada', label: 'Tidak Ada' },
 ];
 
 export default function Profile() {
@@ -39,15 +47,23 @@ export default function Profile() {
   const { toast } = useToast();
   const [profile, setProfile] = useState<UserProfile>({
     id: 'user-1',
-    age: 25,
-    gender: 'prefer-not-to-say',
-    fitnessLevel: 'beginner',
-    goals: ['general-fitness'],
+    age: 0,
+    gender: 'pria',
+    fitnessLevel: 'pemula',
+    goals: ['kebugaran-umum'],
     availableTime: 30,
+    healthConditions: ['tidak-ada'],
     preferences: {
       favoriteExercises: [],
       completedExercises: [],
       skippedExercises: [],
+    },
+    progress: {
+      currentStreak: 0,
+      longestStreak: 0,
+      totalExercisesCompleted: 0,
+      totalCaloriesBurned: 0,
+      dailyLogs: [],
     },
   });
 
@@ -68,12 +84,38 @@ export default function Profile() {
   };
 
   const toggleGoal = (goal: FitnessGoal) => {
-    setProfile((prev) => ({
-      ...prev,
-      goals: prev.goals.includes(goal)
-        ? prev.goals.filter((g) => g !== goal)
-        : [...prev.goals, goal],
-    }));
+    setProfile((prev) => {
+      return {
+        ...prev,
+        goals: prev.goals.includes(goal) ? prev.goals.filter((g) => g !== goal) : [...prev.goals, goal],
+      };
+    });
+  };
+
+  const toggleHealthCondition = (condition: HealthCondition) => {
+    setProfile((prev) => {
+      let newConditions: HealthCondition[];
+      if (condition === 'tidak-ada') {
+        // If "tidak-ada" is selected, clear all other conditions
+        newConditions = ['tidak-ada'];
+      } else {
+        // If any other condition is selected, remove "tidak-ada" and toggle the condition
+        const filteredConditions = prev.healthConditions.filter((c) => c !== 'tidak-ada');
+        if (filteredConditions.includes(condition)) {
+          newConditions = filteredConditions.filter((c) => c !== condition);
+          // If no conditions left, add "tidak-ada"
+          if (newConditions.length === 0) {
+            newConditions = ['tidak-ada'];
+          }
+        } else {
+          newConditions = [...filteredConditions, condition];
+        }
+      }
+      return {
+        ...prev,
+        healthConditions: newConditions,
+      };
+    });
   };
 
   return (
@@ -85,8 +127,8 @@ export default function Profile() {
             <User className="h-6 w-6 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-foreground">Your Profile</h1>
-            <p className="text-sm text-muted-foreground">Personalize your fitness journey</p>
+            <h1 className="text-2xl font-bold text-foreground">Profil Anda</h1>
+            <p className="text-sm text-muted-foreground">Personalisasi perjalanan kebugaran Anda</p>
           </div>
         </div>
 
@@ -95,24 +137,14 @@ export default function Profile() {
           {/* Age */}
           {/* Age */}
           <div className="space-y-2">
-            <Label htmlFor="age">Age</Label>
-            <Input
-              id="age"
-              type="number"
-              value={profile.age}
-              onChange={(e) => setProfile({ ...profile, age: parseInt(e.target.value) || 0 })}
-              min="13"
-              max="100"
-            />
+            <Label htmlFor="age">Usia</Label>
+            <Input id="age" type="number" value={profile.age} onChange={(e) => setProfile({ ...profile, age: parseInt(e.target.value) || 0 })} min="13" max="100" />
           </div>
 
           {/* Gender */}
           <div className="space-y-2">
-            <Label htmlFor="gender">Gender</Label>
-            <Select
-              value={profile.gender}
-              onValueChange={(value: Gender) => setProfile({ ...profile, gender: value })}
-            >
+            <Label htmlFor="gender">Jenis Kelamin</Label>
+            <Select value={profile.gender} onValueChange={(value: Gender) => setProfile({ ...profile, gender: value })}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
@@ -128,11 +160,8 @@ export default function Profile() {
 
           {/* Fitness Level */}
           <div className="space-y-2">
-            <Label htmlFor="fitness-level">Fitness Level</Label>
-            <Select
-              value={profile.fitnessLevel}
-              onValueChange={(value: FitnessLevel) => setProfile({ ...profile, fitnessLevel: value })}
-            >
+            <Label htmlFor="fitness-level">Tingkat Kebugaran</Label>
+            <Select value={profile.fitnessLevel} onValueChange={(value: FitnessLevel) => setProfile({ ...profile, fitnessLevel: value })}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
@@ -148,32 +177,34 @@ export default function Profile() {
 
           {/* Available Time */}
           <div className="space-y-2">
-            <Label htmlFor="time">Daily Available Time (minutes)</Label>
-            <Input
-              id="time"
-              type="number"
-              value={profile.availableTime}
-              onChange={(e) =>
-                setProfile({ ...profile, availableTime: parseInt(e.target.value) || 0 })
-              }
-              min="5"
-              max="180"
-            />
+            <Label htmlFor="time">Waktu Tersedia Harian (menit)</Label>
+            <Input id="time" type="number" value={profile.availableTime} onChange={(e) => setProfile({ ...profile, availableTime: parseInt(e.target.value) || 0 })} min="5" max="180" />
           </div>
 
           {/* Fitness Goals */}
           <div className="space-y-3">
-            <Label>Fitness Goals (select all that apply)</Label>
+            <Label>Tujuan Kebugaran (pilih semua yang sesuai)</Label>
             <div className="space-y-3">
               {fitnessGoals.map((goal) => (
                 <div key={goal.value} className="flex items-center space-x-3">
-                  <Checkbox
-                    id={goal.value}
-                    checked={profile.goals.includes(goal.value)}
-                    onCheckedChange={() => toggleGoal(goal.value)}
-                  />
+                  <Checkbox id={goal.value} checked={profile.goals.includes(goal.value)} onCheckedChange={() => toggleGoal(goal.value)} />
                   <Label htmlFor={goal.value} className="cursor-pointer font-normal">
                     {goal.label}
+                  </Label>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Health Conditions */}
+          <div className="space-y-3">
+            <Label>Kondisi Kesehatan/Riwayat Medis (pilih semua yang sesuai)</Label>
+            <div className="space-y-3">
+              {healthConditions.map((condition) => (
+                <div key={condition.value} className="flex items-center space-x-3">
+                  <Checkbox id={condition.value} checked={profile.healthConditions.includes(condition.value)} onCheckedChange={() => toggleHealthCondition(condition.value)} />
+                  <Label htmlFor={condition.value} className="cursor-pointer font-normal">
+                    {condition.label}
                   </Label>
                 </div>
               ))}
@@ -185,13 +216,9 @@ export default function Profile() {
         <WorkoutReminder />
 
         {/* Save Button */}
-        <Button
-          onClick={handleSave}
-          className="w-full bg-gradient-to-r from-primary to-primary-glow hover:opacity-90 gap-2 hover-scale shadow-glow animate-fade-in-up"
-          size="lg"
-        >
+        <Button onClick={handleSave} className="w-full bg-gradient-to-r from-primary to-primary-glow hover:opacity-90 gap-2 hover-scale shadow-glow animate-fade-in-up" size="lg">
           <Save className="h-4 w-4" />
-          Save Profile
+          Simpan Profil
         </Button>
       </div>
 

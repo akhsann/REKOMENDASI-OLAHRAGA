@@ -2,9 +2,9 @@ import { Exercise, UserProfile, RecommendationScore, FitnessLevel, Intensity } f
 
 // Fitness level to intensity mapping
 const fitnessIntensityMap: Record<FitnessLevel, Intensity[]> = {
-  beginner: ['low', 'medium'],
-  intermediate: ['medium', 'high'],
-  advanced: ['high'],
+  pemula: ['rendah', 'sedang'],
+  menengah: ['sedang', 'tinggi'],
+  lanjutan: ['tinggi'],
 };
 
 // Calculate similarity score between user profile and exercise
@@ -16,12 +16,12 @@ export function calculateSimilarityScore(user: UserProfile, exercise: Exercise):
   const suitableIntensities = fitnessIntensityMap[user.fitnessLevel];
   if (suitableIntensities.includes(exercise.intensity)) {
     score += 20;
-  } else if (user.fitnessLevel === 'intermediate' && exercise.intensity === 'low') {
+  } else if (user.fitnessLevel === 'menengah' && exercise.intensity === 'rendah') {
     score += 10; // Partial match
   }
 
   // 2. Goals alignment (30 points)
-  const matchingGoals = exercise.benefits.filter(benefit => user.goals.includes(benefit as any));
+  const matchingGoals = exercise.benefits.filter((benefit) => user.goals.includes(benefit as any));
   score += matchingGoals.length * 10;
   if (matchingGoals.length > 0) {
     reasons.push(`Aligns with ${matchingGoals.join(', ')} goals`);
@@ -59,12 +59,8 @@ export function calculateSimilarityScore(user: UserProfile, exercise: Exercise):
 }
 
 // Get personalized recommendations
-export function getRecommendations(
-  user: UserProfile,
-  exercises: Exercise[],
-  limit: number = 5
-): RecommendationScore[] {
-  const scoredExercises = exercises.map(exercise => {
+export function getRecommendations(user: UserProfile, exercises: Exercise[], limit: number = 5): RecommendationScore[] {
+  const scoredExercises = exercises.map((exercise) => {
     const score = calculateSimilarityScore(user, exercise);
     const reasons: string[] = [];
 
@@ -75,7 +71,7 @@ export function getRecommendations(
     if (exercise.duration <= user.availableTime) {
       reasons.push(`Fits your ${user.availableTime}min schedule`);
     }
-    if (exercise.intensity === 'low' && user.fitnessLevel === 'beginner') {
+    if (exercise.intensity === 'rendah' && user.fitnessLevel === 'pemula') {
       reasons.push('Perfect for beginners');
     }
 
@@ -87,17 +83,11 @@ export function getRecommendations(
   });
 
   // Sort by score and return top recommendations
-  return scoredExercises
-    .sort((a, b) => b.score - a.score)
-    .slice(0, limit);
+  return scoredExercises.sort((a, b) => b.score - a.score).slice(0, limit);
 }
 
 // Learn from user interaction
-export function updateUserPreferences(
-  user: UserProfile,
-  exerciseId: string,
-  action: 'favorite' | 'complete' | 'skip'
-): UserProfile {
+export function updateUserPreferences(user: UserProfile, exerciseId: string, action: 'favorite' | 'complete' | 'skip'): UserProfile {
   const updatedUser = { ...user };
 
   switch (action) {

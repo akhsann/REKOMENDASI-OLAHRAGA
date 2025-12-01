@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getUserProfile, saveUserProfile, hasUserProfile } from '@/utils/storage';
+import { getUserProfile, saveUserProfile, hasUserProfile, updateDailyProgress, calculateStreak } from '@/utils/storage';
 import { exercises } from '@/data/exercises';
 import { getRecommendations, updateUserPreferences } from '@/utils/recommendation';
 import { ExerciseCard } from '@/components/ExerciseCard';
@@ -42,40 +42,52 @@ const Index = () => {
     if (!user) return;
 
     const isFavorite = user.preferences.favoriteExercises.includes(exerciseId);
-    const updatedUser = updateUserPreferences(
-      user,
-      exerciseId,
-      isFavorite ? 'complete' : 'favorite'
-    );
+    const updatedUser = updateUserPreferences(user, exerciseId, isFavorite ? 'complete' : 'favorite');
 
     if (!isFavorite) {
       updatedUser.preferences.favoriteExercises.push(exerciseId);
     } else {
-      updatedUser.preferences.favoriteExercises = 
-        updatedUser.preferences.favoriteExercises.filter(id => id !== exerciseId);
+      updatedUser.preferences.favoriteExercises = updatedUser.preferences.favoriteExercises.filter((id) => id !== exerciseId);
     }
 
     saveUserProfile(updatedUser);
     setUser(updatedUser);
     toast({
-      title: isFavorite ? 'Removed from favorites' : 'Added to favorites',
-      description: isFavorite
-        ? 'Exercise removed from your favorites.'
-        : 'Exercise saved to your favorites!',
+      title: isFavorite ? 'Dihapus dari favorit' : 'Ditambahkan ke favorit',
+      description: isFavorite ? 'Latihan telah dihapus dari favorit Anda.' : 'Latihan telah tersimpan di favorit Anda!',
     });
   };
 
   const handleStart = (exerciseId: string) => {
     if (!user) return;
 
-    const updatedUser = updateUserPreferences(user, exerciseId, 'complete');
-    saveUserProfile(updatedUser);
-    setUser(updatedUser);
-    loadRecommendations(updatedUser);
+    const exercise = exercises.find((ex) => ex.id === exerciseId);
+    if (!exercise) return;
+
+    const updatedUser = { ...user };
+
+    // Update preferences
+    const userWithPreferences = updateUserPreferences(updatedUser, exerciseId, 'complete');
+
+    // Update progress tracking
+    userWithPreferences.progress.dailyLogs = updateDailyProgress(userWithPreferences.progress.dailyLogs, exerciseId, exercise.caloriesBurn, exercise.duration);
+
+    // Update totals
+    userWithPreferences.progress.totalExercisesCompleted += 1;
+    userWithPreferences.progress.totalCaloriesBurned += exercise.caloriesBurn;
+
+    // Recalculate streaks
+    const streaks = calculateStreak(userWithPreferences.progress.dailyLogs);
+    userWithPreferences.progress.currentStreak = streaks.current;
+    userWithPreferences.progress.longestStreak = Math.max(userWithPreferences.progress.longestStreak, streaks.longest);
+
+    saveUserProfile(userWithPreferences);
+    setUser(userWithPreferences);
+    loadRecommendations(userWithPreferences);
 
     toast({
-      title: 'Workout completed!',
-      description: "Great job! We're learning your preferences to improve recommendations.",
+      title: 'Latihan selesai!',
+      description: 'Kerja bagus! Kami mempelajari preferensi Anda untuk meningkatkan rekomendasi.',
     });
   };
 
@@ -88,8 +100,8 @@ const Index = () => {
     loadRecommendations(updatedUser);
 
     toast({
-      title: 'Exercise skipped',
-      description: "We'll show you different exercises next time.",
+      title: 'Latihan dilewati',
+      description: 'Kami akan menampilkan latihan yang berbeda lain kali.',
     });
   };
 
@@ -97,8 +109,8 @@ const Index = () => {
     if (user) {
       loadRecommendations(user);
       toast({
-        title: 'Recommendations refreshed',
-        description: 'New exercise suggestions loaded!',
+        title: 'Rekomendasi diperbarui',
+        description: 'Saran latihan baru telah dimuat!',
       });
     }
   };
@@ -118,17 +130,9 @@ const Index = () => {
             </div>
             <div className="flex-1">
               <h1 className="text-2xl font-bold text-foreground">Today's Recommendations</h1>
-              <p className="text-sm text-muted-foreground">
-                Personalized just for you
-              </p>
+              <p className="text-sm text-muted-foreground">Personalized just for you</p>
             </div>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={handleRefresh}
-              disabled={isLoading}
-              className="hover-scale"
-            >
+            <Button variant="outline" size="icon" onClick={handleRefresh} disabled={isLoading} className="hover-scale">
               <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
             </Button>
           </div>
@@ -136,21 +140,15 @@ const Index = () => {
           {/* User Stats */}
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-card rounded-xl p-3 border border-border text-center hover-lift cursor-pointer animate-scale-in">
-              <div className="text-2xl font-bold text-primary animate-pulse">
-                {user.preferences.completedExercises.length}
-              </div>
+              <div className="text-2xl font-bold text-primary animate-pulse">{user.preferences.completedExercises.length}</div>
               <div className="text-xs text-muted-foreground">Completed</div>
             </div>
-            <div className="bg-card rounded-xl p-3 border border-border text-center hover-lift cursor-pointer animate-scale-in" style={{animationDelay: '0.1s'}}>
-              <div className="text-2xl font-bold text-accent animate-pulse">
-                {user.preferences.favoriteExercises.length}
-              </div>
+            <div className="bg-card rounded-xl p-3 border border-border text-center hover-lift cursor-pointer animate-scale-in" style={{ animationDelay: '0.1s' }}>
+              <div className="text-2xl font-bold text-accent animate-pulse">{user.preferences.favoriteExercises.length}</div>
               <div className="text-xs text-muted-foreground">Favorites</div>
             </div>
-            <div className="bg-card rounded-xl p-3 border border-border text-center hover-lift cursor-pointer animate-scale-in" style={{animationDelay: '0.2s'}}>
-              <div className="text-2xl font-bold text-foreground animate-pulse">
-                {user.availableTime}m
-              </div>
+            <div className="bg-card rounded-xl p-3 border border-border text-center hover-lift cursor-pointer animate-scale-in" style={{ animationDelay: '0.2s' }}>
+              <div className="text-2xl font-bold text-foreground animate-pulse">{user.availableTime}m</div>
               <div className="text-xs text-muted-foreground">Daily Time</div>
             </div>
           </div>
@@ -178,10 +176,7 @@ const Index = () => {
             <Sparkles className="h-5 w-5 text-primary shrink-0 mt-0.5 animate-pulse-glow" />
             <div className="space-y-1">
               <div className="font-semibold text-foreground">Smart Recommendations</div>
-              <div className="text-muted-foreground text-xs">
-                Our system learns from your interactions - completing, favoriting, and skipping exercises
-                helps us suggest better workouts tailored to your preferences.
-              </div>
+              <div className="text-muted-foreground text-xs">Our system learns from your interactions - completing, favoriting, and skipping exercises helps us suggest better workouts tailored to your preferences.</div>
             </div>
           </div>
         </div>
