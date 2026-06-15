@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getUserProfile, saveUserProfile } from '@/utils/storage';
-import { exercises } from '@/data/exercises';
+import { getExercises } from '@/utils/exerciseStore';
 import { ExerciseCard } from '@/components/ExerciseCard';
 import { Navigation } from '@/components/Navigation';
 import { Heart } from 'lucide-react';
 import { UserProfile } from '@/types/exercise';
+import type { SessionDurationMinutes } from '@/utils/exerciseSession';
 import { useToast } from '@/hooks/use-toast';
 
 export default function Favorites() {
+  const navigate = useNavigate();
   const [user, setUser] = useState<UserProfile | null>(null);
   const { toast } = useToast();
 
@@ -16,9 +19,7 @@ export default function Favorites() {
     setUser(profile);
   }, []);
 
-  const favoriteExercises = exercises.filter(
-    (ex) => user?.preferences.favoriteExercises.includes(ex.id)
-  );
+  const favoriteExercises = getExercises().filter((ex) => user?.preferences.favoriteExercises.includes(ex.id));
 
   const handleUnfavorite = (exerciseId: string) => {
     if (!user) return;
@@ -34,28 +35,13 @@ export default function Favorites() {
     saveUserProfile(updatedUser);
     setUser(updatedUser);
     toast({
-      title: 'Removed from favorites',
-      description: 'Exercise removed from your favorites list.',
+      title: 'Dihapus dari favorit',
+      description: 'Latihan telah dihapus dari daftar favorit Anda.',
     });
   };
 
-  const handleStart = (exerciseId: string) => {
-    if (!user) return;
-
-    const updatedUser = {
-      ...user,
-      preferences: {
-        ...user.preferences,
-        completedExercises: [...user.preferences.completedExercises, exerciseId],
-      },
-    };
-
-    saveUserProfile(updatedUser);
-    setUser(updatedUser);
-    toast({
-      title: 'Workout completed!',
-      description: 'Great job! Keep up the momentum.',
-    });
+  const handleStart = (exerciseId: string, durationMinutes: SessionDurationMinutes) => {
+    navigate(`/tutorial?id=${exerciseId}&mins=${durationMinutes}`);
   };
 
   return (
@@ -67,9 +53,9 @@ export default function Favorites() {
             <Heart className="h-6 w-6 text-accent-foreground fill-current animate-bounce-subtle" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-foreground">Favorites</h1>
+            <h1 className="text-2xl font-bold text-foreground">Favorit</h1>
             <p className="text-sm text-muted-foreground">
-              {favoriteExercises.length} saved exercise{favoriteExercises.length !== 1 ? 's' : ''}
+              {favoriteExercises.length} latihan disimpan
             </p>
           </div>
         </div>
@@ -78,10 +64,8 @@ export default function Favorites() {
         {favoriteExercises.length === 0 ? (
           <div className="text-center py-12 animate-scale-in">
             <Heart className="h-16 w-16 mx-auto mb-4 text-muted-foreground animate-pulse" />
-            <h3 className="text-lg font-semibold text-foreground mb-2">No favorites yet</h3>
-            <p className="text-sm text-muted-foreground">
-              Start adding exercises to your favorites from the home page!
-            </p>
+            <h3 className="text-lg font-semibold text-foreground mb-2">Belum ada favorit</h3>
+            <p className="text-sm text-muted-foreground">Mulai tambahkan latihan ke favorit Anda dari halaman utama!</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -91,7 +75,8 @@ export default function Favorites() {
                 exercise={exercise}
                 isFavorite={true}
                 onFavorite={() => handleUnfavorite(exercise.id)}
-                onStart={() => handleStart(exercise.id)}
+                onStart={(mins) => handleStart(exercise.id, mins)}
+                userDuration={user?.availableTime}
               />
             ))}
           </div>

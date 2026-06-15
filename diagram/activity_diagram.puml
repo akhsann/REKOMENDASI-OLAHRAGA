@@ -1,0 +1,35 @@
+@startuml
+title Activity Diagram - Pendaftaran Akun (Register)
+
+|User|
+start
+:Pilih menu Registrasi;
+:Mengisi form registrasi;
+note right
+  - Nama
+  - Email
+  - Password
+  - Konfirmasi Password
+end note
+
+|System|
+:Menerima data registrasi;
+:Validasi form;
+
+if (Form valid?) then (tidak)
+  |User|
+  :Menampilkan pesan error;
+  stop
+else (ya)
+  |System|
+  :Membuat akun baru;
+  :Menyimpan data user;
+  :Membuat UserProfile default;
+  :Login otomatis;
+  
+  |User|
+  :Redirect ke halaman utama;
+  stop
+endif
+
+@enduml

@@ -6,7 +6,7 @@ export interface WorkoutReminder {
   hour: number;
   minute: number;
   enabled: boolean;
-  days: number[]; // 0 = Sunday, 1 = Monday, etc.
+  days: number[]; // 0 = Minggu, 1 = Senin, dst.
 }
 
 export const isNativeApp = () => {
@@ -15,7 +15,7 @@ export const isNativeApp = () => {
 
 export const requestNotificationPermission = async (): Promise<boolean> => {
   if (!isNativeApp()) {
-    console.log('Not running on native platform');
+    console.log('Tidak berjalan di platform native');
     return false;
   }
 
@@ -23,7 +23,7 @@ export const requestNotificationPermission = async (): Promise<boolean> => {
     const permission = await LocalNotifications.requestPermissions();
     return permission.display === 'granted';
   } catch (error) {
-    console.error('Error requesting notification permission:', error);
+    console.error('Kesalahan meminta izin notifikasi:', error);
     return false;
   }
 };
@@ -37,14 +37,14 @@ export const checkNotificationPermission = async (): Promise<boolean> => {
     const permission = await LocalNotifications.checkPermissions();
     return permission.display === 'granted';
   } catch (error) {
-    console.error('Error checking notification permission:', error);
+    console.error('Kesalahan memeriksa izin notifikasi:', error);
     return false;
   }
 };
 
 export const scheduleWorkoutReminder = async (reminder: WorkoutReminder) => {
   if (!isNativeApp()) {
-    console.log('Notifications only work on native platform');
+    console.log('Notifikasi hanya berfungsi di platform native');
     return false;
   }
 
@@ -57,37 +57,41 @@ export const scheduleWorkoutReminder = async (reminder: WorkoutReminder) => {
   }
 
   try {
-    // Cancel existing notification with this ID
-    await LocalNotifications.cancel({ notifications: [{ id: reminder.id }] });
+    // Batalkan SEMUA notifikasi harian yang ada untuk pengingat ini (hari 0–6)
+    const allIds = Array.from({ length: 7 }, (_, i) => ({ id: reminder.id + i * 1000 }));
+    await LocalNotifications.cancel({ notifications: allIds });
 
     if (!reminder.enabled) {
       return true;
     }
 
-    // Schedule for each selected day
+    const now = new Date();
+
+    // Jadwalkan untuk setiap hari yang dipilih
     const notifications = reminder.days.map((day) => {
-      const now = new Date();
       const scheduledDate = new Date();
-      
-      // Set to target day
+
+      // Atur ke hari target dalam seminggu
       const currentDay = now.getDay();
-      const daysUntilTarget = (day - currentDay + 7) % 7;
+      let daysUntilTarget = (day - currentDay + 7) % 7;
+
       scheduledDate.setDate(now.getDate() + daysUntilTarget);
-      
-      // Set time
+
+      // Atur waktu tepat, hapus milidetik untuk perbandingan yang presisi
       scheduledDate.setHours(reminder.hour);
       scheduledDate.setMinutes(reminder.minute);
       scheduledDate.setSeconds(0);
+      scheduledDate.setMilliseconds(0);
 
-      // If the time has passed today and it's the same day, schedule for next week
-      if (daysUntilTarget === 0 && scheduledDate.getTime() < now.getTime()) {
+      // Jika waktu terjadwal sudah lewat (hari yang sama atau sudah terlewati), geser ke minggu depan
+      if (scheduledDate.getTime() <= now.getTime()) {
         scheduledDate.setDate(scheduledDate.getDate() + 7);
       }
 
       return {
-        id: reminder.id + day * 1000, // Unique ID per day
-        title: '🏋️ Workout Time!',
-        body: "It's time for your daily exercise. Let's get moving!",
+        id: reminder.id + day * 1000, // ID unik per hari (mis. hari 0 = 1000, hari 1 = 2000, ...)
+        title: '🏋️ Waktunya Olahraga!',
+        body: 'Saatnya olahraga harian Anda. Ayo bergerak!',
         schedule: {
           at: scheduledDate,
           repeats: true,
@@ -105,7 +109,7 @@ export const scheduleWorkoutReminder = async (reminder: WorkoutReminder) => {
 
     return false;
   } catch (error) {
-    console.error('Error scheduling notification:', error);
+    console.error('Kesalahan menjadwalkan notifikasi:', error);
     return false;
   }
 };
@@ -116,13 +120,13 @@ export const cancelWorkoutReminder = async (reminderId: number) => {
   }
 
   try {
-    // Cancel all notifications for this reminder (including all days)
+    // Batalkan semua notifikasi untuk pengingat ini (termasuk semua hari)
     const notificationIds = Array.from({ length: 7 }, (_, i) => ({
       id: reminderId + i * 1000,
     }));
     await LocalNotifications.cancel({ notifications: notificationIds });
   } catch (error) {
-    console.error('Error canceling notification:', error);
+    console.error('Kesalahan membatalkan notifikasi:', error);
   }
 };
 
@@ -135,7 +139,7 @@ export const getPendingNotifications = async () => {
     const { notifications } = await LocalNotifications.getPending();
     return notifications;
   } catch (error) {
-    console.error('Error getting pending notifications:', error);
+    console.error('Kesalahan mengambil notifikasi tertunda:', error);
     return [];
   }
 };

@@ -1,0 +1,43 @@
+@startuml
+title Activity Diagram - Setup Profil
+
+|User|
+start
+:Masuk ke halaman utama;
+
+|System|
+:Cek kelengkapan profil;
+
+if (Profil lengkap?) then (ya)
+  |User|
+  :Tetap di halaman utama;
+  stop
+else (tidak)
+  |System|
+  :Redirect ke halaman Profile;
+  
+  |User|
+  :Mengisi data profil;
+  note right
+    - Usia
+    - Jenis Kelamin
+    - Tingkat Kebugaran
+    - Tujuan Kebugaran
+    - Waktu Tersedia
+    - Kondisi Kesehatan
+  end note
+  :Klik Simpan Profil;
+  
+  |System|
+  :Validasi data profil;
+  :Menyimpan UserProfile;
+  :Redirect ke halaman utama;
+  
+  |User|
+  stop
+endif
+
+@enduml
+
+
+

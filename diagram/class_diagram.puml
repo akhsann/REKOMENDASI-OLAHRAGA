@@ -1,0 +1,107 @@
+@startuml
+title Class Diagram - Aplikasi Rekomendasi Olahraga
+
+skinparam class {
+    BackgroundColor #FFFFFF
+    BorderColor #000000
+    ArrowColor #000000
+}
+
+class User {
+    +id: string
+    +name: string
+    +email: string
+}
+
+class UserProfile {
+    +id: string
+    +gender: Gender
+    +age: int
+    +fitnessLevel: FitnessLevel
+    +goals: FitnessGoal[]
+    +availableTime: int
+    +healthConditions: HealthCondition[]
+}
+
+class ExercisePreferences {
+    +favoriteExercises: string[]
+    +completedExercises: string[]
+    +skippedExercises: string[]
+}
+
+class ExerciseProgress {
+    +dailyLogs: DailyProgress[]
+    +currentStreak: int
+    +totalCaloriesBurned: float
+}
+
+class DailyProgress {
+    +date: Date
+    +exercisesCompleted: string[]
+    +caloriesBurned: float
+    +timeSpent: float
+}
+
+class Exercise {
+    +id: string
+    +name: string
+    +category: ExerciseCategory
+    +duration: int
+    +intensity: Intensity
+    +caloriesBurn: float
+}
+
+class RecommendationScore {
+    +score: float
+    +reasons: string[]
+}
+
+class ExerciseTutorial {
+    +exerciseId: string
+    +steps: TutorialStep[]
+    +safetyTips: string[]
+}
+
+class TutorialStep {
+    +title: string
+    +description: string
+}
+
+class AuthService {
+    +registerUser()
+    +loginUser()
+    +logoutUser()
+}
+
+class StorageService {
+    +saveUserProfile()
+    +getUserProfile()
+    +updateDailyProgress()
+}
+
+class RecommendationService {
+    +calculateSimilarityScore()
+    +getRecommendations()
+}
+
+' Composition & Aggregation
+User ||--|| UserProfile : has
+UserProfile *-- ExercisePreferences : contains
+UserProfile *-- ExerciseProgress : contains
+ExerciseProgress *-- DailyProgress : contains
+ExerciseTutorial *-- TutorialStep : contains
+
+' Association
+RecommendationScore --> Exercise : scores
+ExerciseTutorial --> Exercise : references
+
+' Dependency
+AuthService --> User : creates
+AuthService --> UserProfile : manages
+StorageService --> UserProfile : manages
+StorageService --> DailyProgress : manages
+RecommendationService --> UserProfile : uses
+RecommendationService --> Exercise : uses
+RecommendationService --> RecommendationScore : creates
+
+@enduml

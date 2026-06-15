@@ -1,0 +1,830 @@
+{
+  "rules": [
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Angkat Beban (Angkat Besi)",
+      "safety": "aman",
+      "catatan": "Dengan menggunakan beban yang ringan dan tidak melebihi kemampuan pengangkat"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Dumbbell",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Sama seperti sebelumnya, gunakan intensitas ringan- sedang"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Squats",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Sama seperti sebelumnya, gunakan intensitas ringan- sedang"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "HIIT",
+      "safety": "tidak_aman"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Berjalan Santai",
+      "safety": "aman"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Berjalan Cepat",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Tetap aman namun temponya harus stabil"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Lari Santai (Jogging)",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Aman tetapi hindari intensitas tinggi"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Bersepeda Statis",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gunakan Intensitas rendah - sedang saja"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Bersepeda Luar",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari track yang ekstrim dan cuaca yang buruk"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Berenang (Gaya bebas)",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Baik untuk kesehatan jantung dan tekanan darah"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Yoga",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari gerakan yang ekstrim dan teknik napas berlebihan"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Kalistenik",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gunakan Intensitas rendah - sedang saja"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Stepper",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari tempo yang terlalu cepat"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Aerobik",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari intensitas tinggi sama seperti beberapa olahraga sebelumnya"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Rowing Machine",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari intensitas tinggi sama seperti beberapa olahraga sebelumnya"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Mesin Elipse (Elliptical)",
+      "safety": "aman"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Menari (ballroom)",
+      "safety": "aman"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Sepatu Roda",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Sebaiknya belajar menjaga keseimbangan tubuh terlebih dahulu dan hindari kecepatan tinggi"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Lompat Tali",
+      "safety": "tidak_aman"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Senam/Gimnastik",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari gerakan eksplosif, pilih gerakan yang santai dan dapat disesuaikan oleh tubuh"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Pilates",
+      "safety": "aman"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Zumba",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Sesuaikan tempo dan hindari gerakan yang berlebihan"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Golf",
+      "safety": "aman"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Bulu Tangkis",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Batasi durasi dan hindari permainan kompetitif"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Tenis",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Batasi durasi dan hindari permainan kompetitif"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Padel",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Batasi durasi dan hindari permainan kompetitif"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Baseball",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari sprint yang berlebihan"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Bola basket",
+      "safety": "tidak_aman"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Bola Voli",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Batasi durasi dan hindari permainan kompetitif"
+    },
+    {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Sepak Bola",
+      "safety": "tidak_aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Angkat Beban (Angkat Besi)",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari menahan napas dan gunakan intensitas sedang"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Dumbbell",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Baik jika dilakukan dengan kontrol napas yang baik"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Squats",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari repetisi yang berlebihan"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "HIIT",
+      "safety": "tidak_aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Berjalan Santai",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Berjalan Cepat",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Lari Santai (Jogging)",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Bersepeda Statis",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Bersepeda Luar",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari udara dingin, debu, atau polusi tinggi"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Berenang (Gaya bebas)",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Yoga",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Kalistenik",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Stepper",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Aerobik",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Rowing Machine",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Mesin Elipse (Elliptical)",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Menari (ballroom)",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Sepatu Roda",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Lompat Tali",
+      "safety": "tidak_aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Senam/Gimnastik",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Pilates",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Zumba",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Golf",
+      "safety": "aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Bulu Tangkis",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gunakan durasi dan tempo yang terkontrol"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Tenis",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gunakan durasi dan tempo yang terkontrol"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Padel",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gunakan durasi dan tempo yang terkontrol"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Baseball",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gunakan durasi dan tempo yang terkontrol"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Bola basket",
+      "safety": "tidak_aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Bola Voli",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gunakan durasi dan tempo yang terkontrol"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Sepak Bola",
+      "safety": "tidak_aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Angkat Beban (Angkat Besi)",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Monitor gula darah sebelum dan sesudah latihan"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Dumbbell",
+      "safety": "aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Squats",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Lakukan dengan teknik yang benar dan intensitas bertahap"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "HIIT",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hanya untuk diabetes yang terkontrol dan tidak memiliki komplikasi"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Berjalan Santai",
+      "safety": "aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Berjalan Cepat",
+      "safety": "aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Lari Santai (Jogging)",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Jangan terlalu lama dan hindari intensitas tinggi"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Bersepeda Statis",
+      "safety": "aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Bersepeda Luar",
+      "safety": "aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Berenang (Gaya bebas)",
+      "safety": "aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Yoga",
+      "safety": "aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Kalistenik",
+      "safety": "aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Stepper",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari intensitas tinggi"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Aerobik",
+      "safety": "aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Rowing Machine",
+      "safety": "aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Mesin Elipse (Elliptical)",
+      "safety": "aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Menari (ballroom)",
+      "safety": "aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Sepatu Roda",
+      "safety": "aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Lompat Tali",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari bila memiliki neuropati atau masalah kaki"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Senam/Gimnastik",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari intensitas tinggi dan sesuaikan kemampuan tubuh"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Pilates",
+      "safety": "aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Zumba",
+      "safety": "aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Golf",
+      "safety": "aman"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Bulu Tangkis",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Intensitas sedang–tinggi, perlu kontrol kondisi tubuh"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Tenis",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Intensitas sedang–tinggi, perlu kontrol kondisi tubuh"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Padel",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Intensitas sedang–tinggi, perlu kontrol kondisi tubuh"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Baseball",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Intensitas sedang–tinggi, perlu kontrol kondisi tubuh"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Bola basket",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Intensitas sedang–tinggi, perlu kontrol kondisi tubuh"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Bola Voli",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Intensitas sedang–tinggi, perlu kontrol kondisi tubuh"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Sepak Bola",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Intensitas sedang–tinggi, perlu kontrol kondisi tubuh"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Angkat Beban (Angkat Besi)",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gunakan beban ringan–sedang untuk mengurangi risiko cedera sendi"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Dumbbell",
+      "safety": "aman"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Squats",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Perhatikan teknik dan hindari tekanan berlebih pada lutut"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "HIIT",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hanya untuk pemula yang sudah memiliki kondisi fisik cukup baik"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Berjalan Santai",
+      "safety": "aman"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Berjalan Cepat",
+      "safety": "aman"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Lari Santai (Jogging)",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari durasi panjang"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Bersepeda Statis",
+      "safety": "aman"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Bersepeda Luar",
+      "safety": "aman"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Berenang (Gaya bebas)",
+      "safety": "aman"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Yoga",
+      "safety": "aman"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Kalistenik",
+      "safety": "aman"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Stepper",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Durasi ringan-sedang untuk pemula"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Aerobik",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Pilih aerobik low impact"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Rowing Machine",
+      "safety": "aman"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Mesin Elipse (Elliptical)",
+      "safety": "aman"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Menari (ballroom)",
+      "safety": "aman"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Sepatu Roda",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Perhatikan risiko jatuh dan keseimbangan"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Lompat Tali",
+      "safety": "tidak_aman"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Senam/Gimnastik",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari gerakan eksplosif dan tekanan tinggi pada sendi"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Pilates",
+      "safety": "aman"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Zumba",
+      "safety": "aman"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Golf",
+      "safety": "aman"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Bulu Tangkis",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari permainan terlalu intens pada pemula"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Tenis",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari permainan terlalu intens pada pemula"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Padel",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari permainan terlalu intens pada pemula"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Baseball",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Intensitas relatif rendah dengan jeda cukup"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Bola basket",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari melakukan secara intens karena memiliki risiko tinggi pada sendi"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Bola Voli",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari lompatan yang berlebihan"
+    },
+    {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Sepak Bola",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari melakukan secara intens karena memiliki risiko tinggi pada sendi"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Angkat Beban (Angkat Besi)",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gunakan beban ringan dan hindari tekanan berlebih pada sendi"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Dumbbell",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gunakan repetisi ringan"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Squats",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari squat terlalu dalam bila lutut terasa nyeri"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "HIIT",
+      "safety": "tidak_aman"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Berjalan Santai",
+      "safety": "aman"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Berjalan Cepat",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hentikan bila nyeri meningkat"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Lari Santai (Jogging)",
+      "safety": "tidak_aman"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Bersepeda Statis",
+      "safety": "aman"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Bersepeda Luar",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari medan berat dan durasi terlalu lama"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Berenang (Gaya bebas)",
+      "safety": "aman"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Yoga",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari gerakan yang memberikan tekanan besar pada sendi"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Kalistenik",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gunakan gerakan low impact saja"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Stepper",
+      "safety": "tidak_aman"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Aerobik",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Pilih aerobik low impact"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Rowing Machine",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gunakan intensitas rendah"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Mesin Elipse (Elliptical)",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gunakan intensitas rendah"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Menari (ballroom)",
+      "safety": "aman"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Sepatu Roda",
+      "safety": "tidak_aman"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Lompat Tali",
+      "safety": "tidak_aman"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Senam/Gimnastik",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari gerakan eksplosif dan fleksibilitas ekstrem"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Pilates",
+      "safety": "aman"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Zumba",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari gerakan eksplosif dan fleksibilitas ekstrem"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Golf",
+      "safety": "aman"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Bulu Tangkis",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gerakan cepat dapat membebani lutut dan pergelangan kaki"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Tenis",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gerakan cepat dapat membebani lutut dan pergelangan kaki"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Padel",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gerakan cepat dapat membebani lutut dan pergelangan kaki"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Baseball",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari gerakan lempar berlebihan bila sendi bahu bermasalah"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Bola basket",
+      "safety": "tidak_aman"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Bola Voli",
+      "safety": "tidak_aman"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Sepak Bola",
+      "safety": "tidak_aman"
+    }
+  ],
+  "generatedFrom": "d:/TUGAS AKHIR/FORM KUSIONER COACH/SALINAN KUSIONER VALIDASI COACH.xlsx"
+}

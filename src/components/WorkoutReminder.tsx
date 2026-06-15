@@ -2,39 +2,58 @@ import { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { Input } from '@/components/ui/input';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Bell, Clock, Save } from 'lucide-react';
+import { Clock, Save, AlertCircle, Plus, Minus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/contexts/AuthContext';
 import { WorkoutReminder as ReminderType, scheduleWorkoutReminder, isNativeApp, checkNotificationPermission, requestNotificationPermission } from '@/utils/notifications';
+import { cn } from '@/lib/utils';
 
 const DAYS = [
-  { value: 0, label: 'Sun' },
-  { value: 1, label: 'Mon' },
-  { value: 2, label: 'Tue' },
-  { value: 3, label: 'Wed' },
-  { value: 4, label: 'Thu' },
-  { value: 5, label: 'Fri' },
-  { value: 6, label: 'Sat' },
+  { value: 0, label: 'Min' },
+  { value: 1, label: 'Sen' },
+  { value: 2, label: 'Sel' },
+  { value: 3, label: 'Rab' },
+  { value: 4, label: 'Kam' },
+  { value: 5, label: 'Jum' },
+  { value: 6, label: 'Sab' },
 ];
 
 export function WorkoutReminder() {
   const { toast } = useToast();
+  const { user } = useAuth();
   const [hasPermission, setHasPermission] = useState(false);
+
+  // Kunci localStorage khusus per pengguna
+  const storageKey = user ? `workoutReminder_${user.id}` : null;
+
   const [reminder, setReminder] = useState<ReminderType>(() => {
-    const saved = localStorage.getItem('workoutReminder');
+    if (!storageKey) {
+      return { id: 1, hour: 7, minute: 0, enabled: true, days: [1, 2, 3, 4, 5] };
+    }
+    const saved = localStorage.getItem(storageKey);
     if (saved) {
-      return JSON.parse(saved);
+      const parsed = JSON.parse(saved);
+      return { ...parsed, enabled: true }; // Pengingat selalu aktif ketika disimpan
     }
     return {
       id: 1,
       hour: 7,
       minute: 0,
-      enabled: false,
-      days: [1, 2, 3, 4, 5], // Monday to Friday
+      enabled: true,
+      days: [1, 2, 3, 4, 5], // Senin sampai Jumat
     };
   });
+
+  // Muat ulang pengaturan saat pengguna berganti
+  useEffect(() => {
+    if (!storageKey) return;
+    const saved = localStorage.getItem(storageKey);
+    if (saved) {
+      setReminder(JSON.parse(saved));
+    } else {
+      setReminder({ id: 1, hour: 7, minute: 0, enabled: true, days: [1, 2, 3, 4, 5] });
+    }
+  }, [storageKey]);
 
   useEffect(() => {
     checkPermission();
@@ -54,13 +73,13 @@ export function WorkoutReminder() {
 
     if (granted) {
       toast({
-        title: 'Permission Granted',
-        description: 'You can now receive workout reminders!',
+        title: 'Izin Diberikan',
+        description: 'Anda sekarang dapat menerima notifikasi pengingat latihan!',
       });
     } else {
       toast({
-        title: 'Permission Denied',
-        description: 'Please enable notifications in your device settings.',
+        title: 'Izin Ditolak',
+        description: 'Silakan aktifkan notifikasi di pengaturan perangkat Anda untuk menerima pengingat.',
         variant: 'destructive',
       });
     }
@@ -68,10 +87,11 @@ export function WorkoutReminder() {
 
   const handleSave = async () => {
     if (!isNativeApp()) {
+      if (!storageKey) return;
+      localStorage.setItem(storageKey, JSON.stringify(reminder));
       toast({
-        title: 'Native App Required',
-        description: 'Notifications only work in the native mobile app. Please follow the setup instructions.',
-        variant: 'destructive',
+        title: 'Pengaturan Disimpan (Simulasi)',
+        description: `Pengingat diatur pada pukul ${String(reminder.hour).padStart(2, '0')}:${String(reminder.minute).padStart(2, '0')} secara lokal di web.`,
       });
       return;
     }
@@ -81,19 +101,20 @@ export function WorkoutReminder() {
       return;
     }
 
-    localStorage.setItem('workoutReminder', JSON.stringify(reminder));
+    if (!storageKey) return;
+    localStorage.setItem(storageKey, JSON.stringify(reminder));
 
     const success = await scheduleWorkoutReminder(reminder);
 
     if (success) {
       toast({
-        title: reminder.enabled ? 'Reminder Set!' : 'Reminder Disabled',
-        description: reminder.enabled ? `You'll get notifications at ${String(reminder.hour).padStart(2, '0')}:${String(reminder.minute).padStart(2, '0')}` : 'Your workout reminders have been disabled.',
+        title: 'Pengingat Diaktifkan!',
+        description: `Anda akan menerima notifikasi pada pukul ${String(reminder.hour).padStart(2, '0')}:${String(reminder.minute).padStart(2, '0')}.`,
       });
     } else {
       toast({
-        title: 'Error',
-        description: 'Failed to set reminder. Please try again.',
+        title: 'Gagal Menyimpan',
+        description: 'Gagal mengatur pengingat latihan. Silakan coba lagi.',
         variant: 'destructive',
       });
     }
@@ -106,89 +127,142 @@ export function WorkoutReminder() {
     }));
   };
 
-  if (!isNativeApp()) {
-    return (
-      <Card className="p-5 animate-fade-in-up bg-accent/5 border-accent/20">
-        <div className="flex items-start gap-3">
-          <Bell className="h-5 w-5 text-accent shrink-0 mt-1" />
-          <div className="space-y-2">
-            <h3 className="font-semibold text-foreground">Notifikasi Latihan</h3>
-            <p className="text-sm text-muted-foreground">Untuk mengaktifkan pengingat latihan, Anda perlu menjalankan aplikasi ini sebagai aplikasi seluler asli.</p>
-            <p className="text-xs text-muted-foreground mt-2">Ikuti petunjuk pemasangan di bawah ini untuk menginstal aplikasi asli di perangkat Anda.</p>
-          </div>
-        </div>
-      </Card>
-    );
-  }
-
   return (
-    <Card className="p-5 space-y-5 animate-fade-in-up hover-lift">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-gradient-to-br from-accent to-accent/80 shadow-glow">
-            <Bell className="h-5 w-5 text-accent-foreground" />
-          </div>
-          <div>
-            <h3 className="font-semibold text-foreground">Pengingat Latihan Harian</h3>
-            <p className="text-xs text-muted-foreground">Dapatkan notifikasi untuk latihan harian Anda</p>
+    <Card className="p-6 space-y-6 animate-fade-in-up hover-lift bg-card border border-border shadow-card rounded-2xl relative overflow-hidden">
+      {/* Simulation Badge */}
+      {!isNativeApp() && (
+        <div className="bg-primary/10 border border-primary/20 rounded-2xl p-4 flex gap-3 items-start animate-fade-in mb-1">
+          <span className="text-lg mt-0.5">💡</span>
+          <div className="space-y-1">
+            <h4 className="text-xs font-semibold text-primary">Mode Simulasi Web</h4>
+            <p className="text-[11px] text-muted-foreground leading-relaxed">
+              Anda dapat menyesuaikan waktu dan hari latihan. Notifikasi push asli akan aktif sepenuhnya saat aplikasi diinstal sebagai aplikasi native di HP.
+            </p>
           </div>
         </div>
-        <Switch checked={reminder.enabled} onCheckedChange={(enabled) => setReminder((prev) => ({ ...prev, enabled }))} />
-      </div>
+      )}
 
-      {reminder.enabled && (
-        <div className="space-y-4 animate-scale-in">
-          {/* Time Picker */}
-          <div className="space-y-2">
-            <Label className="flex items-center gap-2">
-              <Clock className="h-4 w-4" />
-              Waktu Pengingat
-            </Label>
-            <div className="flex gap-2 items-center">
-              <Input type="number" min="0" max="23" value={reminder.hour} onChange={(e) => setReminder((prev) => ({ ...prev, hour: parseInt(e.target.value) || 0 }))} className="w-20 text-center" placeholder="HH" />
-              <span className="text-2xl font-bold">:</span>
-              <Input type="number" min="0" max="59" value={reminder.minute} onChange={(e) => setReminder((prev) => ({ ...prev, minute: parseInt(e.target.value) || 0 }))} className="w-20 text-center" placeholder="MM" />
-            </div>
-          </div>
-
-          {/* Days Selection */}
-          <div className="space-y-2">
-            <Label>Ulangi Pada</Label>
-            <div className="flex flex-wrap gap-2">
-              {DAYS.map((day) => (
-                <div
-                  key={day.value}
-                  onClick={() => toggleDay(day.value)}
-                  className={`
-                  flex items-center justify-center w-12 h-12 rounded-full cursor-pointer
-                  transition-all duration-300 hover-scale
-                  ${reminder.days.includes(day.value) ? 'bg-primary text-primary-foreground shadow-glow' : 'bg-secondary text-secondary-foreground'}
-                `}
+      <div className="space-y-5">
+        {/* Time Picker */}
+        <div className="space-y-3">
+          <Label className="flex items-center gap-2 text-sm font-semibold text-foreground">
+            <Clock className="h-4 w-4 text-primary" />
+            Waktu Pengingat
+          </Label>
+          
+          <div className="flex gap-4 items-center justify-center py-5 bg-secondary/30 rounded-2xl border border-border/50 shadow-inner">
+            {/* Hour selector */}
+            <div className="flex flex-col items-center">
+              <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold mb-2">Jam</span>
+              <div className="flex items-center gap-1 bg-card rounded-xl border border-input shadow-sm p-1.5 focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+                <button 
+                  type="button" 
+                  onClick={() => setReminder((prev) => ({ ...prev, hour: (prev.hour - 1 + 24) % 24 }))}
+                  className="p-1 rounded-lg text-muted-foreground hover:bg-secondary hover:text-foreground active:scale-95 transition-all"
                 >
-                  <span className="text-xs font-semibold">{day.label}</span>
-                </div>
-              ))}
+                  <Minus className="h-4 w-4" />
+                </button>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  value={String(reminder.hour).padStart(2, '0')}
+                  onChange={(e) => {
+                    const raw = e.target.value.replace(/[^0-9]/g, '');
+                    const num = Math.min(23, parseInt(raw) || 0);
+                    setReminder((prev) => ({ ...prev, hour: num }));
+                  }}
+                  className="w-10 text-center font-bold text-xl bg-transparent border-0 p-0 focus:outline-none focus:ring-0 text-foreground"
+                />
+                <button 
+                  type="button" 
+                  onClick={() => setReminder((prev) => ({ ...prev, hour: (prev.hour + 1) % 24 }))}
+                  className="p-1 rounded-lg text-muted-foreground hover:bg-secondary hover:text-foreground active:scale-95 transition-all"
+                >
+                  <Plus className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+
+            <span className="text-3xl font-light text-muted-foreground/60 self-end mb-2.5">:</span>
+
+            {/* Minute selector */}
+            <div className="flex flex-col items-center">
+              <span className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold mb-2">Menit</span>
+              <div className="flex items-center gap-1 bg-card rounded-xl border border-input shadow-sm p-1.5 focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+                <button 
+                  type="button" 
+                  onClick={() => setReminder((prev) => ({ ...prev, minute: (prev.minute - 1 + 60) % 60 }))}
+                  className="p-1 rounded-lg text-muted-foreground hover:bg-secondary hover:text-foreground active:scale-95 transition-all"
+                >
+                  <Minus className="h-4 w-4" />
+                </button>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  value={String(reminder.minute).padStart(2, '0')}
+                  onChange={(e) => {
+                    const raw = e.target.value.replace(/[^0-9]/g, '');
+                    const num = Math.min(59, parseInt(raw) || 0);
+                    setReminder((prev) => ({ ...prev, minute: num }));
+                  }}
+                  className="w-10 text-center font-bold text-xl bg-transparent border-0 p-0 focus:outline-none focus:ring-0 text-foreground"
+                />
+                <button 
+                  type="button" 
+                  onClick={() => setReminder((prev) => ({ ...prev, minute: (prev.minute + 1) % 60 }))}
+                  className="p-1 rounded-lg text-muted-foreground hover:bg-secondary hover:text-foreground active:scale-95 transition-all"
+                >
+                  <Plus className="h-4 w-4" />
+                </button>
+              </div>
             </div>
           </div>
-
-          {!hasPermission && (
-            <div className="bg-accent/10 border border-accent/20 rounded-lg p-3 text-sm">
-              <p className="text-accent-foreground">📱 Izin notifikasi diperlukan. Ketuk "Simpan Pengingat" untuk mengaktifkan notifikasi.</p>
-            </div>
-          )}
-
-          <Button onClick={handleSave} className="w-full bg-gradient-to-r from-accent to-accent/80 hover:opacity-90 gap-2 hover-scale shadow-glow">
-            <Save className="h-4 w-4" />
-            Simpan Pengingat
-          </Button>
         </div>
-      )}
 
-      {!reminder.enabled && (
-        <Button onClick={handleSave} variant="outline" className="w-full hover-scale">
-          Simpan Pengaturan
+        {/* Days Selection */}
+        <div className="space-y-3">
+          <Label className="text-sm font-semibold text-foreground">Ulangi Pada</Label>
+          <div className="flex justify-between items-center gap-1.5 py-1">
+            {DAYS.map((day) => {
+              const isActive = reminder.days.includes(day.value);
+              return (
+                <button
+                  key={day.value}
+                  type="button"
+                  onClick={() => toggleDay(day.value)}
+                  className={cn(
+                    "flex items-center justify-center w-11 h-11 rounded-full text-xs font-bold transition-all duration-300 transform active:scale-95 shadow-sm border",
+                    isActive 
+                      ? "bg-gradient-to-br from-primary to-primary/80 text-primary-foreground border-primary/20 shadow-glow scale-105" 
+                      : "bg-card text-muted-foreground border-border hover:bg-secondary/50"
+                  )}
+                >
+                  {day.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {!hasPermission && isNativeApp() && (
+          <div className="bg-destructive/10 border border-destructive/20 rounded-2xl p-4 flex gap-3 items-start animate-fade-in">
+            <AlertCircle className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
+            <div className="space-y-1">
+              <h4 className="text-xs font-semibold text-destructive">Izin Notifikasi Diperlukan</h4>
+              <p className="text-[11px] text-destructive/80 leading-relaxed">
+                Izin notifikasi dinonaktifkan di perangkat Anda. Ketuk tombol <strong>Simpan Pengingat</strong> di bawah untuk meminta izin.
+              </p>
+            </div>
+          </div>
+        )}
+
+        <Button onClick={handleSave} className="w-full py-6 bg-gradient-to-r from-accent to-accent/90 text-white hover:opacity-95 hover:shadow-premium hover:-translate-y-0.5 active:translate-y-0 gap-2 rounded-xl transition-all duration-300 font-semibold shadow-glow">
+          <Save className="h-5 w-5" />
+          Simpan Pengingat
         </Button>
-      )}
+      </div>
     </Card>
   );
 }

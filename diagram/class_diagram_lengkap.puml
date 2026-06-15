@@ -1,0 +1,81 @@
+@startuml DiagramKelasOlahraga
+title Diagram Kelas - Aplikasi Rekomendasi Olahraga
+
+skinparam shadowing false
+skinparam classAttributeIconSize 10
+skinparam dpi 140
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam ArrowColor #333333
+skinparam classBorderColor #555555
+skinparam classBackgroundColor #FFFFFF
+skinparam classHeaderBackgroundColor #EFEFEF
+
+class User {
+  + String id
+  + String name
+  + String email
+  + String role
+  + String createdAt
+}
+
+class UserProfile {
+  + String id
+  + int age
+  + Gender gender
+  + List<FitnessGoal> goals
+  + int availableTime
+  + List<HealthCondition> healthConditions
+  + ActivityLevel activityLevel
+  + Preferences preferences
+  + Progress progress
+  --
+  + updateProfile()
+  + getDailyProgress()
+}
+
+class DailyProgress {
+  + String date
+  + List<String> exercisesCompleted
+  + int caloriesBurned
+  + int timeSpent
+}
+
+class RecommendationScore {
+  + Exercise exercise
+  + int score
+  + List<String> reasons
+  --
+  + calculateFitnessMatch()
+}
+
+class Exercise {
+  + String id
+  + String name
+  + ExerciseCategory category
+  + int duration
+  + Intensity intensity
+  + List<String> benefits
+  + String description
+  + List<String> equipment
+  + List<String> targetMuscles
+  + int caloriesBurn
+  + String imageUrl
+}
+
+class AdminSystem {
+  + viewUserProgress(String userId)
+}
+
+' ====================
+'  RELASI
+' ====================
+
+User "1" -- "1" UserProfile                  : has >
+UserProfile "1" -- "*" DailyProgress         : logs >
+UserProfile "1" ..> "1" RecommendationScore  : evaluated against >
+UserProfile "*" --> "*" Exercise              : favorites >
+RecommendationScore "1" o-- "1" Exercise     : contains >
+AdminSystem ..> DailyProgress                 : views >
+
+@enduml

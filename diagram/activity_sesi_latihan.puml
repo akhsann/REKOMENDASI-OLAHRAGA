@@ -1,0 +1,69 @@
+@startuml
+title Activity Diagram - Sesi Latihan
+
+|User|
+start
+:Pilih latihan dari rekomendasi;
+:Klik Mulai Latihan;
+
+|System|
+:Redirect ke halaman Tutorial;
+
+|User|
+:Lihat tutorial step-by-step;
+repeat
+  :Baca langkah tutorial;
+  :Klik Selanjutnya;
+repeat while (Masih ada langkah?) is (ya)
+->tidak;
+:Klik Mulai Latihan;
+
+|System|
+:Redirect ke halaman Workout Session;
+
+|User|
+:Klik Mulai Latihan;
+
+|System|
+:Timer mulai berjalan;
+:Hitung waktu dan kalori;
+
+|User|
+repeat
+  if (User pause?) then (ya)
+    :Klik Jeda;
+    |System|
+    :Hentikan timer;
+    |User|
+    :Klik Lanjutkan;
+    |System|
+    :Lanjutkan timer;
+  endif
+repeat while (Durasi belum tercapai?) is (ya)
+->tidak;
+
+|System|
+:Menampilkan notifikasi selesai;
+
+|User|
+:Klik Selesai & Simpan;
+
+|System|
+:Simpan progres;
+note right
+  Update:
+  - completedExercises
+  - dailyLogs
+  - totalCaloriesBurned
+  - totalExercisesCompleted
+  - Recalculate streak
+end note
+:Redirect ke halaman utama;
+
+|User|
+stop
+
+@enduml
+
+
+

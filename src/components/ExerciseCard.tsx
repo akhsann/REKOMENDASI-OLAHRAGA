@@ -1,10 +1,53 @@
+
 import { Exercise } from '@/types/exercise';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Heart, Clock, Flame, TrendingUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { categoryMap, intensityMap, benefitsMap, equipmentMap, muscleMap } from '@/utils/translationMaps';
+import { caloriesBurnForDuration, type SessionDurationMinutes } from '@/utils/exerciseSession';
+
+const categoryMap: Record<string, string> = {
+  kardio: 'Kardio',
+  kekuatan: 'Kekuatan',
+  fleksibilitas: 'Fleksibilitas',
+  keseimbangan: 'Keseimbangan',
+  hiit: 'HIIT',
+  cardio: 'Kardio',
+  strength: 'Kekuatan',
+  flexibility: 'Fleksibilitas',
+  balance: 'Keseimbangan',
+};
+
+const intensityMap: Record<string, string> = {
+  rendah: 'Rendah',
+  sedang: 'Sedang',
+  tinggi: 'Tinggi',
+  low: 'Rendah',
+  medium: 'Sedang',
+  high: 'Tinggi',
+};
+
+const benefitsMap: Record<string, string> = {
+  'weight-loss': 'Penurunan Berat Badan',
+  endurance: 'Daya Tahan',
+  'general-fitness': 'Kebugaran Umum',
+  'muscle-gain': 'Penambahan Otot',
+  flexibility: 'Fleksibilitas',
+};
+
+const muscleMap: Record<string, string> = {
+  legs: 'Kaki',
+  core: 'Inti',
+  glutes: 'Gluteus',
+  chest: 'Dada',
+  shoulders: 'Bahu',
+  triceps: 'Triceps',
+  'full-body': 'Seluruh Tubuh',
+  back: 'Punggung',
+};
 
 interface ExerciseCardProps {
   exercise: Exercise;
@@ -12,28 +55,34 @@ interface ExerciseCardProps {
   reasons?: string[];
   isFavorite?: boolean;
   onFavorite?: () => void;
-  onStart?: () => void;
+  /** Dipanggil dengan durasi sesi yang dipilih (15 / 30 / 60 menit). */
+  onStart?: (durationMinutes: SessionDurationMinutes) => void;
   onSkip?: () => void;
+  /** Waktu tersedia harian dari profil pengguna */
+  userDuration?: number;
 }
 
 const categoryColors: Record<Exercise['category'], string> = {
-  cardio: 'bg-primary/10 text-primary border-primary/20',
-  strength: 'bg-accent/10 text-accent border-accent/20',
-  flexibility: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20',
-  balance: 'bg-purple-500/10 text-purple-600 border-purple-500/20',
+  kardio: 'bg-primary/10 text-primary border-primary/20',
+  kekuatan: 'bg-accent/10 text-accent border-accent/20',
+  fleksibilitas: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20',
+  keseimbangan: 'bg-purple-500/10 text-purple-600 border-purple-500/20',
   hiit: 'bg-red-500/10 text-red-600 border-red-500/20',
 };
 
 const intensityColors: Record<Exercise['intensity'], string> = {
-  low: 'text-emerald-600',
-  medium: 'text-amber-600',
-  high: 'text-red-600',
+  rendah: 'text-emerald-600',
+  sedang: 'text-amber-600',
+  tinggi: 'text-red-600',
 };
 
-export function ExerciseCard({ exercise, score, reasons, isFavorite = false, onFavorite, onStart, onSkip }: ExerciseCardProps) {
+export function ExerciseCard({ exercise, score, reasons, isFavorite = false, onFavorite, onStart, onSkip, userDuration }: ExerciseCardProps) {
+  const sessionMinutes = (userDuration as SessionDurationMinutes) || 30;
+  const caloriesDisplay = caloriesBurnForDuration(exercise.caloriesBurn, sessionMinutes);
+
   return (
     <Card className="p-5 hover-lift border-border bg-card animate-fade-in-up overflow-hidden group relative">
-      <div className="absolute inset-0 shimmer-bg animate-shimmer opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
       <div className="flex flex-col gap-4 relative z-10">
         {/* Header */}
         <div className="flex justify-between items-start">
@@ -46,19 +95,30 @@ export function ExerciseCard({ exercise, score, reasons, isFavorite = false, onF
                 </Badge>
               )}
             </div>
-            <p className="text-sm text-muted-foreground line-clamp-2">{exercise.description}</p>
+            <p className="text-sm text-muted-foreground">{exercise.description}</p>
           </div>
           <Button variant="ghost" size="icon" onClick={onFavorite} className="shrink-0 hover-scale">
             <Heart className={cn('h-5 w-5 transition-all duration-300', isFavorite ? 'fill-accent text-accent scale-110' : 'text-muted-foreground')} />
           </Button>
         </div>
 
+
+        {/* Durasi sesi */}
+        <div className="space-y-2">
+          <Label className="text-xs text-muted-foreground">Durasi sesi</Label>
+          <div className="flex">
+            <Badge variant="secondary" className="px-3 py-1 text-sm bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20">
+              {sessionMinutes} menit
+            </Badge>
+          </div>
+        </div>
+
         {/* Badges */}
         <div className="flex flex-wrap gap-2">
-          <Badge className={categoryColors[exercise.category]}>{categoryMap[exercise.category]}</Badge>
+          <Badge className={cn(categoryColors[exercise.category], 'border')}>{categoryMap[exercise.category]}</Badge>
           <Badge variant="outline" className="gap-1">
             <Clock className="h-3 w-3" />
-            {exercise.duration} menit
+            {sessionMinutes} menit
           </Badge>
           <Badge variant="outline" className={cn('gap-1', intensityColors[exercise.intensity])}>
             <TrendingUp className="h-3 w-3" />
@@ -66,7 +126,7 @@ export function ExerciseCard({ exercise, score, reasons, isFavorite = false, onF
           </Badge>
           <Badge variant="outline" className="gap-1">
             <Flame className="h-3 w-3 text-accent" />
-            {exercise.caloriesBurn} kal
+            ~{caloriesDisplay} kal
           </Badge>
         </div>
 
@@ -95,7 +155,10 @@ export function ExerciseCard({ exercise, score, reasons, isFavorite = false, onF
         {(onStart || onSkip) && (
           <div className="flex gap-2 pt-2">
             {onStart && (
-              <Button onClick={onStart} className="flex-1 bg-gradient-to-r from-primary to-primary-glow hover:opacity-90 hover:scale-105 transition-all duration-300 shadow-glow">
+              <Button
+                onClick={() => onStart(sessionMinutes)}
+                className="flex-1 bg-gradient-to-r from-primary to-primary-glow hover:opacity-90 hover:scale-105 transition-all duration-300 shadow-glow"
+              >
                 Mulai Latihan
               </Button>
             )}

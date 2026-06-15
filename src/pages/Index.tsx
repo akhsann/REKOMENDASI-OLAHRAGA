@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getUserProfile, saveUserProfile, hasUserProfile, updateDailyProgress, calculateStreak } from '@/utils/storage';
-import { exercises } from '@/data/exercises';
+import { getUserProfile, saveUserProfile, hasUserProfile } from '@/utils/storage';
+import { getExercises } from '@/utils/exerciseStore';
 import { getRecommendations, updateUserPreferences } from '@/utils/recommendation';
 import { ExerciseCard } from '@/components/ExerciseCard';
 import { Navigation } from '@/components/Navigation';
 import { Button } from '@/components/ui/button';
 import { UserProfile, RecommendationScore } from '@/types/exercise';
+import type { SessionDurationMinutes } from '@/utils/exerciseSession';
 import { Sparkles, RefreshCw } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -33,7 +34,7 @@ const Index = () => {
 
   const loadRecommendations = (profile: UserProfile) => {
     setIsLoading(true);
-    const recs = getRecommendations(profile, exercises, 5);
+    const recs = getRecommendations(profile, getExercises(), 5);
     setRecommendations(recs);
     setIsLoading(false);
   };
@@ -42,12 +43,20 @@ const Index = () => {
     if (!user) return;
 
     const isFavorite = user.preferences.favoriteExercises.includes(exerciseId);
-    const updatedUser = updateUserPreferences(user, exerciseId, isFavorite ? 'complete' : 'favorite');
+    let updatedUser: UserProfile;
 
     if (!isFavorite) {
-      updatedUser.preferences.favoriteExercises.push(exerciseId);
+      // Tambahkan ke favorit — updateUserPreferences sudah menangani push
+      updatedUser = updateUserPreferences(user, exerciseId, 'favorite');
     } else {
-      updatedUser.preferences.favoriteExercises = updatedUser.preferences.favoriteExercises.filter((id) => id !== exerciseId);
+      // Hapus dari favorit — lakukan filter manual
+      updatedUser = {
+        ...user,
+        preferences: {
+          ...user.preferences,
+          favoriteExercises: user.preferences.favoriteExercises.filter((id) => id !== exerciseId),
+        },
+      };
     }
 
     saveUserProfile(updatedUser);
@@ -58,37 +67,8 @@ const Index = () => {
     });
   };
 
-  const handleStart = (exerciseId: string) => {
-    if (!user) return;
-
-    const exercise = exercises.find((ex) => ex.id === exerciseId);
-    if (!exercise) return;
-
-    const updatedUser = { ...user };
-
-    // Update preferences
-    const userWithPreferences = updateUserPreferences(updatedUser, exerciseId, 'complete');
-
-    // Update progress tracking
-    userWithPreferences.progress.dailyLogs = updateDailyProgress(userWithPreferences.progress.dailyLogs, exerciseId, exercise.caloriesBurn, exercise.duration);
-
-    // Update totals
-    userWithPreferences.progress.totalExercisesCompleted += 1;
-    userWithPreferences.progress.totalCaloriesBurned += exercise.caloriesBurn;
-
-    // Recalculate streaks
-    const streaks = calculateStreak(userWithPreferences.progress.dailyLogs);
-    userWithPreferences.progress.currentStreak = streaks.current;
-    userWithPreferences.progress.longestStreak = Math.max(userWithPreferences.progress.longestStreak, streaks.longest);
-
-    saveUserProfile(userWithPreferences);
-    setUser(userWithPreferences);
-    loadRecommendations(userWithPreferences);
-
-    toast({
-      title: 'Latihan selesai!',
-      description: 'Kerja bagus! Kami mempelajari preferensi Anda untuk meningkatkan rekomendasi.',
-    });
+  const handleStart = (exerciseId: string, durationMinutes: SessionDurationMinutes) => {
+    navigate(`/tutorial?id=${exerciseId}&mins=${durationMinutes}`);
   };
 
   const handleSkip = (exerciseId: string) => {
@@ -129,8 +109,8 @@ const Index = () => {
               <Sparkles className="h-6 w-6 text-primary-foreground" />
             </div>
             <div className="flex-1">
-              <h1 className="text-2xl font-bold text-foreground">Today's Recommendations</h1>
-              <p className="text-sm text-muted-foreground">Personalized just for you</p>
+              <h1 className="text-2xl font-bold text-foreground">Rekomendasi Olahraga</h1>
+              <p className="text-sm text-muted-foreground">Disesuaikan khusus untuk Anda</p>
             </div>
             <Button variant="outline" size="icon" onClick={handleRefresh} disabled={isLoading} className="hover-scale">
               <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
@@ -140,16 +120,16 @@ const Index = () => {
           {/* User Stats */}
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-card rounded-xl p-3 border border-border text-center hover-lift cursor-pointer animate-scale-in">
-              <div className="text-2xl font-bold text-primary animate-pulse">{user.preferences.completedExercises.length}</div>
-              <div className="text-xs text-muted-foreground">Completed</div>
+              <div className="text-2xl font-bold text-primary">{user.progress?.totalExercisesCompleted ?? 0}</div>
+              <div className="text-xs text-muted-foreground">Selesai</div>
             </div>
             <div className="bg-card rounded-xl p-3 border border-border text-center hover-lift cursor-pointer animate-scale-in" style={{ animationDelay: '0.1s' }}>
-              <div className="text-2xl font-bold text-accent animate-pulse">{user.preferences.favoriteExercises.length}</div>
-              <div className="text-xs text-muted-foreground">Favorites</div>
+              <div className="text-2xl font-bold text-accent">{user.preferences.favoriteExercises.length}</div>
+              <div className="text-xs text-muted-foreground">Favorit</div>
             </div>
             <div className="bg-card rounded-xl p-3 border border-border text-center hover-lift cursor-pointer animate-scale-in" style={{ animationDelay: '0.2s' }}>
-              <div className="text-2xl font-bold text-foreground animate-pulse">{user.availableTime}m</div>
-              <div className="text-xs text-muted-foreground">Daily Time</div>
+              <div className="text-2xl font-bold text-foreground">{user.availableTime}m</div>
+              <div className="text-xs text-muted-foreground">Waktu Harian</div>
             </div>
           </div>
         </div>
@@ -164,22 +144,14 @@ const Index = () => {
               reasons={rec.reasons}
               isFavorite={user.preferences.favoriteExercises.includes(rec.exercise.id)}
               onFavorite={() => handleFavorite(rec.exercise.id)}
-              onStart={() => handleStart(rec.exercise.id)}
+              onStart={(mins) => handleStart(rec.exercise.id, mins)}
               onSkip={() => handleSkip(rec.exercise.id)}
+              userDuration={user.availableTime}
             />
           ))}
         </div>
 
-        {/* AI Learning Notice */}
-        <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 text-sm animate-fade-in-up hover-lift">
-          <div className="flex items-start gap-3">
-            <Sparkles className="h-5 w-5 text-primary shrink-0 mt-0.5 animate-pulse-glow" />
-            <div className="space-y-1">
-              <div className="font-semibold text-foreground">Smart Recommendations</div>
-              <div className="text-muted-foreground text-xs">Our system learns from your interactions - completing, favoriting, and skipping exercises helps us suggest better workouts tailored to your preferences.</div>
-            </div>
-          </div>
-        </div>
+
       </div>
 
       <Navigation />

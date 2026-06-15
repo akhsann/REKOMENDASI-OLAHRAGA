@@ -1,0 +1,46 @@
+@startuml
+title Activity Diagram - Monitoring Progres
+
+|User|
+start
+:Klik menu Progres;
+
+|System|
+:Redirect ke halaman Progress;
+:Load UserProfile dari storage;
+:Menampilkan statistik;
+note right
+  - Current Streak
+  - Longest Streak
+  - Total Exercises Completed
+  - Total Calories Burned
+end note
+:Menampilkan grafik progres;
+note right
+  - Daily Calories Chart
+  - Exercise Count Chart
+  - Weekly Summary
+end note
+:Menampilkan recent activity;
+
+|User|
+:Review statistik dan grafik;
+if (Ingin export data?) then (ya)
+  :Klik Export;
+  |System|
+  :Generate JSON file;
+  :Download file;
+  |User|
+  :File terunduh;
+else (tidak)
+endif
+
+:Klik kembali ke halaman utama;
+
+|System|
+stop
+
+@enduml
+
+
+

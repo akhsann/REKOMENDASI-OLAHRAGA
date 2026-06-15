@@ -1,10 +1,15 @@
-export type FitnessLevel = 'pemula' | 'menengah' | 'lanjutan';
 export type Gender = 'pria' | 'wanita' | 'lainnya' | 'lebih-baik-tidak-dikatakan';
 export type ExerciseCategory = 'kardio' | 'kekuatan' | 'fleksibilitas' | 'keseimbangan' | 'hiit';
 export type Intensity = 'rendah' | 'sedang' | 'tinggi';
 export type FitnessGoal = 'penurunan-berat-badan' | 'penambahan-otot' | 'ketahanan' | 'fleksibilitas' | 'kebugaran-umum';
 
-export type HealthCondition = 'hipertensi' | 'asma' | 'diabetes' | 'obesitas' | 'tidak-ada';
+// Tingkat aktivitas/pekerjaan harian pengguna
+export type ActivityLevel = 'ringan' | 'sedang' | 'tinggi';
+
+export type HealthCondition = 'hipertensi' | 'asma' | 'diabetes' | 'obesitas' | 'nyeri-sendi' | 'tidak-ada';
+
+/** Subset dari HealthCondition yang dipakai di safeConditions & medicalNotes */
+export type MedicalKey = 'hipertensi' | 'asma' | 'diabetes' | 'obesitas' | 'nyeriSendi';
 
 export interface DailyProgress {
   date: string; // YYYY-MM-DD format
@@ -17,10 +22,11 @@ export interface UserProfile {
   id: string;
   age: number;
   gender: Gender;
-  fitnessLevel: FitnessLevel;
   goals: FitnessGoal[];
   availableTime: number; // minutes per day
   healthConditions: HealthCondition[];
+  // Informasi tingkat aktivitas/pekerjaan harian
+  activityLevel?: ActivityLevel;
   preferences: {
     favoriteExercises: string[];
     completedExercises: string[];
@@ -39,13 +45,19 @@ export interface Exercise {
   id: string;
   name: string;
   category: ExerciseCategory;
-  duration: number; // minutes
+  /** Referensi durasi (menit) yang dipakai untuk kalori & skor rekomendasi — selalu 30; sesi aktual dipilih 15/30/60 di UI. */
+  duration: number;
   intensity: Intensity;
   benefits: string[];
+  /** Daftar kondisi kesehatan yang AMAN melakukan olahraga ini (termasuk 'tidak-ada' = sehat). */
+  safeConditions: HealthCondition[];
+  /** Catatan/modifikasi khusus per kondisi medis tertentu (opsional). Kunci = nama kondisi (camelCase). */
+  medicalNotes?: Partial<Record<MedicalKey, string>>;
   description: string;
   equipment: string[];
   targetMuscles: string[];
-  caloriesBurn: number; // per session
+  /** Kalori estimasi untuk sesi **30 menit** (referensi tarif tetap). */
+  caloriesBurn: number;
   imageUrl?: string;
 }
 

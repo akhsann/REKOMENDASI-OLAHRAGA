@@ -1,12 +1,38 @@
 import { UserProfile, DailyProgress } from '@/types/exercise';
+import { getCurrentUser, getCurrentUserProfile, saveCurrentUserProfile } from './auth';
 
-const USER_PROFILE_KEY = 'fitness_user_profile';
+import { supabase } from './supabase';
+
+const USER_PROFILE_KEY = 'fitness_user_profile'; // Legacy key for backward compatibility
 
 export function saveUserProfile(profile: UserProfile): void {
-  localStorage.setItem(USER_PROFILE_KEY, JSON.stringify(profile));
+  // Try to save using auth system first
+  try {
+    saveCurrentUserProfile(profile);
+    
+    // Also sync to Supabase asynchronously if user is logged in
+    const currentUser = getCurrentUser(); // Use authenticated User (has valid Supabase UUID)
+    if (currentUser?.id) {
+      const profileWithId = { ...profile, id: currentUser.id };
+      supabase.from('profiles').upsert({
+        id: currentUser.id,
+        profile_data: profileWithId
+      }).then(({ error }) => {
+        if (error) console.error('Failed to sync profile to Supabase:', error);
+      });
+    }
+  } catch {
+    // Fallback to legacy storage if not authenticated
+    localStorage.setItem(USER_PROFILE_KEY, JSON.stringify(profile));
+  }
 }
 
 export function getUserProfile(): UserProfile | null {
+  // Try to get from auth system first
+  const authProfile = getCurrentUserProfile();
+  if (authProfile) return authProfile;
+
+  // Fallback to legacy storage
   const stored = localStorage.getItem(USER_PROFILE_KEY);
   if (!stored) return null;
 
@@ -33,6 +59,11 @@ export function clearUserProfile(): void {
 }
 
 export function hasUserProfile(): boolean {
+  // Check auth system first
+  const authProfile = getCurrentUserProfile();
+  if (authProfile) return true;
+
+  // Fallback to legacy check
   return localStorage.getItem(USER_PROFILE_KEY) !== null;
 }
 

@@ -1,0 +1,36 @@
+/**
+ * Nama olahraga pada kuesioner validasi pelatih → satu ID latihan di `exercises.ts`
+ * (urutan ex1–ex30 sama dengan baris kuesioner).
+ */
+export const QUESTIONNAIRE_NAME_TO_EXERCISE_IDS: Record<string, readonly string[]> = {
+  'Angkat Beban (Angkat Besi)': ['ex1'],
+  Dumbbell: ['ex2'],
+  Squats: ['ex3'],
+  HIIT: ['ex4'],
+  'Berjalan Santai': ['ex5'],
+  'Berjalan Cepat': ['ex6'],
+  'Lari Santai (Jogging)': ['ex7'],
+  'Bersepeda Statis': ['ex8'],
+  'Bersepeda Luar': ['ex9'],
+  'Berenang (Gaya bebas)': ['ex10'],
+  Yoga: ['ex11'],
+  Kalistenik: ['ex12'],
+  Stepper: ['ex13'],
+  Aerobik: ['ex14'],
+  'Rowing Machine': ['ex15'],
+  'Mesin Elipse (Elliptical)': ['ex16'],
+  'Menari (ballroom)': ['ex17'],
+  'Sepatu Roda': ['ex18'],
+  'Lompat Tali': ['ex19'],
+  'Senam/Gimnastik': ['ex20'],
+  Pilates: ['ex21'],
+  Zumba: ['ex22'],
+  Golf: ['ex23'],
+  'Bulu Tangkis': ['ex24'],
+  Tenis: ['ex25'],
+  Padel: ['ex26'],
+  Baseball: ['ex27'],
+  'Bola basket': ['ex28'],
+  'Bola Voli': ['ex29'],
+  'Sepak Bola': ['ex30'],
+};

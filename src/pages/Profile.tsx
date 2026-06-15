@@ -1,23 +1,19 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserProfile, FitnessLevel, Gender, FitnessGoal, HealthCondition } from '@/types/exercise';
+import { UserProfile, Gender, FitnessGoal, HealthCondition, ActivityLevel } from '@/types/exercise';
 import { saveUserProfile, getUserProfile } from '@/utils/storage';
+import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Navigation } from '@/components/Navigation';
-import { WorkoutReminder } from '@/components/WorkoutReminder';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
-import { User, Save } from 'lucide-react';
+import { User, Save, LogOut } from 'lucide-react';
 
-const fitnessLevels: { value: FitnessLevel; label: string }[] = [
-  { value: 'pemula', label: 'Pemula' },
-  { value: 'menengah', label: 'Menengah' },
-  { value: 'lanjutan', label: 'Lanjutan' },
-];
+
 
 const genders: { value: Gender; label: string }[] = [
   { value: 'pria', label: 'Pria' },
@@ -39,20 +35,44 @@ const healthConditions: { value: HealthCondition; label: string }[] = [
   { value: 'asma', label: 'Asma' },
   { value: 'diabetes', label: 'Diabetes' },
   { value: 'obesitas', label: 'Obesitas' },
+  { value: 'nyeri-sendi', label: 'Nyeri sendi' },
   { value: 'tidak-ada', label: 'Tidak Ada' },
+];
+
+const activityLevels: {
+  value: ActivityLevel;
+  label: string;
+  description: string;
+}[] = [
+  {
+    value: 'ringan',
+    label: 'Tingkat Aktivitas Ringan',
+    description: 'Banyak duduk dan kurang gerak fisik harian. Contoh: Mahasiswa, pelajar, pegawai kantoran/administrasi, programmer/IT, desainer grafis, akuntan, customer service desk-based, content creator desk-based, freelancer remote worker.',
+  },
+  {
+    value: 'sedang',
+    label: 'Tingkat Aktivitas Sedang',
+    description: 'Pekerjaan yang mengharuskan banyak berdiri, berjalan, atau beraktivitas di lapangan. Contoh: Guru, dosen, kasir, resepsionis, perawat shift ringan, barista, pegawai toko, sales counter, fotografer, event organizer, sales lapangan, teknisi, kurir, driver ojek online, petugas lapangan, polisi, TNI, cleaning service, mekanik, surveyor lapangan.',
+  },
+  {
+    value: 'tinggi',
+    label: 'Tingkat Aktivitas Tinggi',
+    description: 'Pekerjaan fisik yang berat dan menguras tenaga. Contoh: Kuli bangunan, pekerja proyek, atlet, pekerja gudang, petani, nelayan, pekerja tambang, pelatih fisik, pemandu wisata outdoor, buruh angkut.',
+  },
 ];
 
 export default function Profile() {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { user, logout } = useAuth();
   const [profile, setProfile] = useState<UserProfile>({
-    id: 'user-1',
+    id: user?.id || 'user-1',
     age: 0,
     gender: 'pria',
-    fitnessLevel: 'pemula',
     goals: ['kebugaran-umum'],
     availableTime: 30,
     healthConditions: ['tidak-ada'],
+    activityLevel: 'ringan',
     preferences: {
       favoriteExercises: [],
       completedExercises: [],
@@ -71,8 +91,11 @@ export default function Profile() {
     const existingProfile = getUserProfile();
     if (existingProfile) {
       setProfile(existingProfile);
+    } else if (user) {
+      // Initialize profile with user ID
+      setProfile((prev) => ({ ...prev, id: user.id }));
     }
-  }, []);
+  }, [user]);
 
   const handleSave = () => {
     saveUserProfile(profile);
@@ -118,6 +141,8 @@ export default function Profile() {
     });
   };
 
+  const selectedActivityLevel = activityLevels.find((level) => level.value === profile.activityLevel);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary pb-20 animate-fade-in">
       <div className="max-w-md mx-auto p-6 space-y-6">
@@ -126,9 +151,14 @@ export default function Profile() {
           <div className="p-3 rounded-2xl bg-gradient-to-br from-primary to-primary-glow shadow-glow animate-pulse-glow">
             <User className="h-6 w-6 text-primary-foreground" />
           </div>
-          <div>
+          <div className="flex-1">
             <h1 className="text-2xl font-bold text-foreground">Profil Anda</h1>
             <p className="text-sm text-muted-foreground">Personalisasi perjalanan kebugaran Anda</p>
+            {user && (
+              <div className="mt-1 text-xs text-muted-foreground">
+                {user.name} • {user.email}
+              </div>
+            )}
           </div>
         </div>
 
@@ -138,7 +168,19 @@ export default function Profile() {
           {/* Age */}
           <div className="space-y-2">
             <Label htmlFor="age">Usia</Label>
-            <Input id="age" type="number" value={profile.age} onChange={(e) => setProfile({ ...profile, age: parseInt(e.target.value) || 0 })} min="13" max="100" />
+            <Input
+              id="age"
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              value={profile.age === 0 ? '' : profile.age.toString()}
+              onChange={(e) => {
+                const raw = e.target.value.replace(/[^0-9]/g, '').replace(/^0+(?=\d)/, '');
+                const num = Math.min(100, Math.max(0, parseInt(raw) || 0));
+                setProfile({ ...profile, age: raw === '' ? 0 : num });
+              }}
+              placeholder="Masukkan usia Anda"
+            />
           </div>
 
           {/* Gender */}
@@ -158,27 +200,52 @@ export default function Profile() {
             </Select>
           </div>
 
-          {/* Fitness Level */}
+
+
+          {/* Available Time */}
           <div className="space-y-2">
-            <Label htmlFor="fitness-level">Tingkat Kebugaran</Label>
-            <Select value={profile.fitnessLevel} onValueChange={(value: FitnessLevel) => setProfile({ ...profile, fitnessLevel: value })}>
-              <SelectTrigger>
-                <SelectValue />
+            <Label htmlFor="time">Waktu Tersedia Harian</Label>
+            <Select 
+              value={profile.availableTime.toString()} 
+              onValueChange={(value) => setProfile({ ...profile, availableTime: parseInt(value) })}
+            >
+              <SelectTrigger id="time">
+                <SelectValue placeholder="Pilih durasi waktu" />
               </SelectTrigger>
               <SelectContent>
-                {fitnessLevels.map((level) => (
+                <SelectItem value="15">15 menit</SelectItem>
+                <SelectItem value="30">30 menit</SelectItem>
+                <SelectItem value="60">60 menit</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Daily Activity Level */}
+          <div className="space-y-2">
+            <Label>Tingkat Aktivitas / Pekerjaan Harian</Label>
+            <Select
+              value={profile.activityLevel}
+              onValueChange={(value: ActivityLevel) => {
+                setProfile((prev) => ({
+                  ...prev,
+                  activityLevel: value,
+                }));
+              }}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Pilih tingkat aktivitas harian" />
+              </SelectTrigger>
+              <SelectContent>
+                {activityLevels.map((level) => (
                   <SelectItem key={level.value} value={level.value}>
                     {level.label}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
-          </div>
-
-          {/* Available Time */}
-          <div className="space-y-2">
-            <Label htmlFor="time">Waktu Tersedia Harian (menit)</Label>
-            <Input id="time" type="number" value={profile.availableTime} onChange={(e) => setProfile({ ...profile, availableTime: parseInt(e.target.value) || 0 })} min="5" max="180" />
+            {selectedActivityLevel && (
+              <p className="text-xs text-muted-foreground">{selectedActivityLevel.description}</p>
+            )}
           </div>
 
           {/* Fitness Goals */}
@@ -212,13 +279,27 @@ export default function Profile() {
           </div>
         </Card>
 
-        {/* Workout Reminder Section */}
-        <WorkoutReminder />
-
         {/* Save Button */}
         <Button onClick={handleSave} className="w-full bg-gradient-to-r from-primary to-primary-glow hover:opacity-90 gap-2 hover-scale shadow-glow animate-fade-in-up" size="lg">
           <Save className="h-4 w-4" />
           Simpan Profil
+        </Button>
+
+        {/* Logout Button */}
+        <Button
+          onClick={() => {
+            logout();
+            toast({
+              title: 'Logout berhasil',
+              description: 'Anda telah keluar dari akun',
+            });
+          }}
+          variant="outline"
+          className="w-full gap-2 hover-scale"
+          size="lg"
+        >
+          <LogOut className="h-4 w-4" />
+          Keluar
         </Button>
       </div>
 

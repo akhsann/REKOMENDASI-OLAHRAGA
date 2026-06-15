@@ -4,13 +4,10 @@ import { UserProfile, DailyProgress } from '@/types/exercise';
 import { Navigation } from '@/components/Navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { TrendingUp, Flame, Calendar, Target, Award, Zap, Download } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { TrendingUp, Flame, Calendar, Target, Award, Zap } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 
 const Progress = () => {
-  const { toast } = useToast();
   const [user, setUser] = useState<UserProfile | null>(null);
   const [selectedPeriod, setSelectedPeriod] = useState<'week' | 'month' | 'all'>('week');
 
@@ -154,7 +151,7 @@ const Progress = () => {
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <Calendar className="h-5 w-5" />
-                This Week's Summary
+                Ringkasan Minggu ini
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
@@ -223,68 +220,7 @@ const Progress = () => {
           </Card>
         )}
 
-        {/* Recent Activity */}
-        <Card className="animate-fade-in-up">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Calendar className="h-5 w-5" />
-              Recent Activity
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => {
-                  const dataStr = JSON.stringify(user.progress, null, 2);
-                  const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
-                  const exportFileDefaultName = `fitness-progress-${new Date().toISOString().split('T')[0]}.json`;
-                  const linkElement = document.createElement('a');
-                  linkElement.setAttribute('href', dataUri);
-                  linkElement.setAttribute('download', exportFileDefaultName);
-                  linkElement.click();
 
-                  toast({
-                    title: 'Data exported!',
-                    description: 'Your progress data has been downloaded.',
-                  });
-                }}
-                className="ml-auto"
-              >
-                <Download className="h-4 w-4 mr-1" />
-                Export
-              </Button>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {filteredLogs.length === 0 ? (
-              <p className="text-muted-foreground text-center py-4">No activity in the selected period</p>
-            ) : (
-              <div className="space-y-3">
-                {filteredLogs
-                  .slice(-7)
-                  .reverse()
-                  .map((log) => (
-                    <div key={log.date} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                      <div>
-                        <div className="font-medium">
-                          {new Date(log.date).toLocaleDateString('en-US', {
-                            weekday: 'short',
-                            month: 'short',
-                            day: 'numeric',
-                          })}
-                        </div>
-                        <div className="text-sm text-muted-foreground">
-                          {log.exercisesCompleted.length} exercise{log.exercisesCompleted.length !== 1 ? 's' : ''}
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="font-medium">{log.caloriesBurned} cal</div>
-                        <div className="text-sm text-muted-foreground">{log.timeSpent}m</div>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
       </div>
 
       <Navigation />

@@ -1,0 +1,254 @@
+@startuml DiagramKelasRekomendasiOlahraga
+title Diagram Kelas Aplikasi Rekomendasi Olahraga
+
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype ortho
+skinparam dpi 160
+
+' =========================
+' TIPE DATA & ENUM
+' =========================
+package "Tipe Data" {
+
+    class User {
+        - id : string
+        - name : string
+        - email : string
+        - createdAt : string
+    }
+
+    class AuthResponse {
+        - user : User
+        - token : string
+    }
+
+    enum FitnessLevel {
+        pemula
+        menengah
+        lanjutan
+    }
+
+    enum Gender {
+        pria
+        wanita
+        lainnya
+        lebih_baik_tidak_dikatakan
+    }
+
+    enum ExerciseCategory {
+        kardio
+        kekuatan
+        fleksibilitas
+        keseimbangan
+        hiit
+    }
+
+    enum Intensity {
+        rendah
+        sedang
+        tinggi
+    }
+
+    enum FitnessGoal {
+        penurunan_berat_badan
+        penambahan_otot
+        ketahanan
+        fleksibilitas
+        kebugaran_umum
+    }
+
+    enum HealthCondition {
+        hipertensi
+        asma
+        diabetes
+        obesitas
+        tidak_ada
+    }
+}
+
+' =========================
+' MODEL DATA
+' =========================
+package "Model Data" {
+
+    class UserProfile {
+        - id : string
+        - age : number
+        - gender : Gender
+        - fitnessLevel : FitnessLevel
+        - goals : FitnessGoal[]
+        - availableTime : number
+        - healthConditions : HealthCondition[]
+        - preferences : UserPreferences
+        - progress : UserProgress
+    }
+
+    class Exercise {
+        - id : string
+        - name : string
+        - category : ExerciseCategory
+        - duration : number
+        - intensity : Intensity
+        - benefits : string[]
+        - description : string
+        - equipment : string[]
+        - targetMuscles : string[]
+        - caloriesBurn : number
+        - imageUrl : string
+    }
+
+    class RecommendationScore {
+        - score : number
+        - reasons : string[]
+    }
+
+    class DailyProgress {
+        - date : string
+        - exercisesCompleted : string[]
+        - caloriesBurned : number
+        - timeSpent : number
+    }
+
+    class UserPreferences {
+        - favoriteExercises : string[]
+        - completedExercises : string[]
+        - skippedExercises : string[]
+    }
+
+    class UserProgress {
+        - dailyLogs : DailyProgress[]
+        - currentStreak : number
+        - longestStreak : number
+        - totalCaloriesBurned : number
+        - totalExercisesCompleted : number
+    }
+}
+
+' =========================
+' CONTEXT & PROVIDER
+' =========================
+package "Context & Provider" {
+
+    class AuthContextType {
+        - user : User | null
+        - isLoading : boolean
+        - isAuthenticated : boolean
+        + login(email : string, password : string)
+        + register(name : string, email : string, password : string)
+        + logout()
+    }
+
+    class AuthProvider {
+        - user : User | null
+        - isLoading : boolean
+        + login()
+        + register()
+        + logout()
+        + render()
+    }
+
+    class useAuth {
+        + useAuth() : AuthContextType
+    }
+}
+
+' =========================
+' KOMPONEN REACT
+' =========================
+package "Komponen React" {
+
+    class App
+    class BrowserRouter
+    class ProtectedRoute
+
+    class Index {
+        - isLoading : boolean
+        + loadRecommendations()
+        + handleFavorite()
+        + handleStart()
+        + handleSkip()
+        + handleRefresh()
+    }
+
+    class ExerciseCard {
+        - isFavorite : boolean
+        + onFavorite()
+        + onStart()
+        + onSkip()
+    }
+
+    class Navigation
+    class Login
+    class Register
+    class Profile
+    class Favorites
+    class Progress
+    class TutorialPage
+    class WorkoutSession
+    class NotFound
+}
+
+' =========================
+' UTILITAS
+' =========================
+package "Utilitas" {
+
+    class RecommendationUtils {
+        + calculateSimilarityScore()
+        + getRecommendations()
+        + updateUserPreferences()
+    }
+
+    class StorageUtils {
+        + getUserProfile()
+        + saveUserProfile()
+        + hasUserProfile()
+    }
+
+    class AuthUtils {
+        + loginUser()
+        + registerUser()
+        + getCurrentUser()
+        + logoutUser()
+    }
+
+    class NotificationUtils {
+        + scheduleNotification()
+        + cancelNotification()
+    }
+}
+
+' =========================
+' RELASI
+' =========================
+User --> UserProfile : memiliki
+UserProfile o-- UserPreferences
+UserProfile o-- UserProgress
+UserProgress o-- DailyProgress
+
+RecommendationScore --> Exercise
+
+AuthProvider --> AuthContextType
+AuthProvider --> AuthUtils
+useAuth --> AuthContextType
+
+Index --> UserProfile
+Index --> RecommendationUtils
+Index --> StorageUtils
+Index --> ExerciseCard
+
+ExerciseCard --> Exercise
+
+App --> AuthProvider
+App --> BrowserRouter
+
+RecommendationUtils --> UserProfile
+RecommendationUtils --> Exercise
+RecommendationUtils --> RecommendationScore
+
+StorageUtils --> UserProfile
+
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+title Activity Diagram - Rekomendasi Latihan
+
+|User|
+start
+:Masuk ke halaman utama;
+
+|System|
+:Load UserProfile dari storage;
+:Hitung rekomendasi latihan;
+note right
+  Algoritma Scoring:
+  - Fitness Level: 20 pts
+  - Goals Alignment: 30 pts
+  - Time Availability: 20 pts
+  - User Interaction: 30 pts
+  - Category Diversity: 10 pts
+end note
+:Urutkan berdasarkan score;
+:Ambil 5 rekomendasi teratas;
+:Menampilkan daftar rekomendasi;
+
+|User|
+:Lihat rekomendasi;
+:Review detail latihan;
+
+|System|
+stop
+
+@enduml
+
+
+
