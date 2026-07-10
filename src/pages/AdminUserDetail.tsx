@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '@/utils/supabase';
-import { UserProfile, DailyProgress } from '@/types/exercise';
+import { UserProfile, DailyProgress, CompletedExerciseEntry } from '@/types/exercise';
+import { getExercises } from '@/utils/exerciseStore';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
   ArrowLeft, Flame, Award, Target, Zap, Calendar,
-  TrendingUp, User, Activity, Clock,
+  TrendingUp, User, Activity, Clock, Dumbbell, ChevronDown, ChevronUp,
 } from 'lucide-react';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
@@ -25,6 +26,25 @@ export default function AdminUserDetail() {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedPeriod, setSelectedPeriod] = useState<'week' | 'month' | 'all'>('week');
+  const [expandedLog, setExpandedLog] = useState<string | null>(null);
+
+  const allExercises = getExercises();
+
+  const getExerciseName = (id: string): string => {
+    const ex = allExercises.find((e) => e.id === id);
+    return ex ? ex.name : id;
+  };
+
+  const getExerciseDuration = (id: string, storedDuration: number): number => {
+    if (storedDuration > 0) return storedDuration;
+    const ex = allExercises.find((e) => e.id === id);
+    return ex ? ex.duration : 0;
+  };
+
+  const normalizeEntry = (entry: CompletedExerciseEntry | string): CompletedExerciseEntry => {
+    if (typeof entry === 'string') return { id: entry, durationMinutes: 0 };
+    return entry;
+  };
 
   useEffect(() => {
     if (!userId) return;
@@ -294,25 +314,70 @@ export default function AdminUserDetail() {
           <Card>
             <CardHeader>
               <CardTitle className="text-base flex items-center gap-2">
-                <Calendar className="h-4 w-4" />
-                Log Harian ({filteredLogs.length} hari)
+                <Dumbbell className="h-4 w-4" />
+                Riwayat Latihan ({filteredLogs.length} hari)
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
-                {[...filteredLogs].reverse().map((log) => (
-                  <div key={log.date} className="flex items-center justify-between py-2.5 px-4 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors">
-                    <div>
-                      <p className="font-medium text-sm text-foreground">
-                        {new Date(log.date).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
-                      </p>
-                      <p className="text-xs text-muted-foreground mt-0.5">{log.exercisesCompleted.length} latihan · {Math.round(log.timeSpent)} menit</p>
+              <div className="space-y-3 max-h-[600px] overflow-y-auto pr-1">
+                {[...filteredLogs].reverse().map((log) => {
+                  const isExpanded = expandedLog === log.date;
+                  const entries = log.exercisesCompleted.map(normalizeEntry);
+                  return (
+                    <div key={log.date} className="border border-border rounded-xl overflow-hidden">
+                      {/* Day header */}
+                      <button
+                        className="w-full flex items-center justify-between py-3 px-4 bg-secondary/40 hover:bg-secondary/70 transition-colors text-left"
+                        onClick={() => setExpandedLog(isExpanded ? null : log.date)}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0">
+                            <Calendar className="h-4 w-4 text-primary" />
+                          </div>
+                          <div>
+                            <p className="font-semibold text-sm text-foreground">
+                              {new Date(log.date).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+                            </p>
+                            <p className="text-xs text-muted-foreground mt-0.5">
+                              {entries.length} latihan · {log.caloriesBurned} kal · {Math.round(log.timeSpent)} mnt
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="text-sm font-bold text-orange-500">{log.caloriesBurned} kal</span>
+                          {isExpanded
+                            ? <ChevronUp className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                            : <ChevronDown className="h-4 w-4 text-muted-foreground flex-shrink-0" />}
+                        </div>
+                      </button>
+
+                      {/* Per-exercise detail */}
+                      {isExpanded && (
+                        <div className="divide-y divide-border">
+                          {entries.map((entry, idx) => (
+                            <div
+                              key={`${entry.id}-${idx}`}
+                              className="flex items-center gap-3 px-5 py-3 bg-background/60"
+                            >
+                              <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                                <Dumbbell className="h-3.5 w-3.5 text-primary" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-foreground truncate">
+                                  {getExerciseName(entry.id)}
+                                </p>
+                              </div>
+                              <div className="flex items-center gap-1 text-xs text-muted-foreground flex-shrink-0">
+                                <Clock className="h-3 w-3" />
+                                <span>{getExerciseDuration(entry.id, entry.durationMinutes)} mnt</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                    <div className="text-right">
-                      <span className="text-sm font-bold text-orange-500">{log.caloriesBurned} kal</span>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </CardContent>
           </Card>

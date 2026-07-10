@@ -273,7 +273,16 @@ export function getRecommendations(user: UserProfile, exercises: Exercise[], lim
 
   scoredExercises.sort((a, b) => b.score - a.score);
   const withCoachRules = applyCoachQuestionnaireRules(user, scoredExercises);
-  return withCoachRules.slice(0, limit);
+
+  // Pisahkan latihan yang dilewati dan tidak dilewati
+  const skippedIds = user.preferences?.skippedExercises || [];
+  const activeRecs = withCoachRules.filter((rec) => !skippedIds.includes(rec.exercise.id));
+  const skippedRecs = withCoachRules.filter((rec) => skippedIds.includes(rec.exercise.id));
+
+  // Gabungkan kembali: latihan aktif di atas, latihan yang dilewati di bawah
+  const finalRecs = [...activeRecs, ...skippedRecs];
+
+  return finalRecs.slice(0, limit);
 }
 
 // Belajar dari interaksi pengguna

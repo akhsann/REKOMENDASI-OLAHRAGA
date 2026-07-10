@@ -1,17 +1,6 @@
 import { Exercise } from '@/types/exercise';
 
-/**
- * Database latihan mengikuti kuesioner validasi pelatih
- * (`SALINAN KUSIONER VALIDASI COACH.xlsx`, kolom "Nama Olahraga").
- * Format tiap item sama seperti contoh Bersepeda Statis (id, name, category, duration,
- * intensity, benefits, description, equipment, targetMuscles, caloriesBurn).
- *
- * `duration`: selalu **30** (referensi untuk skor rekomendasi & takaran kalori per menit).
- * `caloriesBurn`: kalori estimasi untuk **sesi 30 menit** (sumber: FatSecret / Harvard — tautan di bawah).
- * Pengguna memilih durasi latihan **15, 30, atau 60 menit** di UI; kalori sesi = pembulatan((kaloriBurn÷30)×durasi dipilih).
- * FatSecret: https://www.fatsecret.co.id/kebugaran/fitness-(workout)
- * Harvard: https://www.health.harvard.edu/diet-and-weight-loss/calories-burned-in-30-minutes-for-people-of-three-different-weights
- */
+
 export const exercises: Exercise[] = [
   {
     id: 'ex1',
@@ -90,7 +79,7 @@ export const exercises: Exercise[] = [
   },
   {
     id: 'ex5',
-    name: 'Berjalan Santai (lambat)',
+    name: 'Berjalan Santai',
     category: 'kardio',
     duration: 30,
     intensity: 'rendah',
@@ -100,25 +89,8 @@ export const exercises: Exercise[] = [
     },
     description: 'Berjalan kaki dengan tempo rileks dan ritme stabil untuk aktivitas kardio ringan.',
     equipment: ['sepatu-jalan'],
-    targetMuscles: ['kaki', 'betis', 'bokong'],
+    targetMuscles: ['kaki', 'bokong'],
     caloriesBurn: 68,
-  },
-  {
-    id: 'ex6',
-    name: 'Berjalan Cepat',
-    category: 'kardio',
-    duration: 30,
-    intensity: 'sedang',
-    benefits: ['ketahanan', 'penurunan-berat-badan', 'kebugaran-umum'],
-    safeConditions: ['tidak-ada', 'hipertensi', 'asma', 'diabetes', 'obesitas', 'nyeri-sendi'],
-    medicalNotes: {
-      hipertensi: 'Tetap aman namun temponya harus stabil',
-      nyeriSendi: 'Hentikan bila nyeri meningkat',
-    },
-    description: 'Berjalan kaki dengan ritme cepat dan langkah tegas sambil menjaga postur tegak.',
-    equipment: ['sepatu-jalan'],
-    targetMuscles: ['kaki', 'betis', 'bokong'],
-    caloriesBurn: 170,
   },
   {
     id: 'ex7',
@@ -135,7 +107,7 @@ export const exercises: Exercise[] = [
     },
     description: 'Lari dengan kecepatan stabil yang masih memungkinkan percakapan singkat.',
     equipment: ['sepatu-lari'],
-    targetMuscles: ['kaki', 'betis', 'bokong', 'inti'],
+    targetMuscles: ['kaki', 'bokong', 'inti'],
     caloriesBurn: 273,
   },
   {
@@ -204,23 +176,6 @@ export const exercises: Exercise[] = [
     equipment: ['matras-yoga'],
     targetMuscles: ['seluruh-tubuh', 'inti'],
     caloriesBurn: 102,
-  },
-  {
-    id: 'ex12',
-    name: 'Kalistenik',
-    category: 'kekuatan',
-    duration: 30,
-    intensity: 'sedang',
-    benefits: ['penambahan-otot', 'kebugaran-umum', 'ketahanan'],
-    safeConditions: ['tidak-ada', 'asma', 'diabetes', 'obesitas', 'hipertensi', 'nyeri-sendi'],
-    medicalNotes: {
-      hipertensi: 'Gunakan Intensitas rendah - sedang saja',
-      nyeriSendi: 'Gunakan gerakan low impact saja',
-    },
-    description: 'Latihan berat badan seperti push-up, squat tubuh, dan plank dengan intensitas sedang.',
-    equipment: ['tidak-ada'],
-    targetMuscles: ['seluruh-tubuh', 'dada', 'lengan', 'inti'],
-    caloriesBurn: 162,
   },
   {
     id: 'ex13',
@@ -292,21 +247,6 @@ export const exercises: Exercise[] = [
     caloriesBurn: 273,
   },
   {
-    id: 'ex17',
-    name: 'Menari (ballroom)',
-    category: 'kardio',
-    duration: 30,
-    intensity: 'rendah',
-    benefits: ['ketahanan', 'kebugaran-umum', 'fleksibilitas'],
-    safeConditions: ['tidak-ada', 'hipertensi', 'asma', 'diabetes', 'obesitas', 'nyeri-sendi'],
-    medicalNotes: {
-    },
-    description: 'Menari aktif dengan pasangan atau solo mengikuti irama musik ballroom atau ruangan.',
-    equipment: ['sepatu-nyaman'],
-    targetMuscles: ['kaki', 'inti', 'seluruh-tubuh'],
-    caloriesBurn: 198,
-  },
-  {
     id: 'ex18',
     name: 'Sepatu Roda',
     category: 'keseimbangan',
@@ -338,25 +278,6 @@ export const exercises: Exercise[] = [
     equipment: ['tali-lompat', 'sepatu-olahraga'],
     targetMuscles: ['betis', 'paha', 'bahu', 'inti'],
     caloriesBurn: 341,
-  },
-  {
-    id: 'ex20',
-    name: 'Senam',
-    category: 'fleksibilitas',
-    duration: 30,
-    intensity: 'sedang',
-    benefits: ['fleksibilitas', 'kebugaran-umum', 'ketahanan'],
-    safeConditions: ['tidak-ada', 'asma', 'hipertensi', 'diabetes', 'obesitas', 'nyeri-sendi'],
-    medicalNotes: {
-      hipertensi: 'Hindari gerakan eksplosif, pilih gerakan yang santai dan dapat disesuaikan oleh tubuh',
-      diabetes: 'Hindari intensitas tinggi dan sesuaikan kemampuan tubuh',
-      obesitas: 'Hindari gerakan eksplosif dan tekanan tinggi pada sendi ',
-      nyeriSendi: 'Hindari gerakan eksplosif dan fleksibilitas ekstrem',
-    },
-    description: 'Gerakan senam atau gimnastik dasar untuk kelenturan, koordinasi, dan kontrol tubuh.',
-    equipment: ['matras'],
-    targetMuscles: ['seluruh-tubuh', 'inti', 'bahu'],
-    caloriesBurn: 119,
   },
   {
     id: 'ex21',
@@ -464,26 +385,6 @@ export const exercises: Exercise[] = [
     equipment: ['raket-padel', 'bola-padel', 'sepatu-olahraga'],
     targetMuscles: ['kaki', 'lengan', 'inti'],
     caloriesBurn: 273,
-  },
-  {
-    id: 'ex27',
-    name: 'Baseball',
-    category: 'kardio',
-    duration: 30,
-    intensity: 'sedang',
-    benefits: ['ketahanan', 'kebugaran-umum', 'penambahan-otot'],
-    safeConditions: ['tidak-ada', 'hipertensi', 'asma', 'diabetes', 'obesitas', 'nyeri-sendi'],
-    medicalNotes: {
-      hipertensi: 'Hindari sprint yang berlebihan',
-      asma: 'Gunakan durasi dan tempo yang terkontrol',
-      diabetes: 'Intensitas sedang–tinggi, perlu kontrol kondisi tubuh',
-      obesitas: 'Intensitas relatif rendah dengan jeda cukup',
-      nyeriSendi: 'Hindari gerakan lempar berlebihan bila sendi bahu bermasalah',
-    },
-    description: 'Latihan atau permainan baseball meliputi melempar, memukul, sprint pendek, dan fielding.',
-    equipment: ['sarung-tangan', 'bola-baseball', 'tongkat-baseball'],
-    targetMuscles: ['lengan', 'bahu', 'kaki', 'inti'],
-    caloriesBurn: 170,
   },
   {
     id: 'ex28',

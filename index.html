@@ -16,20 +16,13 @@
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
-    <!-- PWA Settings -->
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#0a0a0a" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Rekomendasi Olahraga" />
-    <link rel="apple-touch-icon" href="/logo.png" />
-
+    <!-- Unregister Service Workers -->
     <script>
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
-            .then((reg) => console.log('SW registered:', reg.scope))
-            .catch((err) => console.error('SW registration failed:', err));
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (const registration of registrations) {
+            registration.unregister();
+          }
         });
       }
     </script>

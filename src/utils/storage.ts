@@ -1,4 +1,4 @@
-import { UserProfile, DailyProgress } from '@/types/exercise';
+import { UserProfile, DailyProgress, CompletedExerciseEntry } from '@/types/exercise';
 import { getCurrentUser, getCurrentUserProfile, saveCurrentUserProfile } from './auth';
 
 import { supabase } from './supabase';
@@ -38,17 +38,22 @@ export function getUserProfile(): UserProfile | null {
 
   try {
     const parsed = JSON.parse(stored);
-    // Ensure progress fields exist for backward compatibility
-    if (!parsed.progress) {
-      parsed.progress = {
-        dailyLogs: [],
-        currentStreak: 0,
-        longestStreak: 0,
-        totalCaloriesBurned: 0,
-        totalExercisesCompleted: 0,
-      };
-    }
-    return parsed;
+    if (!parsed) return null;
+    return {
+      ...parsed,
+      preferences: {
+        favoriteExercises: parsed.preferences?.favoriteExercises || [],
+        completedExercises: parsed.preferences?.completedExercises || [],
+        skippedExercises: parsed.preferences?.skippedExercises || [],
+      },
+      progress: {
+        currentStreak: parsed.progress?.currentStreak || 0,
+        longestStreak: parsed.progress?.longestStreak || 0,
+        totalExercisesCompleted: parsed.progress?.totalExercisesCompleted || 0,
+        totalCaloriesBurned: parsed.progress?.totalCaloriesBurned || 0,
+        dailyLogs: parsed.progress?.dailyLogs || [],
+      },
+    };
   } catch {
     return null;
   }
@@ -120,21 +125,26 @@ export function getTodayProgress(dailyLogs: DailyProgress[]): DailyProgress | nu
   return dailyLogs.find((log) => log.date === today) || null;
 }
 
-export function updateDailyProgress(dailyLogs: DailyProgress[], exerciseId: string, caloriesBurned: number, timeSpent: number): DailyProgress[] {
+export function updateDailyProgress(
+  dailyLogs: DailyProgress[],
+  exerciseId: string,
+  caloriesBurned: number,
+  timeSpent: number,
+  durationMinutes: number = timeSpent
+): DailyProgress[] {
   const today = new Date().toISOString().split('T')[0];
+  const entry: CompletedExerciseEntry = { id: exerciseId, durationMinutes };
   const existingLog = dailyLogs.find((log) => log.date === today);
 
   if (existingLog) {
-    // Update existing log
-    existingLog.exercisesCompleted.push(exerciseId);
+    existingLog.exercisesCompleted.push(entry);
     existingLog.caloriesBurned += caloriesBurned;
     existingLog.timeSpent += timeSpent;
     return dailyLogs;
   } else {
-    // Create new log
     const newLog: DailyProgress = {
       date: today,
-      exercisesCompleted: [exerciseId],
+      exercisesCompleted: [entry],
       caloriesBurned,
       timeSpent,
     };

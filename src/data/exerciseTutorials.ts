@@ -21,39 +21,39 @@ export const exerciseTutorials: Record<string, ExerciseTutorial> = {
         title: 'Persiapan & postur',
         description:
           'Panaskan sendi dan lakukan set pemanasan dengan palang kosong atau beban sangat ringan. Berdiri dengan kaki selebar bahu, punggung netral, dan inti aktif.',
-        tips: ['Sesuaikan berat dengan kemampuan', 'Gunakan sepatu sol datar di gym'],
+        tips: ['Sesuaikan berat dengan kemampuan'],
       },
       {
         title: 'Gerakan angkat beban',
         description:
-          'Ikuti teknik yang diawasi pelatih (misalnya squat dengan barbel, bench press, atau deadlift dengan ROM aman). Napas teratur; hindari menahan napas berlebihan pada beban berat tanpa pengawasan.',
+          'Ikuti teknik  deadlift dengan ROM aman. Napas teratur; hindari menahan napas berlebihan pada beban berat.',
         tips: ['Buang napas pada fase yang sulit', 'Jaga barbel dekat garis vertikal tubuh sesuai gerakan'],
       },
       {
         title: 'Pendinginan',
-        description: 'Turunkan beban bertahap, lalu regangkan otot yang dipakai selama 5–10 menit.',
+        description: 'Turunkan beban bertahap, lalu regangkan otot.',
         tips: ['Catat volume latihan untuk minggu berikutnya'],
       },
     ],
-    safetyTips: ['Gunakan spotter untuk napas dan satu-rep-maks', 'Jangan membulatkan punggung pada tarikan dari lantai'],
-    commonMistakes: ['Menambah beban sebelum teknik stabil', 'Valsalva berlebihan pada pemula atau tanpa arahan'],
+    safetyTips: ['Gunakan Personal Trainer untuk pemula'],
+    commonMistakes: ['Menambah beban sebelum teknik stabil', 'Berat berlebihan pada pemula atau tanpa arahan'],
   },
   ex2: {
     exerciseId: 'ex2',
     steps: [
       {
         title: 'Pemilihan beban',
-        description: 'Pilih dumbbell yang memungkinkan 10–12 reps dengan bentuk baik untuk gerakan target (curl, press, row, dll.).',
+        description: 'Pilih dumbbell yang memungkinkan dengan berat semampunya.',
         tips: ['Mulai ringan', 'Area latihan bebas halangan'],
       },
       {
         title: 'Eksekusi',
         description: 'Jaga siku dan pergelangan netral sesuai gerakan. Kontrol naik dan turun tanpa ayunan momentum berlebihan.',
-        tips: ['Buang napas pada fase mengangkat', 'Tahan core ringan'],
+        tips: ['Buang napas pada fase mengangkat'],
       },
       {
         title: 'Pendinginan',
-        description: 'Regangkan otot yang baru dilatih secara statis singkat.',
+        description: 'Regangkan otot.',
         tips: ['Minum air', 'Istirahat antar set'],
       },
     ],
@@ -76,8 +76,8 @@ export const exerciseTutorials: Record<string, ExerciseTutorial> = {
       },
       {
         title: 'Pendinginan',
-        description: 'Peregangan hamstring dan quadriceps singkat.',
-        tips: ['Hentikan jika lutut terasa tajam'],
+        description: 'Peregangan hamstring.',
+        tips: ['Hentikan jika lutut terasa sakit'],
       },
     ],
     safetyTips: ['Gunakan depth yang aman untuk sendi Anda', 'Hindari valgus lutut berlebihan'],
@@ -88,23 +88,33 @@ export const exerciseTutorials: Record<string, ExerciseTutorial> = {
     steps: [
       {
         title: 'Pemanasan',
-        description: '5–10 menit gerakan dinamis dan denyut jantung naik bertahap.',
-        tips: ['Siapkan timer kerja/istirahat'],
+        description: 'Sekitar 3–4 menit gerakan dinamis dari kepala hingga kaki untuk menaikkan denyut jantung secara bertahap. Meliputi peregangan leher, bahu, putaran lengan, twist badan, pinggul, dan gerakan squat dasar.',
+        tips: ['Kunci otot perut (engage core) sejak awal gerakan', 'Lakukan gerakan memutar kepala dan sendi secara perlahan'],
       },
       {
-        title: 'Interval',
-        description:
-          'Kerja keras singkat (misalnya 20–40 detik) bergantian dengan istirahat aktif atau pasif. Contoh: jumping jack, mountain climber, sprint pendek, kettlebell swing ringan.',
-        tips: ['Tekankan bentuk di atas kecepatan di awal', 'Sesuaikan rasio kerja/istirahat'],
+        title: 'Interval (Latihan Inti)',
+        description: 'Total waktu latihan 15 menit menggunakan metode HIIT dengan rasio 45 detik kerja keras (intensitas tinggi) bergantian dengan 15 detik istirahat aktif (active rest). Gerakan inti terdiri dari 9 variasi: Squat, Alternate Forward Lunges, Standing Oblique Crunch, Mountain Climber, Elbow Plank Open-Close, Plank Hip Drops, Sprint di tempat, Sumo Squat dengan putaran tangan, Sit-Up, dan diakhiri dengan Bicycle Crunch.',
+        tips: [
+          'Selama istirahat aktif (15 detik), jangan duduk atau diam, melainkan tetap jalan di tempat perlahan.',
+          'Saat melakukan plank atau crunch, pastikan tidak ada rongga di punggung bawah dan otot perut selalu dikunci.',
+          'Jaga dada tetap tegak (chest up) saat melakukan lunges.'
+        ],
       },
       {
         title: 'Pendinginan',
-        description: 'Jalan di tempat perlahan lalu peregangan dinamis dan statis pendek.',
-        tips: ['Tarik napas panjang'],
+        description: 'Sekitar 2–3 menit peregangan pasca-latihan yang dimulai dari posisi berbaring (memeluk lutut ke dada dan mengayun perlahan), lalu berdiri untuk peregangan bahu ke lutut (shoulders to knee), meregangkan punggung, hingga diakhiri dengan menarik napas dalam secara statis.',
+        tips: ['Tarik napas panjang dari hidung dan hembuskan perlahan lewat mulut untuk menurunkan detak jantung.'],
       },
     ],
-    safetyTips: ['Permukaan tidak licin', 'Berhenti jika pusing atau nyeri dada'],
-    commonMistakes: ['Interval pertama tanpa pemanasan', 'Terus memaksakan saat bentuk rusak'],
+    safetyTips: [
+      'Gunakan matras olahraga agar punggung tidak cedera saat gerakan berbaring (sit-up/bicycle crunch).',
+      'Lakukan transisi bangun berdiri dari lantai secara perlahan agar tidak pusing.',
+      'Posisikan tangan tepat di bawah bahu saat melakukan mountain climber untuk menjaga stabilitas.'
+    ],
+    commonMistakes: [
+      'Duduk diam atau berhenti total saat waktu jeda istirahat (seharusnya melakukan jalan di tempat atau active rest).',
+      'Membiarkan punggung bawah melengkung/terangkat (tidak engage core) saat gerakan plank dan sit-up.'
+    ],
   },
   ex5: {
     exerciseId: 'ex5',
@@ -128,67 +138,45 @@ export const exerciseTutorials: Record<string, ExerciseTutorial> = {
     safetyTips: ['Waspada lalu lintas dan permukaan tidak rata'],
     commonMistakes: ['Membungkuk melihat ponsel terus-menerus'],
   },
-  ex6: {
-    exerciseId: 'ex6',
-    steps: [
-      {
-        title: 'Pemanasan',
-        description: 'Mulai dari jalan santai 3 menit, lalu tingkatkan ritme.',
-        tips: ['Sepatu jalan nyaman'],
-      },
-      {
-        title: 'Berjalan cepat',
-        description: 'Langkah lebih pendek dan cepat; tumit mendarat lalu gulir ke depan. Ayunan lengan 90°.',
-        tips: ['Tegakkan dada', 'Cadence stabil'],
-      },
-      {
-        title: 'Pendinginan',
-        description: 'Turunkan kecepatan bertahap 5 menit akhir.',
-        tips: ['Regangkan betis dan hamstring'],
-      },
-    ],
-    safetyTips: ['Pilih alas yang tidak licin', 'Hentikan jika sesak tidak biasa'],
-    commonMistakes: ['Overstride besar dengan tumit keras'],
-  },
   ex7: {
     exerciseId: 'ex7',
     steps: [
       {
         title: 'Persiapan',
-        description: 'Sepatu lari sesuai; mulai jalan cepat 5 menit.',
+        description: 'Sepatu lari sesuai dan nyaman.',
         tips: ['Rencanakan rute datar terlebih dahulu'],
       },
       {
         title: 'Jogging',
-        description: 'Tempo percakapan: langkah ringan, pergelangan di bawah lutut, tubuh condong tipis dari pergelangan kaki.',
-        tips: ['Ayunan lengan rileks', 'Pendaratan mid-foot ringan'],
+        description: 'Tempo langkah ringan.',
+        tips: ['Ayunan lengan rileks'],
       },
       {
         title: 'Pendinginan',
-        description: 'Transisi ke jalan 5 menit; peregangan statis pendek.',
+        description: 'peregangan.',
         tips: ['Hidrasi'],
       },
     ],
     safetyTips: ['Perhatikan permukaan dan ramai lalu lintas'],
-    commonMistakes: ['Membungkuk saat lelah', 'Heel strike keras dengan kaki lurus'],
+    commonMistakes: ['Membungkuk saat lelah'],
   },
   ex8: {
     exerciseId: 'ex8',
     steps: [
       {
         title: 'Pengaturan sepeda',
-        description: 'Sesuaikan tinggi sadel dan jarak setang. Pemanasan resistensi rendah.',
-        tips: ['Sepatu mengikat pedal dengan baik'],
+        description: 'Sesuaikan tinggi sadel dan jarak stang.',
+        tips: ['Sepatu tepat pada pedal dengan baik'],
       },
       {
         title: 'Mengayuh',
-        description: 'Kayuh ritmis intensitas sedang; punggung stabil, lutut tidak menyimpang ke dalam.',
+        description: 'Kayuh ritmis intensitas sedang; punggung stabil.',
         tips: ['Tekanan merata telapak kaki', 'Naikkan resistensi bertahap'],
       },
       {
         title: 'Pendinginan',
         description: 'Turunkan resistensi dan kayuh lambat 3–5 menit.',
-        tips: ['Regangkan quadriceps dan hamstring'],
+        tips: ['Regangkan hamstring'],
       },
     ],
     safetyTips: ['Sadel dan pedal terkunci aman', 'Hidrasi'],
@@ -199,13 +187,13 @@ export const exerciseTutorials: Record<string, ExerciseTutorial> = {
     steps: [
       {
         title: 'M-check',
-        description: 'Helm, ban, rem, rantai. Pakaian terlihat.',
+        description: 'Helm, ban, rem, rantai.',
         tips: ['Bawa air'],
       },
       {
         title: 'Kayuhan luar ruang',
-        description: 'Kecepatan konstan sedang; turunkan gigi saat tanjak. Pandangan jauh.',
-        tips: ['Cadence stabil', 'Isyarat tangan saat belok'],
+        description: 'Kecepatan konstan sedang; turunkan gigi saat tanjak. Pandangan fokus.',
+        tips: ['Kecepatan stabil', 'Isyarat tangan saat belok'],
       },
       {
         title: 'Pendinginan',
@@ -213,20 +201,20 @@ export const exerciseTutorials: Record<string, ExerciseTutorial> = {
         tips: ['Patuhi rambu'],
       },
     ],
-    safetyTips: ['Wajib helm di jalan umum', 'Hati pintu parkir'],
-    commonMistakes: ['Gigi berat terus-menerus merusak lutut'],
+    safetyTips: ['Wajib gunakan helm di jalan umum'],
+    commonMistakes: ['Gigi berat terus-menerus menyebabkan nyeri lutut'],
   },
   ex10: {
     exerciseId: 'ex10',
     steps: [
       {
-        title: 'Masuk air',
+        title: 'Masuk Kolam Renang',
         description: 'Pemanasan tepi kolam; sesuaikan suhu; kenakan kacamata renang.',
         tips: ['Area diawasi lifeguard bila ada'],
       },
       {
         title: 'Gaya bebas',
-        description: 'Badan sejajar; lengan bergantian; flutter kick dari pangkal paha; napas ke samping.',
+        description: 'Badan sejajar; lengan bergantian; flutter kick dari pangkal paha; nafas ke samping.',
         tips: ['Kepala netral saat tidak bernapas'],
       },
       {
@@ -235,7 +223,7 @@ export const exerciseTutorials: Record<string, ExerciseTutorial> = {
         tips: ['Bilas dan keringkan telinga'],
       },
     ],
-    safetyTips: ['Berhenti jika kram atau sesak', 'Ketahui kedalaman'],
+    safetyTips: ['Berhenti jika kram atau sesak', 'Ketahui kedalaman kolam'],
     commonMistakes: ['Kaki mengayuh seperti sepeda', 'Kepala terlalu tinggi mengganggu posisi'],
   },
   ex11: {
@@ -259,28 +247,6 @@ export const exerciseTutorials: Record<string, ExerciseTutorial> = {
     ],
     safetyTips: ['Modifikasi untuk hipertensi/inversi ekstrem sesuai anjuran profesional'],
     commonMistakes: ['Menahan napas', 'Memaksakan fleksi dalam'],
-  },
-  ex12: {
-    exerciseId: 'ex12',
-    steps: [
-      {
-        title: 'Pemanasan sendi',
-        description: 'Pergelangan, bahu, pinggul; beberapa squat tanpa beban.',
-        tips: ['Matras jika lantai keras'],
-      },
-      {
-        title: 'Gerakan tubuh',
-        description: 'Push-up atau variasi lutut, squat tubuh, plank pendek sesuai level.',
-        tips: ['Garis tubuh lurus di plank/push-up'],
-      },
-      {
-        title: 'Recovery',
-        description: 'Child pose atau regangan punggung ringan.',
-        tips: ['Progres beban/volume bertahap'],
-      },
-    ],
-    safetyTips: ['Variasi lutut jika belum kuat push-up penuh'],
-    commonMistakes: ['Pinggul jatuh atau naik tinggi di plank'],
   },
   ex13: {
     exerciseId: 'ex13',
@@ -370,28 +336,6 @@ export const exerciseTutorials: Record<string, ExerciseTutorial> = {
     safetyTips: ['Tunggu berhenti penuh sebelum turun'],
     commonMistakes: ['Terlalu banyak berpegangan dengan lengan'],
   },
-  ex17: {
-    exerciseId: 'ex17',
-    steps: [
-      {
-        title: 'Pemanasan',
-        description: 'Gerakan pinggul dan bahu ke musik tempo sedang.',
-        tips: ['Area tidak licin'],
-      },
-      {
-        title: 'Gerakan tari',
-        description: 'Langkah ballroom atau tari sosial dengan transfer berat halus dan lengan ekspresif.',
-        tips: ['Core aktif saat putar'],
-      },
-      {
-        title: 'Pendinginan',
-        description: 'Perlahan dengan lagu lebih lambat; regangan tubuh.',
-        tips: ['Minum air'],
-      },
-    ],
-    safetyTips: ['Sepatu sesuai lantai', 'Hindari putaran lutut terkunci'],
-    commonMistakes: ['Terlalu kaku di pinggul'],
-  },
   ex18: {
     exerciseId: 'ex18',
     steps: [
@@ -435,28 +379,6 @@ export const exerciseTutorials: Record<string, ExerciseTutorial> = {
     ],
     safetyTips: ['Berhenti jika nyeri lutut tajam', 'Matras/kayu lebih ramah sendi'],
     commonMistakes: ['Putaran lengan besar', 'Lompatan tinggi tidak perlu'],
-  },
-  ex20: {
-    exerciseId: 'ex20',
-    steps: [
-      {
-        title: 'Pemanasan',
-        description: 'Mobilisasi sendi dan aktivasi ringan inti.',
-        tips: ['Matras tebal'],
-      },
-      {
-        title: 'Senam',
-        description: 'Rangkaian kelenturan, rol, atau gerakan dasar gimnastik sesuai level—tanpa ballistic paksa.',
-        tips: ['Napas terarah'],
-      },
-      {
-        title: 'Akhir',
-        description: 'Regangan statis pendek dan relaksasi.',
-        tips: ['Awasi instruktur untuk skill baru'],
-      },
-    ],
-    safetyTips: ['Tidak memaksakan oversplit atau landing keras tanpa progresi'],
-    commonMistakes: ['Menahan napas di pose sulit'],
   },
   ex21: {
     exerciseId: 'ex21',
@@ -589,28 +511,6 @@ export const exerciseTutorials: Record<string, ExerciseTutorial> = {
     ],
     safetyTips: ['Perhatikan bola pantul dari kaca/dinding'],
     commonMistakes: ['Jarak raket terlalu jauh dari tubuh di voli'],
-  },
-  ex27: {
-    exerciseId: 'ex27',
-    steps: [
-      {
-        title: 'Throw & catch',
-        description: 'Pemanasan lempar jarak dekat; rotasi bahu pelan.',
-        tips: ['Gunakan glove sesuai tangan'],
-      },
-      {
-        title: 'Latihan lapangan',
-        description: 'Ground ball, fly ringan, atau batting tee sesuai level—singkat dan teknik dulu.',
-        tips: ['Panaskan shoulder sebelum overhand keras'],
-      },
-      {
-        title: 'Cooldown',
-        description: 'Regangan bahu dan punggung bawah.',
-        tips: ['Istirahat rotasi lempar'],
-      },
-    ],
-    safetyTips: ['Pitch volume tinggi butuh progresi mingguan', 'Elbow guard pemuda'],
-    commonMistakes: ['Mechainisme lempar tanpa kaki'],
   },
   ex28: {
     exerciseId: 'ex28',

@@ -98,7 +98,15 @@ export default function Profile() {
   }, [user]);
 
   const handleSave = () => {
-    saveUserProfile(profile);
+    // Reset skipped exercises so they are shown again when the personalization is updated
+    const updatedProfile = {
+      ...profile,
+      preferences: {
+        ...profile.preferences,
+        skippedExercises: [],
+      },
+    };
+    saveUserProfile(updatedProfile);
     toast({
       title: 'Profile saved!',
       description: 'Your fitness profile has been updated successfully.',

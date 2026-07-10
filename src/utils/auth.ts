@@ -179,7 +179,23 @@ export function getCurrentUserProfile(): UserProfile | null {
   if (!stored) return null;
 
   try {
-    return JSON.parse(stored);
+    const parsed = JSON.parse(stored);
+    if (!parsed) return null;
+    return {
+      ...parsed,
+      preferences: {
+        favoriteExercises: parsed.preferences?.favoriteExercises || [],
+        completedExercises: parsed.preferences?.completedExercises || [],
+        skippedExercises: parsed.preferences?.skippedExercises || [],
+      },
+      progress: {
+        currentStreak: parsed.progress?.currentStreak || 0,
+        longestStreak: parsed.progress?.longestStreak || 0,
+        totalExercisesCompleted: parsed.progress?.totalExercisesCompleted || 0,
+        totalCaloriesBurned: parsed.progress?.totalCaloriesBurned || 0,
+        dailyLogs: parsed.progress?.dailyLogs || [],
+      },
+    };
   } catch {
     return null;
   }

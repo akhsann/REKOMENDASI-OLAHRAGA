@@ -10,6 +10,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Play, Pause, Square, Clock, Flame, TrendingUp, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { caloriesBurnForDuration, parseSessionDurationMinutes } from '@/utils/exerciseSession';
+import { ExerciseVideoPlayer } from '@/components/ExerciseVideoPlayer';
 
 export default function WorkoutSession() {
   const [searchParams] = useSearchParams();
@@ -117,7 +118,7 @@ export default function WorkoutSession() {
     // Update progress
     const updatedUser = { ...user };
     updatedUser.preferences.completedExercises.push(exercise.id);
-    updatedUser.progress.dailyLogs = updateDailyProgress(updatedUser.progress.dailyLogs, exercise.id, finalCalories, timeSpent);
+    updatedUser.progress.dailyLogs = updateDailyProgress(updatedUser.progress.dailyLogs, exercise.id, finalCalories, timeSpent, sessionMinutes);
     updatedUser.progress.totalExercisesCompleted += 1;
     updatedUser.progress.totalCaloriesBurned += finalCalories;
 
@@ -152,6 +153,14 @@ export default function WorkoutSession() {
           <h1 className="text-2xl font-bold text-foreground">{exercise.name}</h1>
           <p className="text-sm text-muted-foreground">{exercise.description}</p>
         </div>
+
+        {/* Video Player */}
+        <ExerciseVideoPlayer
+          exerciseId={exercise.id}
+          exerciseName={exercise.name}
+          isPlaying={isActive && !isPaused}
+          className="animate-scale-in"
+        />
 
         {/* Progress Card */}
         <Card className="animate-scale-in">

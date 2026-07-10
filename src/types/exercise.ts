@@ -11,9 +11,14 @@ export type HealthCondition = 'hipertensi' | 'asma' | 'diabetes' | 'obesitas' | 
 /** Subset dari HealthCondition yang dipakai di safeConditions & medicalNotes */
 export type MedicalKey = 'hipertensi' | 'asma' | 'diabetes' | 'obesitas' | 'nyeriSendi';
 
+export interface CompletedExerciseEntry {
+  id: string;            // exercise ID
+  durationMinutes: number; // actual duration performed
+}
+
 export interface DailyProgress {
   date: string; // YYYY-MM-DD format
-  exercisesCompleted: string[]; // exercise IDs
+  exercisesCompleted: CompletedExerciseEntry[]; // each entry = { id, durationMinutes }
   caloriesBurned: number;
   timeSpent: number; // minutes
 }
