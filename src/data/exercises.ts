@@ -4,7 +4,7 @@ import { Exercise } from '@/types/exercise';
 export const exercises: Exercise[] = [
   {
     id: 'ex1',
-    name: 'Angkat Beban (Angkat Besi)',
+    name: 'Angkat Besi (Deadlift)',
     category: 'kekuatan',
     duration: 30,
     intensity: 'tinggi',
@@ -35,8 +35,8 @@ export const exercises: Exercise[] = [
       asma: 'Baik jika dilakukan dengan kontrol napas yang baik',
       nyeriSendi: 'Gunakan repetisi ringan',
     },
-    description: 'Latihan dengan dumbbell untuk otot lengan, bahu, dada, atau kaki sesuai program.',
-    equipment: ['dumbel', 'matras', 'sepatu-olahraga'],
+    description: 'Latihan dengan dumbbell untuk otot lengan sesuai program.',
+    equipment: ['dumbel', 'sepatu-olahraga'],
     targetMuscles: ['lengan', 'bahu', 'dada', 'inti'],
     caloriesBurn: 273,
   },
@@ -55,7 +55,7 @@ export const exercises: Exercise[] = [
       obesitas: 'Perhatikan teknik dan hindari tekanan berlebih pada lutut',
       nyeriSendi: 'Hindari squat terlalu dalam bila lutut terasa nyeri',
     },
-    description: 'Gerakan jongkok untuk melatih paha, gluteus, dan stabilitas core dengan kedalaman yang aman.',
+    description: 'Gerakan jongkok untuk melatih paha dan stabilitas core dengan kedalaman yang aman.',
     equipment: ['tidak-ada'],
     targetMuscles: ['paha', 'bokong', 'hamstring', 'inti'],
     caloriesBurn: 273,
@@ -93,7 +93,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 68,
   },
   {
-    id: 'ex7',
+    id: 'ex6',
     name: 'Lari Santai (Jogging)',
     category: 'kardio',
     duration: 30,
@@ -111,7 +111,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 273,
   },
   {
-    id: 'ex8',
+    id: 'ex7',
     name: 'Bersepeda Statis',
     category: 'kardio',
     duration: 30,
@@ -127,7 +127,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 273,
   },
   {
-    id: 'ex9',
+    id: 'ex8',
     name: 'Bersepeda Luar',
     category: 'kardio',
     duration: 30,
@@ -145,7 +145,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 239,
   },
   {
-    id: 'ex10',
+    id: 'ex9',
     name: 'Berenang',
     category: 'kardio',
     duration: 30,
@@ -161,7 +161,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 239,
   },
   {
-    id: 'ex11',
+    id: 'ex10',
     name: 'Yoga',
     category: 'fleksibilitas',
     duration: 30,
@@ -178,7 +178,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 102,
   },
   {
-    id: 'ex13',
+    id: 'ex11',
     name: 'Stepper',
     category: 'kardio',
     duration: 30,
@@ -196,8 +196,8 @@ export const exercises: Exercise[] = [
     caloriesBurn: 273,
   },
   {
-    id: 'ex14',
-    name: 'Aerobik',
+    id: 'ex12',
+    name: 'Senam Aerobik',
     category: 'kardio',
     duration: 30,
     intensity: 'sedang',
@@ -214,7 +214,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 239,
   },
   {
-    id: 'ex15',
+    id: 'ex13',
     name: 'Rowing Machine',
     category: 'kardio',
     duration: 30,
@@ -231,7 +231,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 273,
   },
   {
-    id: 'ex16',
+    id: 'ex14',
     name: 'Mesin Elipse (Elliptical)',
     category: 'kardio',
     duration: 30,
@@ -247,7 +247,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 273,
   },
   {
-    id: 'ex18',
+    id: 'ex15',
     name: 'Sepatu Roda',
     category: 'keseimbangan',
     duration: 30,
@@ -264,7 +264,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 386,
   },
   {
-    id: 'ex19',
+    id: 'ex16',
     name: 'Lompat Tali',
     category: 'kardio',
     duration: 30,
@@ -280,7 +280,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 341,
   },
   {
-    id: 'ex21',
+    id: 'ex17',
     name: 'Pilates',
     category: 'fleksibilitas',
     duration: 30,
@@ -295,7 +295,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 106,
   },
   {
-    id: 'ex22',
+    id: 'ex18',
     name: 'Zumba',
     category: 'kardio',
     duration: 30,
@@ -312,7 +312,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 257,
   },
   {
-    id: 'ex23',
+    id: 'ex19',
     name: 'Golf',
     category: 'kardio',
     duration: 30,
@@ -327,7 +327,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 136,
   },
   {
-    id: 'ex24',
+    id: 'ex20',
     name: 'Bulu Tangkis',
     category: 'kardio',
     duration: 30,
@@ -347,7 +347,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 170,
   },
   {
-    id: 'ex25',
+    id: 'ex21',
     name: 'Tenis',
     category: 'kardio',
     duration: 30,
@@ -367,7 +367,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 273,
   },
   {
-    id: 'ex26',
+    id: 'ex22',
     name: 'Padel',
     category: 'kardio',
     duration: 30,
@@ -387,7 +387,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 273,
   },
   {
-    id: 'ex28',
+    id: 'ex23',
     name: 'Bola basket',
     category: 'kardio',
     duration: 30,
@@ -404,7 +404,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 205,
   },
   {
-    id: 'ex29',
+    id: 'ex24',
     name: 'Bola Voli',
     category: 'kardio',
     duration: 30,
@@ -423,7 +423,7 @@ export const exercises: Exercise[] = [
     caloriesBurn: 136,
   },
   {
-    id: 'ex30',
+    id: 'ex25',
     name: 'Sepak Bola',
     category: 'kardio',
     duration: 30,
@@ -437,6 +437,26 @@ export const exercises: Exercise[] = [
     description: 'Permainan sepak bola dengan menggiring bola, passing, dan sprint intermittent.',
     equipment: ['bola-sepak', 'sepatu-bola', 'dekker'],
     targetMuscles: ['kaki', 'inti', 'seluruh-tubuh'],
+    caloriesBurn: 273,
+  },
+  {
+    id: 'ex26',
+    name: 'Tenis Meja',
+    category: 'kardio',
+    duration: 30,
+    intensity: 'sedang',
+    benefits: ['ketahanan', 'kebugaran-umum', 'fleksibilitas'],
+    safeConditions: ['tidak-ada', 'hipertensi', 'asma', 'diabetes', 'obesitas', 'nyeri-sendi'],
+    medicalNotes: {
+      hipertensi: 'Batasi durasi dan hindari permainan kompetitif',
+      asma: 'Gunakan durasi dan tempo yang terkontrol',
+      diabetes: 'Intensitas sedang, perlu kontrol kondisi tubuh',
+      obesitas: 'Hindari permainan terlalu intens pada pemula',
+      nyeriSendi: 'Gerakan tangan yang cepat dapat membebani pergelangan tangan',
+    },
+    description: 'Permainan tenis meja (ping pong) dengan pukulan cepat, kontrol bola, dan refleks tinggi di atas meja.',
+    equipment: ['bet-tenis-meja', 'bola-ping-pong', 'meja-tenis'],
+    targetMuscles: ['lengan', 'bahu', 'kaki'],
     caloriesBurn: 273,
   },
 ];

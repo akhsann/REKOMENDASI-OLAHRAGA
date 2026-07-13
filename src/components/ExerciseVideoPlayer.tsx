@@ -5,31 +5,32 @@ import { Badge } from '@/components/ui/badge';
 
 // Mapping Exercise ID ke Video File Name atau YouTube URL
 export const exerciseVideoMap: Record<string, string> = {
-  ex1: '/Video/Angkat Besi.mp4',      // Angkat Beban
-  ex2: '/Video/Dumbell.mp4',          // Dumbbell
-  ex3: '/Video/Squats.mp4',           // Squats
-  ex4: 'https://youtu.be/Fc85U3UgC0E?si=WB8gN41fxFjHfUzX', // HIIT (YouTube)
-  ex5: '/Video/Jalan Santai.mp4',     // Berjalan Santai
-  ex7: '/Video/Jogging.mp4',          // Lari Santai (Jogging)
-  ex8: '/Video/Sepeda Statis.mp4',    // Bersepeda Statis
-  ex9: '/Video/Sepeda Luar.mp4',      // Bersepeda Luar
-  ex10: '/Video/Renang Gaya Bebas.mp4',// Berenang
-  ex11: 'https://youtu.be/871uim_3l1A?si=m8MexbJv_JmnJGzv', // Yoga (YouTube)
-  ex13: '/Video/Ministepper.mp4',     // Stepper
-  ex14: 'https://youtu.be/y5OabVgga0E?si=ZJDb6d7Lyh38SxdW', // Aerobik (YouTube)
-  ex15: '/Video/Rowing.mp4',          // Rowing Machine
-  ex16: '/Video/Elliptical.mp4',      // Mesin Elipse (Elliptical)
-  ex18: '/Video/Sepatu Roda.mp4',     // Sepatu Roda
-  ex19: '/Video/Lompat Tali.mp4',     // Lompat Tali
-  ex21: 'https://youtu.be/OiBCicV_cec?si=nzvQtyYRUlLHoYTb&t=26', // Pilates (YouTube)
-  ex22: '/Video/Zumba.mp4',           // Zumba
-  ex23: '/Video/Golf.mp4',            // Golf
-  ex24: '/Video/Bulutangkis.mp4',     // Bulu Tangkis
-  ex25: '/Video/Tenis.mp4',           // Tenis
-  ex26: '/Video/Padel.mp4',           // Padel
-  ex28: '/Video/Basket.mp4',          // Bola basket
-  ex29: '/Video/Voli.mp4',            // Bola Voli
-  ex30: '/Video/Sepakbola.mp4',       // Sepak Bola
+  ex1:  '/Video/ex1.mp4',   // Angkat Beban
+  ex2:  '/Video/ex2.mp4',   // Dumbbell
+  ex3:  '/Video/ex3.mp4',   // Squats
+  ex4:  'https://youtu.be/Fc85U3UgC0E?si=WB8gN41fxFjHfUzX', // HIIT (YouTube)
+  ex5:  '/Video/ex5.mp4',   // Berjalan Santai
+  ex6:  '/Video/ex6.mp4',   // Lari Santai (Jogging)
+  ex7:  '/Video/ex7.mp4',   // Bersepeda Statis
+  ex8:  '/Video/ex8.mp4',   // Bersepeda Luar
+  ex9:  '/Video/ex9.mp4',   // Berenang
+  ex10: 'https://youtu.be/871uim_3l1A?si=m8MexbJv_JmnJGzv', // Yoga (YouTube)
+  ex11: '/Video/ex11.mp4',  // Stepper
+  ex12: 'https://youtu.be/y5OabVgga0E?si=ZJDb6d7Lyh38SxdW', // Aerobik (YouTube)
+  ex13: '/Video/ex13.mp4',  // Rowing Machine
+  ex14: '/Video/ex14.mp4',  // Mesin Elipse (Elliptical)
+  ex15: '/Video/ex15.mp4',  // Sepatu Roda
+  ex16: '/Video/ex16.mp4',  // Lompat Tali
+  ex17: 'https://youtu.be/OiBCicV_cec?si=nzvQtyYRUlLHoYTb&t=26', // Pilates (YouTube)
+  ex18: '/Video/ex18.mp4',  // Zumba
+  ex19: '/Video/ex19.mp4',  // Golf
+  ex20: '/Video/ex20.mp4',  // Bulu Tangkis
+  ex21: '/Video/ex21.mp4',  // Tenis
+  ex22: '/Video/ex22.mp4',  // Padel
+  ex23: '/Video/ex23.mp4',  // Bola basket
+  ex24: '/Video/ex24.mp4',  // Bola Voli
+  ex25: '/Video/ex25.mp4',  // Sepak Bola
+  ex26: '/Video/ex26.mp4',  // Tenis Meja
 };
 
 interface ExerciseVideoPlayerProps {
@@ -66,7 +67,22 @@ export function ExerciseVideoPlayer({
 
   const rawVideoUrl = exerciseVideoMap[exerciseId] || '';
   const isYouTube = rawVideoUrl.includes('youtube.com') || rawVideoUrl.includes('youtu.be');
-  const videoUrl = isYouTube ? rawVideoUrl : encodeURI(rawVideoUrl);
+
+  // Untuk Capacitor Android, video harus diakses via http://localhost
+  // Deteksi apakah berjalan di Capacitor (bukan web biasa)
+  const isCapacitor = typeof (window as any).Capacitor !== 'undefined';
+  const buildVideoUrl = (path: string): string => {
+    if (!path || isYouTube) return path;
+    // Jika sudah absolute URL, kembalikan apa adanya
+    if (path.startsWith('http')) return path;
+    // Di Capacitor Android, gunakan http://localhost sebagai base
+    if (isCapacitor) {
+      return `http://localhost${path}`;
+    }
+    return encodeURI(path);
+  };
+
+  const videoUrl = isYouTube ? rawVideoUrl : buildVideoUrl(rawVideoUrl);
   const youtubeId = isYouTube ? getYouTubeVideoId(videoUrl) : '';
   const embedUrl = isYouTube
     ? `https://www.youtube.com/embed/${youtubeId}?enablejsapi=1&mute=${isMuted ? 1 : 0}&loop=1&playlist=${youtubeId}&playsinline=1`

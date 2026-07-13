@@ -1,4 +1,4 @@
-export interface TutorialStep {
+﻿export interface TutorialStep {
   title: string;
   description: string;
   image?: string;
@@ -18,70 +18,93 @@ export const exerciseTutorials: Record<string, ExerciseTutorial> = {
     exerciseId: 'ex1',
     steps: [
       {
-        title: 'Persiapan & postur',
-        description:
-          'Panaskan sendi dan lakukan set pemanasan dengan palang kosong atau beban sangat ringan. Berdiri dengan kaki selebar bahu, punggung netral, dan inti aktif.',
-        tips: ['Sesuaikan berat dengan kemampuan'],
+        title: 'Persiapan & Atur Postur',
+        description: 'Lakukan pemanasan sendi, lalu coba angkat stik barbel kosong atau beban yang sangat ringan dulu. Berdirilah dengan kaki selebar bahu, posisi punggung lurus alami (tidak membungkuk), dan kencangkan otot perut (core).',
+        tips: ['Sesuaikan total berat beban dengan kemampuan aslimu, jangan gengsi!'],
       },
       {
-        title: 'Gerakan angkat beban',
-        description:
-          'Ikuti teknik  deadlift dengan ROM aman. Napas teratur; hindari menahan napas berlebihan pada beban berat.',
-        tips: ['Buang napas pada fase yang sulit', 'Jaga barbel dekat garis vertikal tubuh sesuai gerakan'],
+        title: 'Gerakan Mengangkat (Deadlift)',
+        description: 'Lakukan gerakan deadlift dengan jarak turun-naik beban yang aman (sesuai kelenturanmu). Atur napas dengan teratur dan jangan pernah menahan napas saat mengangkat beban.',
+        tips: [
+          'Buang napas lewat mulut saat kamu berjuang mendorong badan ke atas untuk berdiri tegak',
+          'Jaga posisi stik barbel agar selalu menempel dekat dengan kaki sepanjang gerakan'
+        ],
       },
       {
-        title: 'Pendinginan',
-        description: 'Turunkan beban bertahap, lalu regangkan otot.',
-        tips: ['Catat volume latihan untuk minggu berikutnya'],
+        title: 'Pendinginan (Cooldown)',
+        description: 'Turunkan berat beban secara bertahap pada set terakhir (drop set santai), lalu lakukan peregangan otot punggung dan paha.',
+        tips: ['Data pencapaian hari ini di Aplikasi buat modal naik level di sesi latihan berikutnya'],
       },
     ],
-    safetyTips: ['Gunakan Personal Trainer untuk pemula'],
-    commonMistakes: ['Menambah beban sebelum teknik stabil', 'Berat berlebihan pada pemula atau tanpa arahan'],
+    safetyTips: [
+      'Sangat disarankan memakai jasa pelatih (Personal Trainer) kalau kamu baru pertama kali belajar deadlift biar nggak cedera saraf kejepit'
+    ],
+    commonMistakes: [
+      'Nafsu menambah berat beban padahal posisi punggung saat mengangkat masih melengkung atau belum stabil',
+      'Mencoba mengangkat beban ekstrem (ego lifting) tanpa pengawasan atau panduan dari yang ahli'
+    ],
   },
   ex2: {
     exerciseId: 'ex2',
     steps: [
       {
-        title: 'Pemilihan beban',
-        description: 'Pilih dumbbell yang memungkinkan dengan berat semampunya.',
-        tips: ['Mulai ringan', 'Area latihan bebas halangan'],
+        title: 'Pilih Beban yang Pas',
+        description: 'Pilih sepasang dumbbell dengan berat yang sesuai dengan kemampuanmu (jangan langsung pakai yang terlalu berat).',
+        tips: [
+          'Lebih baik mulai dari beban yang ringan dulu untuk pemanasan',
+          'Pastikan area sekitarmu kosong dan bebas dari barang yang bisa bikin tersandung'
+        ],
       },
       {
-        title: 'Eksekusi',
-        description: 'Jaga siku dan pergelangan netral sesuai gerakan. Kontrol naik dan turun tanpa ayunan momentum berlebihan.',
-        tips: ['Buang napas pada fase mengangkat'],
+        title: 'Mulai Latihan (Eksekusi)',
+        description: 'Jaga posisi siku tetap stabil dan pergelangan tangan lurus searah gerakan. Kontrol gerakan dumbbell saat naik maupun turun, jangan asal diayunkan menggunakan momentum.',
+        tips: ['Buang napas lewat mulut saat kamu mengangkat beban ke atas'],
       },
       {
         title: 'Pendinginan',
-        description: 'Regangkan otot.',
-        tips: ['Minum air', 'Istirahat antar set'],
+        description: 'Taruh dumbbell kembali, lalu lakukan peregangan pada otot-otot yang baru saja dilatih agar tidak kaku.',
+        tips: [
+          'Minum air putih secukupnya',
+          'Beri jeda istirahat (rest) selama 1–2 menit di antara setiap set'
+        ],
       },
     ],
-    safetyTips: ['Jangan mengunci sendi keras pada gerakan press ringan', 'Turunkan beban ke rak dengan aman'],
-    commonMistakes: ['Membungkuk untuk mengangkat dumbbell dari lantai', 'Ayunan pinggul untuk cheat curl'],
+    safetyTips: [
+      'Jangan meluruskan lengan sampai sendi sikut terkunci total saat melakukan gerakan mendorong (press) supaya sendi nggak cedera',
+      'Taruh kembali dumbbell ke rak beban dengan hati-hati setelah selesai digunakan'
+    ],
+    commonMistakes: [
+      'Membungkukkan punggung saat mengambil dumbbell dari lantai',
+      'Sengaja mengayunkan pinggul ke depan demi memaksakan beban naik saat latihan lengan'
+    ],
   },
   ex3: {
     exerciseId: 'ex3',
     steps: [
       {
-        title: 'Panaskan pinggul dan lutut',
-        description: 'Peregangan dinamis ringan: lunges kecil, squat tanpa beban, lingkar lutut.',
-        tips: ['Kaki selebar bahu atau sedikit lebih lebar sesuai variasi'],
+        title: 'Pemanasan Pinggul & Lutut',
+        description: 'Lakukan peregangan aktif yang ringan: langkah menekuk (lunges) kecil, squat tanpa beban, dan putar lutut perlahan.',
+        tips: ['Buka kaki selebar bahu atau sedikit lebih lebar agar posisi berdiri terasa kokoh'],
       },
       {
-        title: 'Squat',
-        description:
-          'Turunkan pinggul ke belakang-bawah sambil lutut mengikuti arah jari kaki. Turun hingga nyaman tanpa membulatkan punggung; dorong melalui tumit/mid-foot untuk bangkit.',
-        tips: ['Dada tetap panjang', 'Lutut tidak boleh kolaps ke dalam'],
+        title: 'Gerakan Squat',
+        description: 'Dorong pinggul ke belakang dan turunkan badan seperti mau duduk, pastikan arah lutut searah dengan jari kaki. Turun sejauh yang kamu nyaman tanpa membuat punggung melengkung, lalu dorong badan ke atas dengan tumpuan pada telapak kaki.',
+        tips: ['Jaga dada tetap tegak dan busung, jangan menunduk', 'Jaga lutut agar tidak menekuk atau lemas ke arah dalam'],
       },
       {
         title: 'Pendinginan',
-        description: 'Peregangan hamstring.',
-        tips: ['Hentikan jika lutut terasa sakit'],
+        description: 'Lakukan peregangan pada otot paha belakang (hamstring) secara perlahan.',
+        tips: ['Segera hentikan gerakan jika lututmu terasa sakit atau nyeri tajam'],
       },
     ],
-    safetyTips: ['Gunakan depth yang aman untuk sendi Anda', 'Hindari valgus lutut berlebihan'],
-    commonMistakes: ['Heels terangkat', 'Pinggul tidak mundur (quad-dominan tanpa hip hinge)'],
+    safetyTips: [
+      'Jangan dipaksakan jongkok terlalu dalam (depth) kalau ototmu belum lentur, sesuaikan dengan kenyamanan sendi',
+      'Jaga lutut tetap stabil menghadap luar dan jangan biarkan menekuk lemas ke dalam saat naik (valgus)'
+    ],
+    commonMistakes: [
+      'Tumit kaki terangkat dari lantai saat jongkok (bikin tidak seimbang)',
+      'Langsung menekuk lutut ke depan tanpa mendorong pinggul ke belakang dulu (bikin lutut cepat sakit karena menahan beban sendirian)'
+    ],
   },
   ex4: {
     exerciseId: 'ex4',
@@ -120,463 +143,588 @@ export const exerciseTutorials: Record<string, ExerciseTutorial> = {
     exerciseId: 'ex5',
     steps: [
       {
-        title: 'Persiapan',
-        description: 'Kenakan sepatu nyaman. Mulai dengan tempo pelan dan postur tegak.',
-        tips: ['Pilih jalur aman dan terang'],
+        title: 'Persiapan & Postur',
+        description: 'Pakai sepatu yang paling nyaman di kakimu. Mulai langkahmu dengan ritme pelan dulu sambil menjaga posisi badan tetap tegap.',
+        tips: ['Pilih jalur berjalan yang aman, bersih, dan punya penerangan yang cukup'],
       },
       {
-        title: 'Berjalan santai',
-        description: 'Langkah natural ~3–4 km/jam. Ayunkan lengan rileks.',
-        tips: ['Napas santai', 'Pandangan ke depan'],
+        title: 'Mulai Jalan Santai',
+        description: 'Melangkah secara alami dengan kecepatan santai (tidak perlu terburu-buru), lalu ayunkan kedua lenganmu dengan rileks di samping badan.',
+        tips: ['Atur napas biar tetap santai', 'Jaga pandangan fokus ke depan'],
       },
       {
-        title: 'Pendinginan',
-        description: 'Perlahan tempo terakhir lalu regangkan betis dan paha ringan.',
-        tips: ['Minum air'],
+        title: 'Pendinginan (Cooldown)',
+        description: 'Di menit-menit terakhir, perlambat langkah kakimu secara bertahap, lalu lakukan peregangan ringan pada otot betis dan paha.',
+        tips: ['Segera minum air putih secukupnya setelah selesai jalan kaki'],
       },
     ],
-    safetyTips: ['Waspada lalu lintas dan permukaan tidak rata'],
-    commonMistakes: ['Membungkuk melihat ponsel terus-menerus'],
+    safetyTips: [
+      'Tetap waspada dengan kendaraan sekitar dan perhatikan jalanan yang berlubang atau tidak rata biar nggak tersandung'
+    ],
+    commonMistakes: [
+      'Jalan sambil membungkuk karena keasyikan lihat layar HP terus-menerus (bikin leher pegal dan rawan menabrak sesuatu!)'
+    ],
+  },
+  ex6: {
+    exerciseId: 'ex6',
+    steps: [
+      {
+        title: 'Persiapan & Rute',
+        description: 'Pakai sepatu lari yang paling nyaman dan pas di kaki, lalu lakukan peregangan kaki tipis-tipis sebelum mulai.',
+        tips: ['Untuk pemula, pilih rute jalanan yang datar dulu, hindari tanjakan ekstrem'],
+      },
+      {
+        title: 'Mulai Jogging!',
+        description: 'Lari dengan langkah kaki yang santai dan ritme yang stabil. Nggak usah buru-buru, yang penting napasmu tetap terjaga.',
+        tips: ['Jaga ayunan lengan tetap rileks di samping badan untuk menghemat tenaga'],
+      },
+      {
+        title: 'Pendinginan (Cooldown)',
+        description: 'Jangan langsung berhenti total! Turunkan tempo menjadi jalan kaki santai selama beberapa menit, lalu lakukan peregangan otot kaki.',
+        tips: ['Segera minum air putih (hidrasi) setelah selesai biar nggak dehidrasi'],
+      },
+    ],
+    safetyTips: [
+      'Selalu perhatikan kondisi jalanan biar nggak tersandung, dan tetap waspada kalau joging di pinggir jalan raya yang ramai lalu lintas'
+    ],
+    commonMistakes: [
+      'Badan mulai membungkuk ke depan saat lelah (tetap usahakan dada tegak dan pandangan lurus ke depan supaya paru-paru bebas menghirup oksigen)'
+    ],
   },
   ex7: {
     exerciseId: 'ex7',
     steps: [
       {
-        title: 'Persiapan',
-        description: 'Sepatu lari sesuai dan nyaman.',
-        tips: ['Rencanakan rute datar terlebih dahulu'],
+        title: 'Atur Posisi Sepeda',
+        description: 'Sesuaikan tinggi sadel (jok) setinggi pinggulmu saat berdiri, lalu atur jarak setang agar posisi dudukmu nyaman.',
+        tips: ['Pastikan posisi telapak kaki menapak dengan pas dan mantap di pedal'],
       },
       {
-        title: 'Jogging',
-        description: 'Tempo langkah ringan.',
-        tips: ['Ayunan lengan rileks'],
+        title: 'Mulai Mengayuh',
+        description: 'Kayuh sepeda dengan irama yang stabil pada intensitas sedang, dan usahakan posisi punggung tetap lurus (jangan meliuk-liuk).',
+        tips: [
+          'Gunakan seluruh telapak kaki untuk menekan pedal secara merata',
+          'Naikkan tingkat berat beban (resistensi) secara bertahap sesuai kemampuanmu'
+        ],
       },
       {
-        title: 'Pendinginan',
-        description: 'peregangan.',
-        tips: ['Hidrasi'],
+        title: 'Pendinginan (Cooldown)',
+        description: 'Turunkan berat beban (resistensi) ke tingkat paling ringan, lalu kayuh pelan-pelan selama 3–5 menit.',
+        tips: ['Setelah turun dari sepeda, lakukan peregangan pada otot paha belakang (hamstring)'],
       },
     ],
-    safetyTips: ['Perhatikan permukaan dan ramai lalu lintas'],
-    commonMistakes: ['Membungkuk saat lelah'],
+    safetyTips: [
+      'Pastikan tuas pengunci sadel dan pedal sudah terpasang kencang sebelum kamu naik',
+      'Siapkan botol minum di dekatmu dan minumlah di sela-sela latihan (hidrasi)'
+    ],
+    commonMistakes: [
+      'Memasang posisi sadel terlalu rendah (bikin kaki menekuk berlebihan dan membebani lutut)',
+      'Terlalu heboh bertumpu atau bersandar pada stang sepeda (bikin otot perut/core jadi nggak bekerja)'
+    ],
   },
   ex8: {
     exerciseId: 'ex8',
     steps: [
       {
-        title: 'Pengaturan sepeda',
-        description: 'Sesuaikan tinggi sadel dan jarak stang.',
-        tips: ['Sepatu tepat pada pedal dengan baik'],
+        title: 'Cek Sepeda (M-Check)',
+        description: 'Lakukan pengecekan menyeluruh dari depan ke belakang: pastikan helm siap, ban tidak kempes, rem pakem, dan rantai tidak seret atau lepas.',
+        tips: ['Selalu bawa botol minum di holder sepeda'],
       },
       {
-        title: 'Mengayuh',
-        description: 'Kayuh ritmis intensitas sedang; punggung stabil.',
-        tips: ['Tekanan merata telapak kaki', 'Naikkan resistensi bertahap'],
+        title: 'Waktunya Gowes!',
+        description: 'Mulai gowes dengan kecepatan santai yang stabil. Ingat untuk memindahkan operan ke gigi yang lebih ringan saat jalanan menanjak, dan tetap fokus lihat jalan di depan.',
+        tips: ['Jaga kecepatan tetap stabil agar tidak cepat lelah', 'Gunakan isyarat tangan saat ingin belok atau berhenti sebagai tanda untuk kendaraan lain'],
       },
       {
-        title: 'Pendinginan',
-        description: 'Turunkan resistensi dan kayuh lambat 3–5 menit.',
-        tips: ['Regangkan hamstring'],
+        title: 'Pendinginan (Cooldown)',
+        description: 'Di 5 menit terakhir sebelum sampai, gowes santai di jalanan yang rata (flat) tanpa beban berat, lalu lakukan peregangan otot leher, bahu, dan paha.',
+        tips: ['Selalu patuhi rambu-rambu lalu lintas di jalan ya!'],
       },
     ],
-    safetyTips: ['Sadel dan pedal terkunci aman', 'Hidrasi'],
-    commonMistakes: ['Sadel terlalu rendah membebani lutut', 'Bertumpu pada pegangan'],
+    safetyTips: [
+      'Wajib hukumnya pakai helm demi keselamatan, terutama saat bersepeda di jalan raya yang ramai'
+    ],
+    commonMistakes: [
+      'Memaksakan pakai gigi berat terus-menerus (bikin gowesan terasa keras, otot paha cepat pegal, dan bisa memicu nyeri lutut)'
+    ],
   },
   ex9: {
     exerciseId: 'ex9',
     steps: [
       {
-        title: 'M-check',
-        description: 'Helm, ban, rem, rantai.',
-        tips: ['Bawa air'],
+        title: 'Masuk ke Kolam Renang',
+        description: 'Lakukan peregangan ringan di tepi kolam, basahi tubuh biar nggak kaget dengan suhu air, lalu pakai kacamata renangmu.',
+        tips: ['Pilih kolam yang ada pengawasnya (lifeguard) demi keamanan'],
       },
       {
-        title: 'Kayuhan luar ruang',
-        description: 'Kecepatan konstan sedang; turunkan gigi saat tanjak. Pandangan fokus.',
-        tips: ['Kecepatan stabil', 'Isyarat tangan saat belok'],
+        title: 'Latihan Gaya Bebas',
+        description: 'Posisikan badan sejajar dan mendatar di permukaan air, kayuh lengan bergantian, lakukan tendangan lurus dari pangkal paha (bukan lutut), dan tengokkan kepala ke samping saat mengambil napas.',
+        tips: ['Saat sedang tidak mengambil napas, wajah harus menghadap lurus ke bawah kolam (rileks)'],
       },
       {
-        title: 'Pendinginan',
-        description: 'Flat ringan 5 menit terakhir lalu regangan leher, bahu, paha.',
-        tips: ['Patuhi rambu'],
+        title: 'Pendinginan & Keluar',
+        description: 'Tutup sesi dengan berenang santai dan sangat pelan, lalu lakukan peregangan pada otot dada serta bahu.',
+        tips: ['Bilas tubuh dengan air bersih dan pastikan keringkan bagian telinga agar tidak kemasukan air'],
       },
     ],
-    safetyTips: ['Wajib gunakan helm di jalan umum'],
-    commonMistakes: ['Gigi berat terus-menerus menyebabkan nyeri lutut'],
+    safetyTips: [
+      'Segera menepi dan naik jika kaki mulai kram atau napas terasa sesak',
+      'Cek dulu kedalaman kolam sebelum melompat, pastikan sesuai dengan tinggi badanmu'
+    ],
+    commonMistakes: [
+      'Menendang air dengan lutut ditekuk seperti sedang mengayuh sepeda (bikin badan berat dan nggak maju-maju)',
+      'Mengangkat kepala terlalu tinggi ke depan saat ambil napas (bikin pantat dan kaki otomatis tenggelam)'
+    ],
   },
   ex10: {
     exerciseId: 'ex10',
     steps: [
       {
-        title: 'Masuk Kolam Renang',
-        description: 'Pemanasan tepi kolam; sesuaikan suhu; kenakan kacamata renang.',
-        tips: ['Area diawasi lifeguard bila ada'],
+        title: 'Persiapan & Fokus',
+        description: 'Gelar matras di lantai yang rata, atur napas dengan tenang lewat hidung, dan lakukan peregangan ringan agar tubuh terasa hangat.',
+        tips: ['Jauhkan HP dan matikan hal-hal yang bisa memecah konsentrasi (distraksi)'],
       },
       {
-        title: 'Gaya bebas',
-        description: 'Badan sejajar; lengan bergantian; flutter kick dari pangkal paha; nafas ke samping.',
-        tips: ['Kepala netral saat tidak bernapas'],
+        title: 'Praktik Gerakan (Pose)',
+        description: 'Ikuti rangkaian gerakan yoga sesuai arahan instruktur atau pilihanmu sendiri. Nikmati tarikan ototnya, tapi jangan dipaksa kalau terasa nyeri tajam.',
+        tips: ['Usahakan posisi punggung/tulang belakang tetap lurus memanjang', 'Gunakan balok yoga (block) sebagai bantuan jika tubuhmu belum sampai menyentuh lantai'],
       },
       {
-        title: 'Keluar & pendinginan',
-        description: 'Renang sangat ringan akhir sesi; regangkan dada dan bahu.',
-        tips: ['Bilas dan keringkan telinga'],
+        title: 'Relaksasi Akhir (Savasana)',
+        description: 'Tidur terlentang dengan rileks selama 3–5 menit untuk menutup sesi latihan dan menenangkan pikiran.',
+        tips: ['Saat selesai, bangun dan balikkan badan secara perlahan, jangan langsung melompat berdiri'],
       },
     ],
-    safetyTips: ['Berhenti jika kram atau sesak', 'Ketahui kedalaman kolam'],
-    commonMistakes: ['Kaki mengayuh seperti sepeda', 'Kepala terlalu tinggi mengganggu posisi'],
+    safetyTips: [
+      'Jika punya riwayat tekanan darah tinggi, hindari gerakan melipat tubuh ke bawah yang ekstrem atau posisi kepala di bawah (inversi) tanpa pengawasan ahli'
+    ],
+    commonMistakes: [
+      'Sering menahan napas saat menahan pose (ingat, napas harus tetap mengalir!)',
+      'Memaksakan diri melipat tubuh terlalu dalam padahal otot masih kaku (bisa bikin otot pinggang ketarik)'
+    ],
   },
   ex11: {
     exerciseId: 'ex11',
     steps: [
       {
-        title: 'Persiapan',
-        description: 'Matras rata; napas melalui hidung; tubuh hangat ringan.',
-        tips: ['Matikan distraksi'],
+        title: 'Posisi Awal di Mesin',
+        description: 'Naik ke mesin dengan hati-hati, pegang pegangan tangan (handrail) dengan santai, lalu mulai kayuh dengan kecepatan paling rendah dulu.',
+        tips: ['Jaga postur tubuh tetap tegak dan tegap, jangan membungkuk'],
       },
       {
-        title: 'Praktik',
-        description: 'Rangkaian pose yang dipilih instruktur atau mandiri; jangan paksa nyeri tajam.',
-        tips: ['Panjangkan tulang belakang', 'Gunakan blok jika perlu'],
+        title: 'Mulai Melangkah (Stepping)',
+        description: 'Tekan pijakan ke bawah menggunakan seluruh telapak kaki (fokuskan tenaga lewat tumit), dan jangan tumpukan berat badanmu ke tangan.',
+        tips: ['Sesuaikan tingkat kecepatan mesin dengan target latihan kardio kamu'],
       },
       {
-        title: 'Savasana singkat',
-        description: 'Relaksasi 3–5 menit untuk menutup sesi.',
-        tips: ['Bangun perlahan'],
+        title: 'Selesai & Turun',
+        description: 'Perlambat gerakan kaki sampai mesin benar-benar berhenti total sebelum kamu turun, lalu lakukan peregangan pada otot betis.',
+        tips: ['Budayakan bersihkan dan lap bekas keringat di pegangan mesin setelah dipakai, ya!'],
       },
     ],
-    safetyTips: ['Modifikasi untuk hipertensi/inversi ekstrem sesuai anjuran profesional'],
-    commonMistakes: ['Menahan napas', 'Memaksakan fleksi dalam'],
+    safetyTips: [
+      'Jangan sekali-kali mencoba naik atau melompat turun dari mesin selagi pijakannya masih bergerak aktif'
+    ],
+    commonMistakes: [
+      'Terlalu heboh bertumpu pada pegangan tangan (bikin berat badan pindah ke lengan, jadi latihan kakinya kurang maksimal dan kalori yang terbakar lebih sedikit)'
+    ],
+  },
+  ex12: {
+    exerciseId: 'ex12',
+    steps: [
+      {
+        title: 'Pemanasan Irama',
+        description: 'Jalan di tempat (marching) atau melangkah ringan mengikuti ketukan musik yang temponya santai biar tubuh mulai panas.',
+        tips: ['Pastikan ruang gerakmu cukup luas agar tangan dan kaki nggak mentok benda sekitar'],
+      },
+      {
+        title: 'Kombinasi Gerakan',
+        description: 'Lakukan variasi langkah menyamping (step touch), sentuhan ujung kaki, diselingi gerakan lengan. Jika ingin yang ramah sendi, hindari gerakan melompat.',
+        tips: ['Biar lebih aman untuk lutut (low impact), pastikan salah satu kakimu selalu menapak di lantai saat bergerak'],
+      },
+      {
+        title: 'Pendinginan',
+        description: 'Pilih lagu dengan tempo yang lebih lambat, turunkan intensitas gerakan, lalu lakukan peregangan badan sambil berdiri.',
+        tips: ['Segera minum air putih untuk mengembalikan cairan tubuh setelah berkeringat'],
+      },
+    ],
+    safetyTips: [
+      'Wajib pakai sepatu olahraga yang solnya kesat dan mencengkeram lantai dengan baik biar nggak slip'
+    ],
+    commonMistakes: [
+      'Membungkukkan badan saat mulai lelah (tetap jaga dada tegak dan perut kencang agar punggung nggak sakit)'
+    ],
   },
   ex13: {
     exerciseId: 'ex13',
     steps: [
       {
-        title: 'Mesin',
-        description: 'Naik dengan aman; pegangan ringan; mulai kecepatan rendah.',
-        tips: ['Postur tegak'],
+        title: 'Posisi Siap (Catch)',
+        description: 'Duduk tegak di bantalan, kencangkan tali pengikat kaki, luruskan lengan ke depan memegang handle, dan tekuk lututmu ke arah dada.',
+        tips: ['Atur tuas beban kipas (damper) di angka sedang (level 3-5) dulu kalau kamu masih pemula'],
       },
       {
-        title: 'Langkah',
-        description: 'Tekan pijakan penuh melalui tumit-ke-depan; jangan sandarkan berat di tangan.',
-        tips: ['Sesuaikan tingkat sesuai denyut target'],
+        title: 'Dorong & Tarik (Drive)',
+        description: 'Dorong badan ke belakang pakai kekuatan kaki dulu, condongkan badan sedikit ke belakang, lalu tarik handle ke arah dada bagian bawah dengan punggung tetap lurus.',
+        tips: ['Ingat urutan kekuatannya: dorong pakai Kaki -> mainkan Punggung -> baru tarik pakai Lengan'],
       },
       {
-        title: 'Turun',
-        description: 'Perlambat ke nol sebelum turun; regangkan betis.',
-        tips: ['Lap pegangan'],
+        title: 'Kembali ke Awal (Recovery)',
+        description: 'Luruskan lengan kembali ke depan, biarkan badan ikut condong maju, lalu tekuk lutut secara perlahan untuk kembali ke posisi siap.',
+        tips: ['Atur napas: buang napas saat mendorong/menarik, dan ambil napas saat kembali maju'],
       },
     ],
-    safetyTips: ['Hati-hati naik/turun saat sabuk bergerak'],
-    commonMistakes: ['Tumpu pada handrail mengurangi beban kaki'],
+    safetyTips: [
+      'Jangan melentingkan atau merebahkan punggung terlalu jauh ke belakang (hyperextend) di akhir tarikan karena bisa bikin pinggang cedera'
+    ],
+    commonMistakes: [
+      'Asal menarik stik pakai tenaga lengan duluan sebelum kaki mendorong (bikin gerakan jadi macet dan lengan cepat pegal)'
+    ],
   },
   ex14: {
     exerciseId: 'ex14',
     steps: [
       {
-        title: 'Pemanasan irama',
-        description: 'Marching atau langkah ringan dengan musik BPM sedang.',
-        tips: ['Ruang gerak cukup'],
+        title: 'Posisi Awal & Mulai',
+        description: 'Posisikan telapak kaki pas di tengah pedal, genggam pegangannya (handle), lalu kayuh perlahan.',
+        tips: ['Jaga postur badan tetap tegak, jangan membungkuk'],
       },
       {
-        title: 'Kombinasi',
-        description: 'Langkah menyamping, sentuhan kaki, kombinasi lengan—sesuaikan dampak sendi Anda.',
-        tips: ['Satu kaki sering kontak lantai untuk low impact'],
+        title: 'Mulai Mengayuh (Elips)',
+        description: 'Gerakkan tangan dan kaki secara bersamaan. Pijak pedal secara merata dengan seluruh telapak kaki, dan sesekali coba kayuh ke arah belakang untuk variasi otot.',
+        tips: ['Jaga jarak tubuh, jangan mencondongkan badan'],
       },
       {
-        title: 'Pendinginan',
-        description: 'Turunkan BPM; regangan berdiri.',
-        tips: ['Hidrasi'],
+        title: 'Selesai & Turun',
+        description: 'Turunkan tingkat berat beban (resistensi) ke angka paling rendah, perlambat kayuhan, dan tunggu sampai mesin benar-benar berhenti sebelum turun.',
+        tips: ['Setelah turun, lakukan peregangan pada otot pinggul dan paha'],
       },
     ],
-    safetyTips: ['Sepatu dengan cengkeram baik'],
-    commonMistakes: ['Membungkuk saat lelah'],
+    safetyTips: [
+      'Jangan sekali-kali nekat melompat turun saat pedal mesin masih berputar cepat! Tunggu sampai berhenti total'
+    ],
+    commonMistakes: [
+      'Terlalu bertumpu dan bergelantungan pada pegangan tangan (bikin otot perut dan kaki jadi kurang bekerja, tangan juga jadi cepat pegal)'
+    ],
   },
   ex15: {
     exerciseId: 'ex15',
     steps: [
       {
-        title: 'Catch',
-        description: 'Duduk benar; tali kaki kencang; lengan lurus; lutut fleksi.',
-        tips: ['Damper sedang untuk pemula'],
+        title: 'Pakai Pengaman & Cari Keseimbangan',
+        description: 'Wajib pakai helm serta pelindung lutut dan siku. Biar nggak langsung kepeleset, latihan berdiri dan jaga keseimbangan di atas rumput atau karpet dulu.',
+        tips: ['Tekuk lutut sedikit dan turunkan badan agak merendah biar posisi tubuhmu stabil'],
       },
       {
-        title: 'Drive',
-        description: 'Dorong kaki lalu tarik handle ke dada bawah; punggung netral.',
-        tips: ['Urutan kaki-punggung-lengan'],
+        title: 'Mulai Meluncur',
+        description: 'Dorong kakimu ke arah belakang-samping secara bergantian, jaga pandangan tetap lurus ke depan, dan ayunkan lengan dengan santai.',
+        tips: ['Sebelum meluncur cepat, pastikan kamu sudah belajar cara mengerem paling dasar'],
       },
       {
-        title: 'Recovery',
-        description: 'Luruskan lengan, geser maju, tekuk lutut halus.',
-        tips: ['Napas teratur'],
+        title: 'Cara Mengerem & Selesai',
+        description: 'Gunakan rem tumit bawaan sepatu roda atau seret kaki belakang membentuk huruf T (T-stop) untuk berhenti, lalu regangkan pergelangan kaki.',
+        tips: ['Latihan trik jatuh yang aman: condongkan badan ke depan dan gunakan pelindung telapak tanganmu untuk menahan'],
       },
     ],
-    safetyTips: ['Jangan hyperextend punggung di akhir tarikan'],
-    commonMistakes: ['Tarik dengan lengan dulu'],
+    safetyTips: [
+      'Cari tempat latihan yang datar, mulus, dan sepi dari kendaraan atau pejalan kaki',
+      'Jangan coba-coba main di turunan tajam dulu kalau kamu belum mahir'
+    ],
+    commonMistakes: [
+      'Berdiri dengan lutut tegak lurus dan kaku (bikin badan jadi oleng dan gampang jatuh terjungkal ke belakang)'
+    ],
   },
   ex16: {
     exerciseId: 'ex16',
     steps: [
       {
-        title: 'Mulai',
-        description: 'Kaki di tengah pedal; genggam handle; gerakan lambat menyalakan monitor.',
-        tips: ['Postur tegak'],
+        title: 'Atur Panjang Tali',
+        description: 'Injak tengah tali, lalu tarik ke atas. Pastikan ujung gagang tali sejajar dengan ketiakmu. Jangan lupa putar-putar pergelangan tangan dulu buat pemanasan.',
+        tips: ['Pakai sepatu lari yang empuk agar pijakan kaki lebih nyaman'],
       },
       {
-        title: 'Kayuhan elips',
-        description: 'Sinkron lengan-kaki; tekanan merata kaki; sesekali mundur ringan.',
-        tips: ['Jangan condong ke monitor'],
+        title: 'Mulai Melompat',
+        description: 'Gerakkan tali dengan putaran pergelangan tangan, bukan bahu. Lompat tipis saja (2-3 cm dari lantai) dan mendaratlah menggunakan ujung depan kaki (bukan tumit).',
+        tips: ['Jaga posisi siku tetap dekat dengan badan agar putaran tali stabil'],
       },
       {
-        title: 'Akhir',
-        description: 'Resistensi nol, perlambat; turun setelah berhenti.',
-        tips: ['Regangkan pinggul'],
+        title: 'Pendinginan',
+        description: 'Lakukan peregangan pada otot betis dan tendon di belakang pergelangan kaki (achilles) agar tidak kaku.',
+        tips: ['Pilih permukaan lantai yang datar dan tidak keras, hindari beton yang terlalu kasar'],
       },
     ],
-    safetyTips: ['Tunggu berhenti penuh sebelum turun'],
-    commonMistakes: ['Terlalu banyak berpegangan dengan lengan'],
+    safetyTips: [
+      'Segera berhenti kalau kamu merasa ada nyeri tajam di lutut',
+      'Lompat di atas matras yoga atau lantai kayu jauh lebih aman buat kesehatan sendi dibanding lantai semen keras'
+    ],
+    commonMistakes: [
+      'Memutar lengan terlalu lebar (bikin cepat capek) dan melompat terlalu tinggi (bikin lutut cepat sakit)'
+    ],
+  },
+  ex17: {
+    exerciseId: 'ex17',
+    steps: [
+      {
+        title: 'Fokus & Penyelarasan Tubuh',
+        description: 'Latih napas dalam-dalam lewat rusuk (napas dada), posisikan punggung dalam keadaan lurus alami (netral), atau ratakan punggung bawah ke lantai (imprint) jika disarankan instruktur.',
+        tips: ['Kencangkan otot perut (core) secara rileks, jangan ditahan sampai badan kaku'],
+      },
+      {
+        title: 'Latihan Kontrol Otot',
+        description: 'Lakukan gerakan lambat dan fokus, seperti modifikasi gerakan The Hundred (pompa tangan), roll-down, atau angkat pinggul (pelvic bridge) sesuai kemampuanmu.',
+        tips: ['Utamakan gerakan yang benar dan rapi daripada memaksakan gerakan yang terlalu lebar/tinggi'],
+      },
+      {
+        title: 'Selesai & Peregangan',
+        description: 'Lakukan peregangan ringan pada otot punggung dan paha bagian belakang (hamstring) agar tubuh terasa ringan.',
+        tips: ['Kalau mau coba pakai alat khusus (reformer), pastikan kamu didampingi instruktur yang berlisensi ya!'],
+      },
+    ],
+    safetyTips: [
+      'Jika punya riwayat nyeri sendi akut atau masalah tulang, selalu minta gerakan modifikasi yang aman ke instruktur atau terapismu'
+    ],
+    commonMistakes: [
+      'Mendorong badan ke atas pakai otot leher saat mengangkat dada (flexi thoracic)—harusnya kekuatan bertumpu pada otot perut, bukan leher yang dipaksa ketarik'
+    ],
   },
   ex18: {
     exerciseId: 'ex18',
     steps: [
       {
-        title: 'Perlengkapan',
-        description: 'Helm, lutut, siku; latihan berdiri di rumput terlebih dahulu.',
-        tips: ['Lutut sedikit fleksi, pusat gravitasi rendah'],
+        title: 'Pemanasan (Warm-up)',
+        description: 'Mulai gerakkan kaki mengikuti irama musik dan goyang pinggul tipis-tipis biar tubuh siap buat dance.',
+        tips: ['Pakai sepatu olahraga yang bagian sol bawahnya gampang dipakai berputar (pivot) agar kaki tidak seret'],
       },
       {
-        title: 'Meluncur',
-        description: 'Dorong diagonal belakang bergantian; pandangan depan; ayunan lengan.',
-        tips: ['Belajar rem dasar'],
+        title: 'Serunya Zumba!',
+        description: 'Ikuti gerakan koreografi dance Latin dan fitness dari instruktur. Kalau gerakannya terlalu intens atau capek, ganti dengan langkah yang lebih santai dan rendah loncatannya.',
+        tips: ['Jangan lupa senyum, nikmati musiknya, dan atur napas ya!'],
       },
       {
-        title: 'Berhenti',
-        description: 'Rem tumit atau T-stop; regangkan pergelangan kaki.',
-        tips: ['Latih jatuh ke depan ke pelindung'],
+        title: 'Pendinginan (Cooldown)',
+        description: 'Turunkan tempo gerakan perlahan-lahan mengikuti musik yang lebih santai, lalu lakukan peregangan badan.',
+        tips: ['Segera minum air putih buat mengganti keringat yang keluar banyak'],
       },
     ],
-    safetyTips: ['Area datar dan tidak ramai', 'Jalur turunan curam untuk lanjutan'],
-    commonMistakes: ['Lutut kaku vertikal'],
+    safetyTips: [
+      'Pastikan lantai tempatmu joget nggak licin biar nggak gampang terpeleset',
+      'Jangan dipaksakan! Langsung istirahat atau duduk kalau kepala mulai terasa pusing'
+    ],
+    commonMistakes: [
+      'Langsung heboh melompat-lompat tinggi di awal lagu tanpa pemanasan atau tanpa melihat contoh gerakan bertahap dari instruktur (bikin lutut sakit)'
+    ],
   },
   ex19: {
     exerciseId: 'ex19',
     steps: [
       {
-        title: 'Ukuran tali',
-        description: 'Tali mencapai ketiak saat diinjak tengah; pergelangan hangat.',
-        tips: ['Sepatu dengan amortisasi'],
+        title: 'Pemanasan Awal',
+        description: 'Jalan santai menuju posisi bola sambil sesekali melakukan ayunan stik golf (swing) pelan-pelan tanpa bola biar badan nggak kaku.',
+        tips: ['Bawa air minum dan pakai topi kalau cuaca lapangan lagi panas terik'],
       },
       {
-        title: 'Loncatan dasar',
-        description: 'Putar pergelangan; lompatan kecil 2–3 cm; mendarat halus bola kaki.',
-        tips: ['Siku dekat tubuh'],
+        title: 'Mulai Main (Round)',
+        description: 'Jalan kaki menyusuri lapangan sambil membawa tas stik, fokus pada ayunan stik yang terkontrol, dan jangan paksa bahu bergerak berlebihan.',
+        tips: ['Pakai kereta dorong tas golf (trolley) saja kalau punggung kamu mulai terasa pegal'],
+      },
+      {
+        title: 'Selesai Main',
+        description: 'Jalan santai untuk menenangkan otot, lalu regangkan otot punggung dan bahu biar besok nggak encok.',
+        tips: ['Perhatikan posisi tubuh saat mengangkat tas golf, gunakan kekuatan kaki bukan punggung biar nggak cedera'],
+      },
+    ],
+    safetyTips: [
+      'Selalu tengok kanan-kiri dan pastikan jarak aman dengan orang di sekitarmu sebelum mengayun stik golf!'
+    ],
+    commonMistakes: [
+      'Mengayun stik golf cuma pakai tenaga lengan tanpa ikut memutar badan (bikin pukulan nggak jauh dan tangan cepat cedera)'
+    ],
+  },
+  ex20: {
+    exerciseId: 'ex20',
+    steps: [
+      {
+        title: 'Siap Raket',
+        description: 'Pegang raket dengan benar, pasang posisi badan yang rileks dan siap, lalu latihan gerakan langkah kaki tanpa kok.',
+        tips: ['Wajib pakai sepatu badminton supaya lantai lapangan indoor tidak rusak atau lecet'],
+      },
+      {
+        title: 'Waktunya Main!',
+        description: 'Gunakan pukulan forehand atau backhand dengan sentakan pergelangan tangan. Setelah memukul, langsung cepat balik ke posisi tengah lapangan.',
+        tips: ['Kejar kok dengan langkah kaki yang lebar, jangan cuma menjulurkan tangan'],
       },
       {
         title: 'Pendinginan',
-        description: 'Regangkan betis dan achilles.',
-        tips: ['Permukaan tidak tersekat'],
+        description: 'Jalan santai keliling lapangan, lalu regangkan otot betis dan bahu agar tidak pegal-pegal.',
+        tips: ['Minum air yang mengandung elektrolit atau air putih untuk mengembalikan cairan tubuh'],
       },
     ],
-    safetyTips: ['Berhenti jika nyeri lutut tajam', 'Matras/kayu lebih ramah sendi'],
-    commonMistakes: ['Putaran lengan besar', 'Lompatan tinggi tidak perlu'],
+    safetyTips: [
+      'Hati-hati kaki tersangkut atau slip di lapangan',
+      'Pemanasan bahu harus maksimal supaya sendi lengan tidak kaget saat dipakai smash keras'
+    ],
+    commonMistakes: [
+      'Memukul kok cuma pakai tenaga lengan membuat pukulan lemah dan lengan cepat lelah, seharusnya dibantu sentakan pergelangan tangan'
+    ],
   },
   ex21: {
     exerciseId: 'ex21',
     steps: [
       {
-        title: 'Penyelarasan',
-        description: 'Bernapas lateral / tulang rusuk; tulang belakang netral di imprint halus jika diajarkan.',
-        tips: ['Core aktif tanpa kaku'],
+        title: 'Pemanasan Lapangan',
+        description: 'Lari-lari kecil keliling lapangan dan lakukan ayunan raket tanpa bola (shadow swing) biar otot lengan luwes.',
+        tips: ['Gunakan sepatu khusus lapangan tenis (court shoes) supaya kaki mencengkeram dengan baik'],
       },
       {
-        title: 'Seri kontrol',
-        description: 'Gerakan lambat: hundred modificasi, roll-down, bridge pelvis sesuai level.',
-        tips: ['Presisi di atas amplitudo besar'],
+        title: 'Rally & Pukulan',
+        description: 'Kejar bola dengan langkah cepat, putar pinggul saat memukul bola pantul (groundstroke), dan selesaikan ayunan raket sampai ke atas bahu (follow-through).',
+        tips: ['Setelah memukul, langsung cepat-cepat balik ke garis belakang (baseline) lapangan'],
       },
       {
-        title: 'Selesai',
-        description: 'Stretch ringan punggung dan hamstring.',
-        tips: ['Kelas bersertifikat untuk reformer'],
+        title: 'Pendinginan',
+        description: 'Jalan santai sambil memungut bola di lapangan, lalu regangkan otot lengan bawah (pergelangan tangan).',
+        tips: ['Segera istirahat jika siku bagian luar terasa nyeri (gejala tennis elbow)'],
       },
     ],
-    safetyTips: ['Modifikasi untuk osteoporosis atau nyeri akut sesuai terapis'],
-    commonMistakes: ['Menggunakan leher untuk flexi thoracic'],
+    safetyTips: [
+      'Jangan main kalau lapangan basah atau licin karena rawan terpeleset dan cedera'
+    ],
+    commonMistakes: [
+      'Memukul bola dalam posisi bola terlalu dekat dengan badan (bikin ayunan raket macet dan pukulan nggak bertenaga)'
+    ],
   },
   ex22: {
     exerciseId: 'ex22',
     steps: [
       {
-        title: 'Hangat',
-        description: 'Langkah irama dan gerakan pinggul ke musik.',
-        tips: ['Sepatu dengan pivot baik'],
+        title: 'Cek Grip & Pemanasan',
+        description: 'Pegang raket padel dengan nyaman (posisi tangan agak pendek di gagang), lalu lakukan pemanasan operan santai di dalam kotak servis.',
+        tips: ['Pahami dulu aturan pantulan bola di dinding lapangan tempat kamu main'],
       },
       {
-        title: 'Kombinasi Zumba',
-        description: 'Ikuti blok koreografi Latin/fitness; sesuaikan dampak (modifikasi langkah rendah).',
-        tips: ['Senyum dan napas'],
+        title: 'Waktunya Tanding!',
+        description: 'Lakukan pukulan pendek dan langsung sambar bola di depan net. Siap-siap banyak gerak geser ke kanan-kiri dengan cepat mirip main tenis.',
+        tips: ['Selalu ngobrol dan kompak dengan pasangan mainmu biar nggak berebutan bola'],
       },
       {
-        title: 'Cooldown',
-        description: 'Tempo turun; regangan.',
-        tips: ['Hidrasi'],
+        title: 'Pendinginan',
+        description: 'Jalan santai di lapangan, lalu regangkan otot lutut dan punggung bagian bawah supaya nggak kaku.',
+        tips: ['Untuk pemula, gunakan bola padel yang lebih lambat dulu supaya lebih mudah mengontrol permainan'],
       },
     ],
-    safetyTips: ['Lantai tidak licin', 'Berhenti jika pusing'],
-    commonMistakes: ['Melompat keras tanpa progresi'],
+    safetyTips: [
+      'Selalu waspada dan perhatikan arah bola setelah memantul dari kaca atau dinding biar nggak kaget atau kena muka'
+    ],
+    commonMistakes: [
+      'Posisi raket terlalu jauh dari badan saat melakukan pukulan di depan net (bikin pukulan jadi lemah dan susah dikontrol)'
+    ],
   },
   ex23: {
     exerciseId: 'ex23',
     steps: [
       {
-        title: 'Persiapan lapangan',
-        description: 'Pemanasan jalan ke bola; beberapa ayunan pelan.',
-        tips: ['Air dan topi jika panas'],
+        title: 'Pemanasan Tim',
+        description: 'Latihan lay-up santai bergantian (lay-up lines) dan oper-operan bola sambil bergerak maju.',
+        tips: ['Wajib pakai sepatu basket yang kesat biar nggak gampang terpeleset'],
       },
       {
-        title: 'Round',
-        description: 'Berjalan membawa tas/stik; ayunan kontrol; hindari overuse bahu.',
-        tips: ['Gunakan kereta dorong jika nyeri punggung'],
+        title: 'Game On!',
+        description: 'Pasang posisi bertahan yang rendah (defense stance), siap lari cepat saat transisi serang/tahan, dan tekuk lutut sedikit saat menembak (shooting) biar lebih akurat.',
+        tips: ['Jangan diam saja! Tetap bergerak cari ruang kosong walau lagi nggak pegang bola (off-ball)'],
       },
       {
-        title: 'Selesai',
-        description: 'Jalan pelan; regangan punggung dan bahu.',
-        tips: ['Teknik angkat tas yang benar'],
+        title: 'Pendinginan',
+        description: 'Latihan tembakan bebas (free throw) santai atau jalan keliling lapangan, lalu regangkan otot-otot kaki.',
+        tips: ['Minum air putih sedikit demi sedikit, jangan langsung ditenggak banyak saat haus'],
       },
     ],
-    safetyTips: ['Perhatikan orang di sekitar saat swing'],
-    commonMistakes: ['Ayunan hanya dari lengan tanpa rotasi ringan tubuh'],
+    safetyTips: [
+      'Hati-hati saat mendarat setelah melompat! Beri jarak dengan pemain lain biar kaki nggak saling injak',
+      'Disarankan pakai sepatu basket model high-top (krah tinggi) untuk melindungi pergelangan kaki (engkel)'
+    ],
+    commonMistakes: [
+      'Menggiring bola (dribel) terlalu tinggi se dada—bola jadi gampang direbut lawan dan susah dikontrol'
+    ],
   },
   ex24: {
     exerciseId: 'ex24',
     steps: [
       {
-        title: 'Siap raket',
-        description: 'Grip benar; stance ringan; latihan footwork tanpa shuttle.',
-        tips: ['Sepatu non-marking indoor'],
+        title: 'Pemanasan Awal',
+        description: 'Lakukan lempar tangkap dan operan (passing) atas pendek-pendek, lalu putar-putar pergelangan tangan dan kaki agar lebih lentur.',
+        tips: ['Gunakan sepatu khusus voli yang sesuai dengan jenis lapangan (indoor/outdoor)'],
       },
       {
-        title: 'Permainan',
-        description: 'Pukulan forehand/backhand dengan putaran pergelangan; kembali ke tengah.',
-        tips: ['Gunakan kaki untuk mencapai shuttle'],
+        title: 'Waktunya Main!',
+        description: 'Latihan servis, passing bawah (bump), operan atas (set), dan smes (spike) sesuai posisi. Jangan lupa Selalu teriak "Aku!" atau "Kamu!" biar nggak tabrakan.',
+        tips: ['Selalu pasang posisi siap (agak membungkuk rendah) saat menjaga area pertahanan'],
       },
       {
-        title: 'Akhir',
-        description: 'Cooldown berjalan; regangan betis dan bahu.',
-        tips: ['Minum elektrolit'],
+        title: 'Pendinginan',
+        description: 'Jalan santai keliling lapangan, lalu regangkan otot bahu dan lutut secara perlahan agar besok tidak pegal.',
+        tips: ['Untuk pemula, jangan terlalu banyak melakukan smes keras dulu supaya lengan tidak cedera'],
       },
     ],
-    safetyTips: ['Waspada gesekan lapangan', 'Pemanasan bahu'],
-    commonMistakes: ['Memukul hanya dengan lengan'],
+    safetyTips: [
+      'Selalu fokus dan liat posisi teman atau net biar nggak saling tabrakan'
+    ],
+    commonMistakes: [
+      'Berdiri tegak atau bengong saat menunggu bola datang (bikin bola gampang lolos)'
+    ],
   },
   ex25: {
     exerciseId: 'ex25',
     steps: [
       {
-        title: 'Pemanasan lapangan',
-        description: 'Mini jog dan shadow swing.',
-        tips: ['Sepatu court'],
+        title: 'Pemanasan',
+        description: 'Mulai dengan juggling (timang bola) atau operan santai bareng teman, lalu lakukan peregangan kaki sambil bergerak supaya otot siap.',
+        tips: ['Selalu pakai sepatu bola dan pelindung tulang kering (shin guard)'],
       },
       {
-        title: 'Rally',
-        description: 'Gerakan singkat ke bola; rotasi pinggul pada groundstroke; follow-through.',
-        tips: ['Kembali baseline'],
+        title: 'Latihan',
+        description: 'Main game lapangan kecil (game 3v3 / 5v5) atau latihan giring bola lewati kerucut (cone), diselingi lari cepat jarak pendek.',
+        tips: ['Jangan lupa minum air putih di sela-sela istirahat'],
       },
       {
-        title: 'Cooldown',
-        description: 'Ambil bola dengan jalan; regangan forearm.',
-        tips: ['Henti jika nyeri siku lateral'],
+        title: 'Pendinginan',
+        description: 'Jalan santai keliling lapangan, lalu regangkan otot paha bagian dalam dan depan agar kaki tidak kaku.',
+        tips: ['Kalau ada bagian tubuh yang membentur, segera kompres pakai es'],
       },
     ],
-    safetyTips: ['Permukaan basah berisiko'],
-    commonMistakes: ['Terlalu dekat tubuh pada kontak bola'],
+    safetyTips: [
+      'Jangan asal tekel keras! Lakukan hanya jika sudah diajari pelatih',
+      'Perhatikan kondisi lapangan, hindari area yang berlubang agar tidak terkilir'
+    ],
+    commonMistakes: ['Memaksakan lari kencang padahal tubuh sudah sangat lelah (bisa bikin cedera)'],
   },
   ex26: {
     exerciseId: 'ex26',
     steps: [
       {
-        title: 'Grip dan ruang',
-        description: 'Raket padel pendek; pemanasan di dalam kotak servis.',
-        tips: ['Tinjau aturan dinding klub'],
+        title: 'Persiapan & pemanasan',
+        description: 'Panaskan pergelangan tangan, bahu, dan siku dengan rotasi ringan. Pegang bet dengan grip yang nyaman (shakehand atau penhold) dan lakukan rally pelan bersama lawan atau ke dinding untuk membiasakan ritme bola.',
+        tips: ['Posisi siap: kaki selebar bahu, lutut sedikit fleksi', 'Jaga siku tidak terlalu rapat ke tubuh'],
       },
       {
         title: 'Permainan',
-        description: 'Stroke pendek dan voli; banyak gerakan lateral cepat seperti tenis.',
-        tips: ['Komunikasi dengan pasangan'],
+        description: 'Fokus pada kontrol bola menggunakan forehand dan backhand dengan ayunan dari siku, bukan bahu. Gunakan kaki untuk berpindah posisi, bukan hanya meraih dengan tangan. Variasikan topspin, backspin, dan flat drive sesuai kemampuan.',
+        tips: ['Kembalikan ke posisi siap tengah meja setelah setiap pukulan', 'Pandangan fokus pada bola sejak meninggalkan bet lawan'],
       },
       {
-        title: 'Akhir',
-        description: 'Jalan pelan; regangan lutut dan punggung bawah.',
-        tips: ['Lensa pemula gunakan bola lebih lambat'],
+        title: 'Pendinginan',
+        description: 'Akhiri sesi dengan rally lambat lalu regangkan pergelangan tangan, lengan bawah, bahu, dan betis.',
+        tips: ['Regangkan jari dan telapak tangan untuk mencegah kram', 'Hidrasi dan istirahat antar set'],
       },
     ],
-    safetyTips: ['Perhatikan bola pantul dari kaca/dinding'],
-    commonMistakes: ['Jarak raket terlalu jauh dari tubuh di voli'],
-  },
-  ex28: {
-    exerciseId: 'ex28',
-    steps: [
-      {
-        title: 'Tim warm-up',
-        description: 'Lay-up lines ringan; passing dinamis.',
-        tips: ['Sepatu basket'],
-      },
-      {
-        title: 'Permainan',
-        description: 'Defense stance rendah; transisi sprint pendek; tembakan dengan lutut fleksi.',
-        tips: ['Tetap bergerak off-ball'],
-      },
-      {
-        title: 'Cooldown',
-        description: 'Free throw atau jalan; regangan kaki.',
-        tips: ['Hidrasi bertahap'],
-      },
+    safetyTips: [
+      'Pastikan lantai sekitar meja tidak licin dan bebas hambatan',
+      'Hentikan jika terasa nyeri di pergelangan tangan atau siku',
     ],
-    safetyTips: ['Landings ramai—beri jarak', 'High-top opsional untuk pergelangan'],
-    commonMistakes: ['Dribel terlalu tinggi'],
-  },
-  ex29: {
-    exerciseId: 'ex29',
-    steps: [
-      {
-        title: 'Persiapan',
-        description: 'Toss dan passing atas rendah; lincahkan pergelangan.',
-        tips: ['Sepatu indoor/outdoor sesuai lapangan'],
-      },
-      {
-        title: 'Permainan',
-        description: 'Serve, bump, set spike sesuai posisi; komunikasi “mine/yours”.',
-        tips: ['Posisi siap rendah di pertahanan'],
-      },
-      {
-        title: 'Akhir',
-        description: 'Jalan lapangan; regangan bahu dan lutut.',
-        tips: ['Spike volume untuk pemula dibatasi'],
-      },
+    commonMistakes: [
+      'Memukul hanya menggunakan bahu tanpa rotasi lengan bawah',
+      'Tidak kembali ke posisi siap setelah memukul',
+      'Terlalu tegang pada genggaman bet sehingga mengurangi kontrol',
     ],
-    safetyTips: ['Antisipasi tabrakan net/rekan'],
-    commonMistakes: ['Berdiri tegak menunggu bola'],
-  },
-  ex30: {
-    exerciseId: 'ex30',
-    steps: [
-      {
-        title: 'Pemanasan bola',
-        description: 'Juggling atau passing lambat; aktivasi hamstring dinamis.',
-        tips: ['Sepatu dan shin guard sesuai'],
-      },
-      {
-        title: 'Latihan',
-        description: 'Small-sided game atau dribel/cone; sprint intermittent pendek.',
-        tips: ['Minuman strategi istirahat'],
-      },
-      {
-        title: 'Cooldown',
-        description: 'Jalan lapangan; regangan adduktor dan quadriceps.',
-        tips: ['Es pada benturan kontrol'],
-      },
-    ],
-    safetyTips: ['Tackle keras hanya dengan pengawasan dan teknik', 'Permukaan berlubang'],
-    commonMistakes: ['Memaksakan sprint saat lelah'],
   },
   default: {
     exerciseId: 'default',

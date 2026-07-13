@@ -172,6 +172,12 @@
       "safety": "tidak_aman"
     },
     {
+      "condition": "hipertensi",
+      "questionnaireExerciseName": "Tenis Meja",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari tempo yang terlalu cepat"
+    },
+    {
       "condition": "asma",
       "questionnaireExerciseName": "Angkat Beban (Angkat Besi)",
       "safety": "aman_dengan_catatan",
@@ -329,6 +335,12 @@
       "condition": "asma",
       "questionnaireExerciseName": "Sepak Bola",
       "safety": "tidak_aman"
+    },
+    {
+      "condition": "asma",
+      "questionnaireExerciseName": "Tenis Meja",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gunakan durasi dan tempo yang terkontrol"
     },
     {
       "condition": "diabetes",
@@ -493,6 +505,12 @@
       "questionnaireExerciseName": "Sepak Bola",
       "safety": "aman_dengan_catatan",
       "catatan": "Intensitas sedang–tinggi, perlu kontrol kondisi tubuh"
+    },
+    {
+      "condition": "diabetes",
+      "questionnaireExerciseName": "Tenis Meja",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Intensitas sedang, perlu kontrol kondisi tubuh"
     },
     {
       "condition": "obesitas",
@@ -660,6 +678,12 @@
       "catatan": "Hindari melakukan secara intens karena memiliki risiko tinggi pada sendi"
     },
     {
+      "condition": "obesitas",
+      "questionnaireExerciseName": "Tenis Meja",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Hindari permainan terlalu intens pada pemula"
+    },
+    {
       "condition": "nyeri-sendi",
       "questionnaireExerciseName": "Angkat Beban (Angkat Besi)",
       "safety": "aman_dengan_catatan",
@@ -824,6 +848,12 @@
       "condition": "nyeri-sendi",
       "questionnaireExerciseName": "Sepak Bola",
       "safety": "tidak_aman"
+    },
+    {
+      "condition": "nyeri-sendi",
+      "questionnaireExerciseName": "Tenis Meja",
+      "safety": "aman_dengan_catatan",
+      "catatan": "Gerakan tangan yang cepat dapat membebani pergelangan tangan"
     }
   ],
   "generatedFrom": "d:/TUGAS AKHIR/FORM KUSIONER COACH/SALINAN KUSIONER VALIDASI COACH.xlsx"
