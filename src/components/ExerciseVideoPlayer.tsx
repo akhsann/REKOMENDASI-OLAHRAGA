@@ -69,14 +69,17 @@ export function ExerciseVideoPlayer({
   const isYouTube = rawVideoUrl.includes('youtube.com') || rawVideoUrl.includes('youtu.be');
 
   // Untuk Capacitor Android, video harus diakses via http://localhost
-  // Deteksi apakah berjalan di Capacitor (bukan web biasa)
-  const isCapacitor = typeof (window as any).Capacitor !== 'undefined';
+  // Deteksi apakah berjalan di Capacitor Android (bukan web biasa)
+  const isCapacitorAndroid =
+    typeof (window as any).Capacitor !== 'undefined' &&
+    typeof (window as any).Capacitor.getPlatform === 'function' &&
+    (window as any).Capacitor.getPlatform() === 'android';
   const buildVideoUrl = (path: string): string => {
     if (!path || isYouTube) return path;
     // Jika sudah absolute URL, kembalikan apa adanya
     if (path.startsWith('http')) return path;
     // Di Capacitor Android, gunakan http://localhost sebagai base
-    if (isCapacitor) {
+    if (isCapacitorAndroid) {
       return `http://localhost${path}`;
     }
     return encodeURI(path);
