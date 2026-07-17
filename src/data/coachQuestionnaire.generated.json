@@ -3,7 +3,7 @@
     {
       "condition": "hipertensi",
       "questionnaireExerciseName": "Angkat Beban (Angkat Besi)",
-      "safety": "aman",
+      "safety": "aman_dengan_catatan",
       "catatan": "Dengan menggunakan beban yang ringan dan tidak melebihi kemampuan pengangkat"
     },
     {
