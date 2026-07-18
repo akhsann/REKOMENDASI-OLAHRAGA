@@ -22,7 +22,7 @@ export const exerciseVideoMap: Record<string, string> = {
   ex15: '/Video/ex15.mp4',  // Sepatu Roda
   ex16: '/Video/ex16.mp4',  // Lompat Tali
   ex17: 'https://youtu.be/OiBCicV_cec?si=nzvQtyYRUlLHoYTb&t=26', // Pilates (YouTube)
-  ex18: '/Video/ex18.mp4',  // Zumba
+  ex18: 'https://youtu.be/CKUuR_gGfVg?si=ryGHCDa1Fmb4sW7W&t=23',  // Zumba (YouTube)
   ex19: '/Video/ex19.mp4',  // Golf
   ex20: '/Video/ex20.mp4',  // Bulu Tangkis
   ex21: '/Video/ex21.mp4',  // Tenis
