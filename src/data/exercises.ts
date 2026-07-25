@@ -1,6 +1,5 @@
 import { Exercise } from '@/types/exercise';
 
-
 export const exercises: Exercise[] = [
   {
     id: 'ex1',
@@ -9,6 +8,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'tinggi',
     benefits: ['penambahan-otot', 'kebugaran-umum', 'ketahanan'],
+    suitableAgeGroups: ['dewasa'],
     safeConditions: ['tidak-ada', 'hipertensi', 'asma', 'diabetes', 'obesitas', 'nyeri-sendi'],
     medicalNotes: {
       hipertensi: 'Dengan menggunakan beban yang ringan dan tidak melebihi kemampuan pengangkat',
@@ -29,6 +29,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['penambahan-otot', 'kebugaran-umum', 'ketahanan'],
+    suitableAgeGroups: ['remaja', 'dewasa'],
     safeConditions: ['tidak-ada', 'hipertensi', 'asma', 'diabetes', 'obesitas', 'nyeri-sendi'],
     medicalNotes: {
       hipertensi: 'Dengan menggunakan beban yang ringan dan tidak melebihi kemampuan pengangkat, gunakan intensitas ringan- sedang',
@@ -47,6 +48,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['penambahan-otot', 'kebugaran-umum', 'ketahanan'],
+    suitableAgeGroups: ['remaja', 'dewasa'],
     safeConditions: ['tidak-ada', 'hipertensi', 'asma', 'diabetes', 'obesitas', 'nyeri-sendi'],
     medicalNotes: {
       hipertensi: 'gunakan intensitas ringan-sedang',
@@ -67,6 +69,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'tinggi',
     benefits: ['penurunan-berat-badan', 'ketahanan', 'kebugaran-umum'],
+    suitableAgeGroups: ['remaja', 'dewasa'],
     safeConditions: ['tidak-ada', 'diabetes', 'obesitas'],
     medicalNotes: {
       diabetes: 'Hanya untuk diabetes yang terkontrol dan tidak memiliki komplikasi',
@@ -84,9 +87,9 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'rendah',
     benefits: ['kebugaran-umum', 'ketahanan', 'penurunan-berat-badan'],
+    suitableAgeGroups: ['remaja', 'dewasa', 'lansia'],
     safeConditions: ['tidak-ada', 'hipertensi', 'diabetes', 'obesitas', 'asma', 'nyeri-sendi'],
-    medicalNotes: {
-    },
+    medicalNotes: {},
     description: 'Jalan kaki dengan kecepatan santai dan rileks, sangat cocok untuk menjaga kebugaran tubuh tanpa membuat terlalu lelah.',
     equipment: ['sepatu-jalan'],
     targetMuscles: ['kaki', 'bokong'],
@@ -99,6 +102,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['ketahanan', 'penurunan-berat-badan', 'kebugaran-umum'],
+    suitableAgeGroups: ['remaja', 'dewasa', 'lansia'],
     safeConditions: ['tidak-ada', 'asma', 'hipertensi', 'diabetes', 'obesitas'],
     medicalNotes: {
       hipertensi: 'Aman tetapi hindari intensitas tinggi',
@@ -117,6 +121,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['ketahanan', 'kebugaran-umum', 'penurunan-berat-badan'],
+    suitableAgeGroups: ['remaja', 'dewasa', 'lansia'],
     safeConditions: ['tidak-ada', 'asma', 'diabetes', 'obesitas', 'nyeri-sendi', 'hipertensi'],
     medicalNotes: {
       hipertensi: 'Gunakan Intensitas rendah - sedang saja',
@@ -133,6 +138,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['ketahanan', 'kebugaran-umum', 'penurunan-berat-badan'],
+    suitableAgeGroups: ['remaja', 'dewasa', 'lansia'],
     safeConditions: ['tidak-ada', 'diabetes', 'obesitas', 'hipertensi', 'asma', 'nyeri-sendi'],
     medicalNotes: {
       hipertensi: 'Hindari track yang ekstrim dan cuaca yang buruk',
@@ -151,6 +157,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['ketahanan', 'kebugaran-umum', 'penurunan-berat-badan'],
+    suitableAgeGroups: ['remaja', 'dewasa'],
     safeConditions: ['tidak-ada', 'asma', 'diabetes', 'obesitas', 'nyeri-sendi', 'hipertensi'],
     medicalNotes: {
       hipertensi: 'Baik untuk kesehatan jantung dan tekanan darah',
@@ -167,6 +174,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'rendah',
     benefits: ['fleksibilitas', 'kebugaran-umum', 'ketahanan'],
+    suitableAgeGroups: ['remaja', 'dewasa', 'lansia'],
     safeConditions: ['tidak-ada', 'asma', 'diabetes', 'obesitas', 'hipertensi', 'nyeri-sendi'],
     medicalNotes: {
       hipertensi: 'Hindari gerakan yang ekstrim dan teknik napas berlebihan',
@@ -184,6 +192,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['ketahanan', 'penurunan-berat-badan', 'kebugaran-umum'],
+    suitableAgeGroups: ['remaja', 'dewasa', 'lansia'],
     safeConditions: ['tidak-ada', 'asma', 'hipertensi', 'diabetes', 'obesitas'],
     medicalNotes: {
       hipertensi: 'Hindari tempo yang terlalu cepat',
@@ -202,6 +211,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['ketahanan', 'penurunan-berat-badan', 'kebugaran-umum'],
+    suitableAgeGroups: ['remaja', 'dewasa', 'lansia'],
     safeConditions: ['tidak-ada', 'asma', 'diabetes', 'hipertensi', 'obesitas', 'nyeri-sendi'],
     medicalNotes: {
       hipertensi: 'Hindari intensitas tinggi sama seperti beberapa olahraga sebelumnya',
@@ -220,6 +230,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['ketahanan', 'penurunan-berat-badan', 'kebugaran-umum'],
+    suitableAgeGroups: ['remaja', 'dewasa'],
     safeConditions: ['tidak-ada', 'asma', 'diabetes', 'obesitas', 'hipertensi', 'nyeri-sendi'],
     medicalNotes: {
       hipertensi: 'Hindari intensitas tinggi',
@@ -237,6 +248,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['ketahanan', 'penurunan-berat-badan', 'kebugaran-umum'],
+    suitableAgeGroups: ['remaja', 'dewasa', 'lansia'],
     safeConditions: ['tidak-ada', 'hipertensi', 'asma', 'diabetes', 'obesitas', 'nyeri-sendi'],
     medicalNotes: {
       nyeriSendi: 'Gunakan intensitas rendah',
@@ -253,6 +265,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['kebugaran-umum', 'ketahanan', 'fleksibilitas'],
+    suitableAgeGroups: ['remaja', 'dewasa'],
     safeConditions: ['tidak-ada', 'asma', 'diabetes', 'hipertensi', 'obesitas'],
     medicalNotes: {
       hipertensi: 'Sebaiknya belajar menjaga keseimbangan tubuh terlebih dahulu dan hindari kecepatan tinggi',
@@ -270,6 +283,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'tinggi',
     benefits: ['ketahanan', 'penurunan-berat-badan', 'kebugaran-umum'],
+    suitableAgeGroups: ['remaja', 'dewasa'],
     safeConditions: ['tidak-ada', 'diabetes'],
     medicalNotes: {
       diabetes: 'Hindari bila memiliki neuropati atau masalah kaki',
@@ -286,9 +300,9 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['fleksibilitas', 'kebugaran-umum', 'ketahanan'],
+    suitableAgeGroups: ['remaja', 'dewasa', 'lansia'],
     safeConditions: ['tidak-ada', 'hipertensi', 'asma', 'diabetes', 'obesitas', 'nyeri-sendi'],
-    medicalNotes: {
-    },
+    medicalNotes: {},
     description: 'Latihan fokus pada kekuatan otot perut dan punggung, memperbaiki postur tubuh, serta mengatur napas dengan gerakan perlahan.',
     equipment: ['matras'],
     targetMuscles: ['inti', 'punggung', 'seluruh-tubuh'],
@@ -301,6 +315,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['penurunan-berat-badan', 'ketahanan', 'kebugaran-umum'],
+    suitableAgeGroups: ['remaja', 'dewasa', 'lansia'],
     safeConditions: ['tidak-ada', 'asma', 'diabetes', 'obesitas', 'hipertensi', 'nyeri-sendi'],
     medicalNotes: {
       hipertensi: 'Sesuaikan tempo dan hindari gerakan yang berlebihan',
@@ -318,9 +333,9 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'rendah',
     benefits: ['kebugaran-umum', 'ketahanan', 'fleksibilitas'],
+    suitableAgeGroups: ['remaja', 'dewasa', 'lansia'],
     safeConditions: ['tidak-ada', 'hipertensi', 'asma', 'diabetes', 'obesitas', 'nyeri-sendi'],
-    medicalNotes: {
-    },
+    medicalNotes: {},
     description: 'Bermain golf di lapangan terbuka yang diselingi aktivitas berjalan kaki santai sambil membawa stik golf.',
     equipment: ['tongkat-golf', 'bola-golf', 'sepatu-golf'],
     targetMuscles: ['punggung', 'lengan', 'kaki', 'inti'],
@@ -333,6 +348,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'tinggi',
     benefits: ['ketahanan', 'kebugaran-umum', 'penurunan-berat-badan'],
+    suitableAgeGroups: ['remaja', 'dewasa'],
     safeConditions: ['tidak-ada', 'hipertensi', 'asma', 'diabetes', 'obesitas', 'nyeri-sendi'],
     medicalNotes: {
       hipertensi: 'Batasi durasi dan hindari permainan kompetitif',
@@ -353,6 +369,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'tinggi',
     benefits: ['ketahanan', 'kebugaran-umum', 'penurunan-berat-badan'],
+    suitableAgeGroups: ['remaja', 'dewasa'],
     safeConditions: ['tidak-ada', 'hipertensi', 'asma', 'diabetes', 'obesitas', 'nyeri-sendi'],
     medicalNotes: {
       hipertensi: 'Batasi durasi dan hindari permainan kompetitif',
@@ -373,6 +390,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['ketahanan', 'kebugaran-umum', 'penurunan-berat-badan'],
+    suitableAgeGroups: ['remaja', 'dewasa', 'lansia'],
     safeConditions: ['tidak-ada', 'hipertensi', 'asma', 'diabetes', 'obesitas', 'nyeri-sendi'],
     medicalNotes: {
       hipertensi: 'Batasi durasi dan hindari permainan kompetitif',
@@ -393,6 +411,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'tinggi',
     benefits: ['ketahanan', 'penurunan-berat-badan', 'kebugaran-umum'],
+    suitableAgeGroups: ['remaja', 'dewasa'],
     safeConditions: ['tidak-ada', 'diabetes', 'obesitas'],
     medicalNotes: {
       diabetes: 'Intensitas sedang–tinggi, perlu kontrol kondisi tubuh',
@@ -410,6 +429,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['ketahanan', 'kebugaran-umum', 'penurunan-berat-badan'],
+    suitableAgeGroups: ['remaja', 'dewasa'],
     safeConditions: ['tidak-ada', 'hipertensi', 'asma', 'diabetes', 'obesitas'],
     medicalNotes: {
       hipertensi: 'Batasi durasi dan hindari permainan kompetitif',
@@ -429,6 +449,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'tinggi',
     benefits: ['ketahanan', 'penurunan-berat-badan', 'kebugaran-umum'],
+    suitableAgeGroups: ['remaja', 'dewasa'],
     safeConditions: ['tidak-ada', 'diabetes', 'obesitas'],
     medicalNotes: {
       diabetes: 'Intensitas sedang–tinggi, perlu kontrol kondisi tubuh',
@@ -446,6 +467,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['ketahanan', 'kebugaran-umum', 'fleksibilitas'],
+    suitableAgeGroups: ['remaja', 'dewasa', 'lansia'],
     safeConditions: ['tidak-ada', 'hipertensi', 'asma', 'diabetes', 'obesitas', 'nyeri-sendi'],
     medicalNotes: {
       hipertensi: 'Batasi durasi dan hindari permainan kompetitif',

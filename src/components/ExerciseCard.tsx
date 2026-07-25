@@ -175,6 +175,28 @@ export function ExerciseCard({ exercise, score, reasons, isFavorite = false, onF
             </Badge>
           </div>
 
+          {/* Suitable Age Groups */}
+          {exercise.suitableAgeGroups && (
+            <div className="space-y-1">
+              <Label className="text-xs text-muted-foreground">Kategori Usia Cocok</Label>
+              <div className="flex flex-wrap gap-1.5">
+                {exercise.suitableAgeGroups.map((ageGroup) => {
+                  const ageLabels: Record<string, { label: string; color: string }> = {
+                    remaja: { label: 'Remaja (10-18)', color: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20' },
+                    dewasa: { label: 'Dewasa (19-59)', color: 'bg-purple-500/10 text-purple-600 border-purple-500/20' },
+                    lansia: { label: 'Lansia (60+)', color: 'bg-amber-500/10 text-amber-600 border-amber-500/20' },
+                  };
+                  const groupInfo = ageLabels[ageGroup] || { label: ageGroup, color: 'bg-secondary text-secondary-foreground' };
+                  return (
+                    <span key={ageGroup} className={cn('text-[11px] px-2 py-0.5 rounded-md font-medium border', groupInfo.color)}>
+                      {groupInfo.label}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           {/* Target Muscles */}
           <div className="space-y-1">
             <Label className="text-xs text-muted-foreground">Otot Target</Label>

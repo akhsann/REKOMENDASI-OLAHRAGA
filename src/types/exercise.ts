@@ -46,6 +46,8 @@ export interface UserProfile {
   };
 }
 
+export type AgeCategoryGroup = 'remaja' | 'dewasa' | 'lansia';
+
 export interface Exercise {
   id: string;
   name: string;
@@ -54,6 +56,8 @@ export interface Exercise {
   duration: number;
   intensity: Intensity;
   benefits: string[];
+  /** Daftar kelompok usia yang cocok/aman untuk olahraga ini */
+  suitableAgeGroups?: AgeCategoryGroup[];
   /** Daftar kondisi kesehatan yang AMAN melakukan olahraga ini (termasuk 'tidak-ada' = sehat). */
   safeConditions: HealthCondition[];
   /** Catatan/modifikasi khusus per kondisi medis tertentu (opsional). Kunci = nama kondisi (camelCase). */

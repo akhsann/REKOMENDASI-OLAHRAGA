@@ -1,5 +1,6 @@
 import { Exercise, UserProfile, RecommendationScore, Intensity, ExerciseCategory, FitnessGoal, ActivityLevel } from '@/types/exercise';
 import { COACH_CONDITION_LABEL, getActiveHealthConditions, getCoachVerdictForExercise } from '@/utils/coachValidation';
+import { getAgeCategoryInfo } from '@/utils/ageCategory';
 
 // Constants for vector dimensions
 const INTENSITIES: Intensity[] = ['rendah', 'sedang', 'tinggi'];
@@ -80,24 +81,22 @@ function cosineSimilarity(vectorA: number[], vectorB: number[]): number {
 
 /**
  * Konversi UserProfile ke vektor fitur untuk kemiripan cosine
- * Dimensi vektor (total 15):
- * - Bobot kategori (merata): 5 dimensi
- * - Bobot intensitas (dari tingkat aktivitas): 3 dimensi
- * - Tujuan (biner): 5 dimensi
- * - Waktu Tersedia (dinormalisasi): 1 dimensi
- * - Usia (dinormalisasi): 1 dimensi
+ * Dimensi vektor (total 17):
+ * - Kategori (5 dimensi): Bobot merata 0.2
+ * - Intensitas (3 dimensi): Preferensi dari activityLevel
+ * - Tujuan (5 dimensi): Pengkodean biner
+ * - Waktu Tersedia (1 dimensi): Dinormalisasi
+ * - Kategori Usia (3 dimensi): One-Hot [remaja (10-18), dewasa (19-59), lansia (60+)]
  */
 function userProfileToVector(user: UserProfile, allExercises: Exercise[]): number[] {
   const vector: number[] = [];
 
   // 1. Kategori (5 dimensi) - Bobot merata untuk semua kategori
-  // Menggunakan bobot seragam 0.2 agar hasil konsisten antara perhitungan manual dan sistem
   CATEGORIES.forEach(() => {
     vector.push(0.2);
   });
 
-  // 2. Intensitas (3 dimensi) - 100% berdasarkan tingkat aktivitas pengguna
-  // Menggunakan preferensi intensitas murni dari tingkat aktivitas harian
+  // 2. Intensitas (3 dimensi) - berdasarkan tingkat aktivitas pengguna
   const activityLevel: ActivityLevel = user.activityLevel ?? 'ringan';
   INTENSITIES.forEach((intensity) => {
     const weight = ACTIVITY_INTENSITY_PREFERENCE[activityLevel][intensity];
@@ -112,24 +111,23 @@ function userProfileToVector(user: UserProfile, allExercises: Exercise[]): numbe
   // 4. Waktu (1 dimensi) - dinormalisasi
   vector.push(Math.min(user.availableTime / MAX_AVAILABLE_TIME, 1));
 
-  // 5. Proksi usia (1 dimensi) - dinormalisasi
-  vector.push(Math.min(user.age / MAX_AGE, 1));
+  // 5. Kategori Usia (3 dimensi) - One-Hot Encoding: [remaja, dewasa, lansia]
+  const ageInfo = getAgeCategoryInfo(user.age || 20);
+  vector.push(ageInfo.key === 'remaja' ? 1 : 0);
+  vector.push(ageInfo.key === 'dewasa' ? 1 : 0);
+  vector.push(ageInfo.key === 'lansia' ? 1 : 0);
 
   return vector;
 }
 
 /**
  * Konversi Exercise ke vektor fitur untuk kemiripan cosine
- * Dimensi vektor (total 19):
- * - Kategori (one-hot): 5 dimensi
- * - Intensitas (one-hot): 3 dimensi
- * - Manfaat/Tujuan (biner): 5 dimensi
- * - Durasi (dinormalisasi): 1 dimensi
- * - Kalori (dinormalisasi): 1 dimensi
- * - Jumlah Otot Target (dinormalisasi): 1 dimensi
- * - Jumlah Peralatan (dinormalisasi): 1 dimensi
- * - Bobot kecocokan kategori: 1 dimensi
- * - Bobot kecocokan intensitas: 1 dimensi
+ * Dimensi vektor (total 17):
+ * - Kategori (5 dimensi): One-Hot
+ * - Intensitas (3 dimensi): One-Hot
+ * - Manfaat/Tujuan (5 dimensi): Biner
+ * - Durasi (1 dimensi): Dinormalisasi
+ * - Kategori Usia Cocok (3 dimensi): Biner [remaja, dewasa, lansia]
  */
 function exerciseToVector(exercise: Exercise): number[] {
   const vector: number[] = [];
@@ -152,21 +150,35 @@ function exerciseToVector(exercise: Exercise): number[] {
   // 4. Durasi (1 dimensi) - dinormalisasi
   vector.push(Math.min(exercise.duration / MAX_DURATION, 1));
 
-  // 5. Kalori (1 dimensi) - dinormalisasi
-  vector.push(Math.min(exercise.caloriesBurn / MAX_CALORIES, 1));
+  // 5. Kategori Usia Cocok (3 dimensi) - Biner: [remaja, dewasa, lansia]
+  const suitable = exercise.suitableAgeGroups || ['remaja', 'dewasa', 'lansia'];
+  vector.push(suitable.includes('remaja') ? 1 : 0);
+  vector.push(suitable.includes('dewasa') ? 1 : 0);
+  vector.push(suitable.includes('lansia') ? 1 : 0);
 
   return vector;
 }
 
 function applyCoachQuestionnaireRules(user: UserProfile, scored: RecommendationScore[]): RecommendationScore[] {
   const conditions = getActiveHealthConditions(user.healthConditions);
-  if (conditions.length === 0) return scored;
+  const ageInfo = user.age ? getAgeCategoryInfo(user.age) : null;
 
   const adjusted = scored
     .map((rec) => {
       let blocked = false;
       const coachReasons: string[] = [];
       let factor = 1;
+
+      // Cek apakah olahraga cocok dengan kelompok usia pengguna
+      if (ageInfo) {
+        const suitable = rec.exercise.suitableAgeGroups || ['remaja', 'dewasa', 'lansia'];
+        // Jika kelompok usia spesifik lansia & olahraga tidak cocok untuk lansia
+        if (ageInfo.key === 'lansia' && !suitable.includes('lansia')) {
+          blocked = true; // Blokir olahraga berisiko tinggi bagi lansia (seperti Deadlift, HIIT, Lompat Tali)
+        } else if (ageInfo.key === 'remaja' && !suitable.includes('remaja')) {
+          factor *= 0.8;
+        }
+      }
 
       for (const condition of conditions) {
         const verdict = getCoachVerdictForExercise(rec.exercise.id, condition);
@@ -255,6 +267,21 @@ export function getRecommendations(user: UserProfile, exercises: Exercise[], lim
     };
     if (intensityMap[activityLevel].includes(exercise.intensity)) {
       reasons.push('Sesuai tingkat aktivitas Anda');
+    }
+
+    // Kompatibilitas kelompok usia pengguna
+    if (user.age > 0) {
+      const ageInfo = getAgeCategoryInfo(user.age);
+      const suitable = exercise.suitableAgeGroups || ['remaja', 'dewasa', 'lansia'];
+      if (suitable.includes(ageInfo.key as any)) {
+        if (ageInfo.key === 'lansia') {
+          reasons.push('Aman & sesuai untuk kelompok usia Lansia (60+ thn)');
+        } else if (ageInfo.key === 'remaja') {
+          reasons.push('Cocok untuk kelompok usia Remaja (10-18 thn)');
+        } else if (ageInfo.key === 'dewasa') {
+          reasons.push('Cocok untuk kelompok usia Dewasa (19-59 thn)');
+        }
+      }
     }
 
     // Riwayat interaksi pengguna

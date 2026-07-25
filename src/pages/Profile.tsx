@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserProfile, Gender, FitnessGoal, HealthCondition, ActivityLevel } from '@/types/exercise';
 import { saveUserProfile, getUserProfile } from '@/utils/storage';
+import { getAgeCategoryInfo } from '@/utils/ageCategory';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -173,9 +174,8 @@ export default function Profile() {
         {/* Profile Form */}
         <Card className="p-6 space-y-6 animate-scale-in hover-lift">
           {/* Age */}
-          {/* Age */}
           <div className="space-y-2">
-            <Label htmlFor="age">Usia</Label>
+            <Label htmlFor="age">Usia (Tahun)</Label>
             <Input
               id="age"
               type="text"
@@ -187,8 +187,18 @@ export default function Profile() {
                 const num = Math.min(100, Math.max(0, parseInt(raw) || 0));
                 setProfile({ ...profile, age: raw === '' ? 0 : num });
               }}
-              placeholder="Masukkan usia Anda"
+              placeholder="Masukkan usia Anda (contoh: 25)"
             />
+            {profile.age > 0 && (() => {
+              const info = getAgeCategoryInfo(profile.age);
+              return (
+                <div className="flex items-center gap-2 pt-1">
+                  <span className={`inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold border shadow-sm ${info.badgeClass}`}>
+                    Kategori Usia: {info.label} ({info.rangeLabel})
+                  </span>
+                </div>
+              );
+            })()}
           </div>
 
           {/* Gender */}
