@@ -192,7 +192,7 @@ export const exercises: Exercise[] = [
     duration: 30,
     intensity: 'sedang',
     benefits: ['ketahanan', 'penurunan-berat-badan', 'kebugaran-umum'],
-    suitableAgeGroups: ['remaja', 'dewasa', 'lansia'],
+    suitableAgeGroups: ['remaja', 'dewasa'],
     safeConditions: ['tidak-ada', 'asma', 'hipertensi', 'diabetes', 'obesitas'],
     medicalNotes: {
       hipertensi: 'Hindari tempo yang terlalu cepat',
