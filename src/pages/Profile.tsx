@@ -268,12 +268,19 @@ export default function Profile() {
 
           {/* Fitness Goals */}
           <div className="space-y-3">
-            <Label>Tujuan Kebugaran (pilih semua yang sesuai)</Label>
-            <div className="space-y-3">
+            <Label className="text-sm font-semibold">Tujuan Kebugaran (pilih semua yang sesuai)</Label>
+            <div className="space-y-2">
               {fitnessGoals.map((goal) => (
-                <div key={goal.value} className="flex items-center space-x-3">
-                  <Checkbox id={goal.value} checked={profile.goals.includes(goal.value)} onCheckedChange={() => toggleGoal(goal.value)} />
-                  <Label htmlFor={goal.value} className="cursor-pointer font-normal">
+                <div 
+                  key={goal.value} 
+                  className="flex items-center space-x-3 p-2.5 rounded-lg border border-transparent hover:border-border hover:bg-muted/50 transition-colors"
+                >
+                  <Checkbox 
+                    id={goal.value} 
+                    checked={profile.goals.includes(goal.value)} 
+                    onCheckedChange={() => toggleGoal(goal.value)} 
+                  />
+                  <Label htmlFor={goal.value} className="cursor-pointer font-medium text-sm flex-1 select-none">
                     {goal.label}
                   </Label>
                 </div>
@@ -283,12 +290,19 @@ export default function Profile() {
 
           {/* Health Conditions */}
           <div className="space-y-3">
-            <Label>Kondisi Kesehatan/Riwayat Medis (pilih semua yang sesuai)</Label>
-            <div className="space-y-3">
+            <Label className="text-sm font-semibold">Kondisi Kesehatan/Riwayat Medis (pilih semua yang sesuai)</Label>
+            <div className="space-y-2">
               {healthConditions.map((condition) => (
-                <div key={condition.value} className="flex items-center space-x-3">
-                  <Checkbox id={condition.value} checked={profile.healthConditions.includes(condition.value)} onCheckedChange={() => toggleHealthCondition(condition.value)} />
-                  <Label htmlFor={condition.value} className="cursor-pointer font-normal">
+                <div 
+                  key={condition.value} 
+                  className="flex items-center space-x-3 p-2.5 rounded-lg border border-transparent hover:border-border hover:bg-muted/50 transition-colors"
+                >
+                  <Checkbox 
+                    id={condition.value} 
+                    checked={profile.healthConditions.includes(condition.value)} 
+                    onCheckedChange={() => toggleHealthCondition(condition.value)} 
+                  />
+                  <Label htmlFor={condition.value} className="cursor-pointer font-medium text-sm flex-1 select-none">
                     {condition.label}
                   </Label>
                 </div>
